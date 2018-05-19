@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.proxibanque.proxibanquesi.dao.ClientDAO;
+import fr.proxibanque.proxibanquesi.exceptions.ServiceException;
 import fr.proxibanque.proxibanquesi.model.Client;
 
 @Service("service")
@@ -13,14 +14,31 @@ public class AppServiceImp implements AppService {
 
 	@Autowired
 	ClientDAO clientDao;
-	
+
 	public void setClientDao(ClientDAO clientDao) {
 		this.clientDao = clientDao;
 	}
 
 	@Override
-	public void creerClient(Client client) {
-		clientDao.save(client);
+	public void creerClient(Client client) throws ServiceException {
+		if (!clientEstValide(client)) {
+			throw new ServiceException("Client invalide !");
+		} else {
+			clientDao.save(client);
+		}
+	}
+
+	// Helpers
+
+	private boolean clientEstValide(Client client) {
+		if (client == null) {
+			return false;
+		} else if (client.getNom() == null || client.getNom().isEmpty()) {
+			return false;
+		} else if (client.getPrenom() == null || client.getPrenom().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

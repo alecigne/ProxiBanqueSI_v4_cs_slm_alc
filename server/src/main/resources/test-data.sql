@@ -9,4 +9,3 @@ INSERT INTO `Client` (`prenom`, `nom`, `login`, `password`) VALUES
 ('Arnaud', 'Renard', 'arenard', '1234'),
 ('Etienne', 'Savary', 'esavary', '1234'),
 ('Ozlem', 'Avci', 'oavci', '1234');
-
