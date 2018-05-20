@@ -5,7 +5,7 @@ import java.util.List;
 import fr.proxibanque.proxibanquesi.exceptions.ServiceException;
 import fr.proxibanque.proxibanquesi.model.Client;
 
-public interface AppService {
+public interface GestionClientService {
 	
 	void creerClient(Client client) throws ServiceException;
 	
@@ -13,8 +13,8 @@ public interface AppService {
 	
 	List<Client> obtenirTousClients();
 	
-	void modifierClient(Client client);
+	void modifierClient(Client client) throws ServiceException;
 	
-	void supprimerClient(long idClient);
+	void supprimerClient(long idClient) throws ServiceException;
 	
 }

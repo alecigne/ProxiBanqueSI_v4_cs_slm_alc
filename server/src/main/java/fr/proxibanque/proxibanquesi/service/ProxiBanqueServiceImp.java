@@ -13,15 +13,11 @@ import fr.proxibanque.proxibanquesi.model.Client;
 import fr.proxibanque.proxibanquesi.model.CompteCourant;
 
 @Service("service")
-public class AppServiceImp implements AppService {
+public class ProxiBanqueServiceImp implements GestionClientService {
 
 	@Autowired
 	ClientDAO clientDao;
 
-//	public void setClientDao(ClientDAO clientDao) {
-//		this.clientDao = clientDao;
-//	}
-	
 	@PostConstruct
 	public void populateDataBase(){
 		Client client1 = new Client("Dupont1", "Michel", "1 rue de la Source", "75001", "Paris", "0100000001");
@@ -72,13 +68,22 @@ public class AppServiceImp implements AppService {
 	};
 
 	@Override
-	public void modifierClient(Client client) {
-		clientDao.save(client);
+	public void modifierClient(Client client) throws ServiceException {
+		if (client.getIdClient() == 0) {
+			throw new ServiceException("Le client modifié doit avoir un ID.");
+		} else {
+			clientDao.save(client);
+		}
 	}
 
 	@Override
-	public void supprimerClient(long idClient) {
-		clientDao.delete(idClient);
+	public void supprimerClient(long idClient) throws ServiceException {
+		Client clientCandidat = this.obtenirClient(idClient);
+		if (clientCandidat == null) {
+			throw new ServiceException("Ce client n'existe pas !");
+		} else {
+			clientDao.delete(idClient);	
+		}
 	}
 
 }

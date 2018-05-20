@@ -21,9 +21,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**");
+		// TODO Méthodes autorisées explicitement
+		registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH");
 	}
-	
+
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
