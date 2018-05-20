@@ -15,4 +15,8 @@ export class ClientService {
     return this.http.get<Client[]>(this.baseURL + 'client/all');
   }
 
+  loadClient(idClient:number): Observable<Client> {
+    return this.http.get<Client>(this.baseURL + 'client/'+idClient);
+  }
+
 }
