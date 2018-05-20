@@ -44,19 +44,19 @@ public class SpringConfig {
 		return dataSource;
 	}
 
-	private DatabasePopulator databasePopulator() {
-		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
-		databasePopulator.setContinueOnError(false);
-		databasePopulator.addScript(new ClassPathResource("test-data.sql"));
-		return databasePopulator;
-	}
+//	private DatabasePopulator databasePopulator() {
+//		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+//		databasePopulator.setContinueOnError(false);
+//		databasePopulator.addScript(new ClassPathResource("test-data.sql"));
+//		return databasePopulator;
+//	}
 	
 	@Bean
 	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 		JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
 		jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
-		// Exécution du database populator		
-		DatabasePopulatorUtils.execute(databasePopulator(), dataSource());
+		// Exécution du database populator (optionnel)
+//		DatabasePopulatorUtils.execute(databasePopulator(), dataSource());
 		return jpaTransactionManager;
 	}
 
