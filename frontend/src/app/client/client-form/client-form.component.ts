@@ -21,7 +21,7 @@ export class ClientFormComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const clientId = +this.route.snapshot.params['client'];
+    const clientId = +this.route.snapshot.params['clientId'];
     // ÉDITION
     this.service.loadClient(clientId).subscribe(client => {
       this.currentClient = client;

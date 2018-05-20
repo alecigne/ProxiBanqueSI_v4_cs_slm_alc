@@ -1,7 +1,5 @@
 export interface Client {
-  id?: Number;
+  idClient?: Number;
   prenom: string;
   nom: string;
-  login: string;
-  password: string;
 }
