@@ -1,50 +1,56 @@
 package fr.proxibanque.proxibanquesi.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	private String prenom;
+	private long idClient;
 	private String nom;
-	private String login;
-	private String password;
+	private String prenom;
+	private String adresse;
+	private String codePostal;
+	private String ville;
+	private String telephone;
+	
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
+	@JoinColumn(name = "compte_courant_id", unique = true)
+	private CompteCourant compteCourant;
+	
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
+	@JoinColumn(name = "compte_epargne_id", unique = true)
+	private CompteEpargne compteEpargne;
+
+	// *** CONSTRUCTEURS ***
 
 	public Client() {
 	}
 
-	public Client(String prenom, String nom) {
-		this.prenom = prenom;
+	public Client(String nom, String prenom, String adresse, String codePostal, String ville, String telephone) {
 		this.nom = nom;
-	}
-
-	public Client(String prenom, String nom, String login, String password) {
 		this.prenom = prenom;
-		this.nom = nom;
-		this.login = login;
-		this.password = password;
+		this.adresse = adresse;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.telephone = telephone;
 	}
 
-	public long getId() {
-		return id;
+	// *** GETTERS et SETTERS ***
+
+	public long getIdClient() {
+		return idClient;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setIdClient(long idClient) {
+		this.idClient = idClient;
 	}
 
 	public String getNom() {
@@ -55,26 +61,62 @@ public class Client {
 		this.nom = nom;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getPrenom() {
+		return prenom;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getAdresse() {
+		return adresse;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
 	}
 
-	@Override
-	public String toString() {
-		return "Client [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", login=" + login + ", password="
-				+ password + "]";
+	public String getCodePostal() {
+		return codePostal;
 	}
+
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	
+	public CompteCourant getCompteCourant() {
+		return compteCourant;
+	}
+
+	public void setCompteCourant(CompteCourant compteCourant) {
+		this.compteCourant = compteCourant;
+	}
+
+	public CompteEpargne getCompteEpargne() {
+		return compteEpargne;
+	}
+
+	public void setCompteEpargne(CompteEpargne compteEpargne) {
+		this.compteEpargne = compteEpargne;
+	}
+
+	// *** OTHER METHODS ***
 
 }
