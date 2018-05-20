@@ -1,0 +1,20 @@
+<form [formGroup]="clientForm" novalidate>
+
+  <app-field
+    label="nom"
+    [control]="clientForm.get('nom')">
+    <input formControlName="nom" type="text" class="form-control" placeholder="Nom">
+  </app-field>
+
+  <app-field
+    label="prenom"
+    [control]="clientForm.get('prenom')">
+    <input formControlName="prenom" type="text" class="form-control" placeholder="prenom">
+  </app-field>
+
+
+  <button type="submit" class="btn btn-primary">Enregistrer</button>
+  <a routerLink="..">Annuler</a>
+
+</form>
+

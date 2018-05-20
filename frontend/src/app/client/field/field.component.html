@@ -1,0 +1,13 @@
+<div class="form-group"
+     [class.has-error]="control.dirty && control.invalid">
+  <label class="control-label">{{ label }}</label>
+  <ng-content></ng-content>
+  <div class="help-block" *ngIf="control.dirty && control.invalid">
+    <div *ngIf="control.errors['required']">
+      Ce champ est obligatoire.
+    </div>
+    <div *ngIf="control.errors['minlength']">
+      Ce champ doit faire au minimum {{control.errors['minlength'].requiredLength}} caractères.
+    </div>
+  </div>
+</div>
