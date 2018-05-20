@@ -8,17 +8,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+
   ],
   imports: [
     BrowserModule,
     ClientModule,
     RouterModule.forRoot([]),
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [
     { provide: 'BACKEND_URL', useValue:'http://localhost:8080/proxibanquesi/'}
