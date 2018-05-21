@@ -9,7 +9,7 @@ import { ClientService } from '../client.service';
 })
 export class ClientListComponent implements OnInit {
 
-  listeClients: Client[];
+  listeClients: Client[]=[];
 
   constructor(private cs: ClientService) { }
 

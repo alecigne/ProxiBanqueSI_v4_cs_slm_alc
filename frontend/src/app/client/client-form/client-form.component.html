@@ -1,4 +1,4 @@
-<form [formGroup]="clientForm" novalidate>
+<form *ngIf="clientForm" [formGroup]="clientForm" novalidate>
 
   <app-field label="nom" [control]="clientForm.get('nom')">
     <input formControlName="nom" type="text" class="form-control" placeholder="Nom">
@@ -23,10 +23,6 @@
   <app-field label="telephone" [control]="clientForm.get('telephone')">
     <input formControlName="telephone" type="text" class="form-control" placeholder="telephone">
   </app-field>
-
-
-
-
 
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <a routerLink="..">Annuler</a>

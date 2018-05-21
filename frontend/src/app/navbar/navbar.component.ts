@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  //logoImage = '/assets/logo_superquiz.png';
+  logoImage = '/assets/logo_proxibanque.png';
 
   user = {name: 'Bob'};
 
