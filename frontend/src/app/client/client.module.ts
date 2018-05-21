@@ -10,7 +10,7 @@ import { FieldComponent } from './field/field.component';
 const routes: Routes = [
   { path: 'clients', component: ClientListComponent },
   { path: 'client/:clientId', component: ClientFormComponent },
-  { path: '', component: ClientListComponent }
+  { path: '', redirectTo: 'clients', pathMatch: 'full' }
 ]
 
 @NgModule({
