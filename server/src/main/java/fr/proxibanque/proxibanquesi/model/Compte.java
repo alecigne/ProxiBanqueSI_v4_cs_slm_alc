@@ -1,5 +1,6 @@
 package fr.proxibanque.proxibanquesi.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -20,6 +21,7 @@ public abstract class Compte {
 	 * Numéro de compte constituant la PK de la table. 
 	 */
 	@Id
+	@Column(name = "numero_compte")
 	protected long numeroCompte;
 
 	/**
@@ -30,6 +32,7 @@ public abstract class Compte {
 	/**
 	 * Date d'ouverture du compte
 	 */
+	@Column(name = "date_ouverture")
 	protected String dateOuverture;
 
 	// *** GETTERS et SETTERS ***

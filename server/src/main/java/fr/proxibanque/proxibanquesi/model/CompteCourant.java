@@ -1,6 +1,9 @@
 package fr.proxibanque.proxibanquesi.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  * Cette classe décrit les caractéristiques d'un compte épargne ProxiBanque.
@@ -15,13 +18,10 @@ import javax.persistence.Entity;
 public class CompteCourant extends Compte {
 
 	private double decouvertAutorise = 1000.0;
-	
-//	/**
-//	 * Numéro de carte bancaire, FK dans la base Compte Courant
-//	 */
-//	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
-//	@JoinColumn(name = "numero_carte", unique = true)
-//	private CarteBancaire carte;
+
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
+	@JoinColumn(name = "numero_carte", unique = true)
+	private CarteBancaire carteBancaire;
 
 	// *** CONSTRUCTEURS ***
 
@@ -35,13 +35,21 @@ public class CompteCourant extends Compte {
 	}
 
 	// *** GETTERS et SETTERS ***
-	
+
 	public double getDecouvertAutorise() {
 		return decouvertAutorise;
 	}
 
 	public void setDecouvertAutorise(double decouvertAutorise) {
 		this.decouvertAutorise = decouvertAutorise;
-	}	
+	}
+
+	public CarteBancaire getCarteBancaire() {
+		return carteBancaire;
+	}
+
+	public void setCarteBancaire(CarteBancaire carteBancaire) {
+		this.carteBancaire = carteBancaire;
+	}
 
 }

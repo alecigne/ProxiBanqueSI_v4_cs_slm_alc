@@ -1,5 +1,6 @@
 package fr.proxibanque.proxibanquesi.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,6 +22,7 @@ public class CompteEpargne extends Compte {
 	/**
 	 * Taux de rémunération (négociable)
 	 */
+	@Column(name = "taux_remun")
 	private double tauxRemun;
 	
 	// *** CONSTRUCTEURS *** 
