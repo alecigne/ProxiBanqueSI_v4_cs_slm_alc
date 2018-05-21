@@ -62,14 +62,16 @@ public class ProxiBanqueServiceImp implements GestionClientService, GestionCompt
 		}
 	}
 
-	// Helpers
-
 	private boolean clientEstValide(Client client) {
 		if (client == null) {
 			return false;
-		} else if (client.getNom() == null || client.getNom().isEmpty()) {
+		}
+		String nom = client.getNom();
+		String prenom = client.getPrenom();
+		// Teste si les nom et prénom sont null, vides, ou ne contiennent que des espaces
+		if (nom == null || nom.trim().isEmpty()) {
 			return false;
-		} else if (client.getPrenom() == null || client.getPrenom().isEmpty()) {
+		} else if (prenom == null || prenom.trim().isEmpty()) {
 			return false;
 		}
 		return true;

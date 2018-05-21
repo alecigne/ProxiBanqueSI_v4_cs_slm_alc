@@ -11,7 +11,6 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -36,7 +35,7 @@ public class ProxiBanqueServiceImpTest {
 	 */
 	@InjectMocks
 	ProxiBanqueServiceImp pbs;
-	
+
 	/**
 	 * Utilisation d'une DAO bouchon pour les tests du service afin de ne pas
 	 * appeler les méthodes de persistance.
@@ -54,12 +53,74 @@ public class ProxiBanqueServiceImpTest {
 	// *** creerClient ***
 
 	/**
-	 * Si le client est null, le service doit renvoyer une exception de type
-	 * ServiceException.
+	 * Si le client est null, renvoyer une ServiceException.
+	 * 
+	 * @throws ServiceException
 	 */
 	@Test(expected = ServiceException.class)
 	public void creerClient_Retourne_ServiceException_Si_Client_Null() throws ServiceException {
 		pbs.creerClient(null);
+	}
+
+	/**
+	 * Si le nom du client est null, renvoyer une ServiceException.
+	 * 
+	 * @throws ServiceException
+	 */
+	@Test(expected = ServiceException.class)
+	public void creerClient_Retourne_ServiceException_Si_Client_Sans_Nom() throws ServiceException {
+		Client client = new Client(null, "Alice", "alice@lejeune.coml", "58 rue Porte d'Orange", "97300", "Cayenne",
+				"0548059392");
+		pbs.creerClient(client);
+	}
+
+	/**
+	 * Si le nom du client est une chaîne vide, renvoyer une ServiceException.
+	 * 
+	 * @throws ServiceException
+	 */
+	@Test(expected = ServiceException.class)
+	public void creerClient_Retourne_ServiceException_Si_Client_Avec_Nom_Vide() throws ServiceException {
+		Client client = new Client("", "Alice", "alice@lejeune.coml", "58 rue Porte d'Orange", "97300", "Cayenne",
+				"0548059392");
+		pbs.creerClient(client);
+	}
+
+	/**
+	 * Si le prénom du client est null, renvoyer une ServiceException.
+	 * 
+	 * @throws ServiceException
+	 */
+	@Test(expected = ServiceException.class)
+	public void creerClient_Retourne_ServiceException_Si_Client_Sans_Prenom() throws ServiceException {
+		Client client = new Client("Lejeune", null, "alice@lejeune.coml", "58 rue Porte d'Orange", "97300", "Cayenne",
+				"0548059392");
+		pbs.creerClient(client);
+	}
+
+	/**
+	 * Si le prénom du client est une chaîne vide, renvoyer une ServiceException.
+	 * 
+	 * @throws ServiceException
+	 */
+	@Test(expected = ServiceException.class)
+	public void creerClient_Retourne_ServiceException_Si_Client_Avec_Prenom_Vide() throws ServiceException {
+		Client client = new Client("Lejeune", "", "alice@lejeune.coml", "58 rue Porte d'Orange", "97300", "Cayenne",
+				"0548059392");
+		pbs.creerClient(client);
+	}
+
+	/**
+	 * Si le prénom du client ne contient que des espaces, renvoyer une
+	 * ServiceException.
+	 * 
+	 * @throws ServiceException
+	 */
+	@Test(expected = ServiceException.class)
+	public void creerClient_Retourne_ServiceException_Si_Client_Avec_Prenom_Espaces() throws ServiceException {
+		Client client = new Client("Lejeune", "  ", "alice@lejeune.coml", "58 rue Porte d'Orange", "97300", "Cayenne",
+				"0548059392");
+		pbs.creerClient(client);
 	}
 
 	// *** obtenirClient ***
@@ -75,6 +136,22 @@ public class ProxiBanqueServiceImpTest {
 		Client client = pbs.obtenirClient(1L);
 		assertEquals(DUMMY_CLIENT, client);
 		// verify(clientDao).findOne(idClient);
+	}
+
+	// *** modifierClient ***
+
+	/**
+	 * Si le client modifié n'a pas d'ID, renvoyer une ServiceException. Un client
+	 * modifié doit en effet pouvoir être retrouvé en base à partir de son ID.
+	 * 
+	 * @throws ServiceException
+	 */
+	@Test(expected = ServiceException.class)
+	public void modifierClient_Retourne_ServiceException_Si_Id_Non_Fourni() throws ServiceException {
+		Client client = new Client("Lejeune", "  ", "alice@lejeune.coml", "58 rue Porte d'Orange", "97300", "Cayenne",
+				"0548059392");
+		client.setIdClient(0);
+		pbs.modifierClient(client);
 	}
 
 }
