@@ -8,6 +8,10 @@
     <input formControlName="prenom" type="text" class="form-control" placeholder="prenom">
   </app-field>
 
+  <app-field label="email" [control]="clientForm.get('email')">
+    <input formControlName="email" type="text" class="form-control" placeholder="email">
+  </app-field>
+
   <app-field label="adresse" [control]="clientForm.get('adresse')">
     <input formControlName="adresse" type="text" class="form-control" placeholder="adresse">
   </app-field>
