@@ -7,6 +7,7 @@ import { ClientListComponent } from './client/client-list/client-list.component'
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { ChartDemoComponent } from './demo/chart-demo/chart-demo.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
     AppComponent,
     NavbarComponent,
     FooterComponent,
+    ChartDemoComponent,
 
   ],
   imports: [
