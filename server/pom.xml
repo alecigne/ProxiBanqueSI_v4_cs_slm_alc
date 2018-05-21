@@ -22,6 +22,8 @@
 		<hibernate.version>4.2.1.Final</hibernate.version>
 		<jsp.version>2.2</jsp.version>
 		<jstl.version>1.2</jstl.version>
+		<junit.version>4.12</junit.version>
+		<slf4j.version>1.7.5</slf4j.version>
 
 	</properties>
 
@@ -129,6 +131,26 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.10</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${springframework.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 	</dependencies>

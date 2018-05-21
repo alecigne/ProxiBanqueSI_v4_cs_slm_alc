@@ -4,9 +4,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import fr.proxibanque.proxibanquesi.config.SpringConfig;
-import fr.proxibanque.proxibanquesi.model.Client;
-import fr.proxibanque.proxibanquesi.service.GestionClientService;
-import fr.proxibanque.proxibanquesi.service.ProxiBanqueServiceImp;
 
 public class Test1 {
 
