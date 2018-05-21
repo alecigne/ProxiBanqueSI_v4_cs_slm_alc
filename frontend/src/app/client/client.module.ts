@@ -6,10 +6,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { ClientFormComponent } from './client-form/client-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FieldComponent } from './field/field.component';
+import { ChartDemoComponent } from '../demo/chart-demo/chart-demo.component';
 
 const routes: Routes = [
   { path: 'clients', component: ClientListComponent },
   { path: 'client/:clientId', component: ClientFormComponent },
+  { path: 'demohighchart', component: ChartDemoComponent},
   { path: '', redirectTo: 'clients', pathMatch: 'full' }
 ]
 
