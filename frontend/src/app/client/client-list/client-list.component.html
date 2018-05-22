@@ -6,8 +6,8 @@
 
 <div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
 
-    <table class="table table-striped">
-      <thead>
+  <table class="table table-striped">
+    <thead>
       <tr>
         <th>Nom</th>
         <th>Prenom</th>
@@ -15,29 +15,29 @@
         <th>Compte Epargne</th>
         <th>Action</th>
       </tr>
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
       <tr *ngFor="let client of listeClients">
         <td>{{ client.nom }}</td>
         <td>{{ client.prenom }}</td>
         <td>{{ client.compteCourant.solde }}
-            <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
         </td>
-        <td >
+        <td>
           {{ client.compteEpargne.solde }}
         </td>
         <td>
-          <a class="btn btn-default btn-sm" target="_blank">
+          <a class="btn btn-default btn-sm" [routerLink]="['/client/', client.idClient]">
             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
           </a>
-          <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient]">
+          <a class="btn btn-default btn-sm" [routerLink]="['/client/', client.idClient, 'editionclient']">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
           </a>
-          <button class="btn btn-danger btn-sm" >
+          <button class="btn btn-danger btn-sm">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
           </button>
         </td>
       </tr>
-      </tbody>
-    </table>
+    </tbody>
+  </table>
 </div>

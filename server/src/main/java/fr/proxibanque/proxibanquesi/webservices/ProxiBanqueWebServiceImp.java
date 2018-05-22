@@ -21,7 +21,7 @@ import fr.proxibanque.proxibanquesi.model.CompteEpargne;
 import fr.proxibanque.proxibanquesi.service.ProxiBanqueServiceImp;
 
 @RestController
-public class ProxiBanqueWebServiceImp implements GestionClientWebService, GestionCompteWebService {
+public class ProxiBanqueWebServiceImp implements GestionClientWebService, GestionCompteWebService, SIWebService {
 
 	@Autowired
 	ProxiBanqueServiceImp service;
@@ -97,7 +97,6 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 	@Override
 	@PostMapping(value = "/client/{idClient}/CompteCourant/", produces = "application/json")
 	public ResponseEntity<CompteCourant> AttribuerCompteCourantClient(@PathVariable long idClient, @RequestBody CompteCourant compteEpargne) {
-		// TODO Auto-generated method stub
 		try {
 			service.AttribuerCompteCourantClient(idClient, compteEpargne);
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -119,6 +118,18 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 	public Compte AfficherCompteNumero(@PathVariable long numCompte) {
 		// TODO Auto-generated method stub
 			return service.AfficherCompteNumero(numCompte);
+	}
+
+	@Override
+	@PutMapping(value="virement/{numCompteDepart}/{numCompteArrivee}/{montantTransfere}")
+	public void VirementCompteACompte(@PathVariable long numCompteDepart, @PathVariable long numCompteArrivee, @PathVariable double montantTransfere) {
+		try {
+			service.VirementCompteACompte(numCompteDepart, numCompteArrivee, montantTransfere);
+		}catch (Exception e){
+			e.printStackTrace();
+			
+		}
+		
 	}
 
 }

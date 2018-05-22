@@ -23,8 +23,13 @@ import fr.proxibanque.proxibanquesi.model.Conseiller;
 import fr.proxibanque.proxibanquesi.model.Gerant;
 import fr.proxibanque.proxibanquesi.model.CompteEpargne;
 
+/**
+ * @author Clothidle, Sandrine et Anthony
+ *
+ */
 @Service("service")
-public class ProxiBanqueServiceImp implements GestionClientService, GestionCompteService, GestionConseillerService {
+public class ProxiBanqueServiceImp
+		implements GestionClientService, GestionCompteService, GestionConseillerService, SIService {
 
 	// *** ATTRIBUTS ***
 
@@ -38,6 +43,10 @@ public class ProxiBanqueServiceImp implements GestionClientService, GestionCompt
 	@Autowired
 	@Qualifier("compteDAO")
 	CompteDAO compteDAO;
+
+	// pas de découvert autorisé pour un compte Epargne (découvert autorisé défini
+	// pour chaque compte courant)
+	static double limiteDecouvertAutoriseEpargne = 0.0;
 
 	// *** GETTERS et SETTERS ***
 
@@ -87,7 +96,7 @@ public class ProxiBanqueServiceImp implements GestionClientService, GestionCompt
 	public List<Client> obtenirTousClients() {
 		return clientDao.findAll();
 	};
-	
+
 	@Override
 	public List<Client> obtenirClientsParIdConseiller(long idConseiller) {
 		return clientDao.findByConseiller(idConseiller);
@@ -123,13 +132,12 @@ public class ProxiBanqueServiceImp implements GestionClientService, GestionCompt
 	public void AttribuerCompteEpargneClient(long idClient, CompteEpargne compteEpargne) throws ServiceException {
 		// TODO Auto-generated method stub
 		Client client = obtenirClient(idClient);
-		if (client.getCompteEpargne()==null) {
+		if (client.getCompteEpargne() == null) {
 			compteEpargne.setNumeroCompte(genererNumero());
 			compteEpargne.setDateOuverture(today());
 			client.setCompteEpargne(compteEpargne);
 			clientDao.save(client);
-		}
-		else {
+		} else {
 			throw new ServiceException("le client a déjà un compte epargne");
 		}
 
@@ -138,7 +146,7 @@ public class ProxiBanqueServiceImp implements GestionClientService, GestionCompt
 	@Override
 	public void AttribuerCompteCourantClient(long idClient, CompteCourant compteCourant) throws ServiceException {
 		Client client = obtenirClient(idClient);
-		if(client.getCompteCourant()==null) {
+		if (client.getCompteCourant() == null) {
 			compteCourant.setNumeroCompte(genererNumero());
 			compteCourant.setDateOuverture(today());
 			client.setCompteCourant(compteCourant);
@@ -188,6 +196,32 @@ public class ProxiBanqueServiceImp implements GestionClientService, GestionCompt
 	@Override
 	public Compte AfficherCompteNumero(long numCompte) {
 		return compteDAO.findOne(numCompte);
+	}
+
+	@Override
+	public void VirementCompteACompte(long numCompteDepart, long numCompteArrivee, double montantTransfere) throws ServiceException {
+		Compte compteDepart = AfficherCompteNumero(numCompteDepart);
+		double soldecompteDepart =compteDepart.getSolde(); 
+		Compte compteArrivee = AfficherCompteNumero(numCompteArrivee);
+		double soldecompteArrivee=compteArrivee.getSolde();
+		double limiteDecouvert;
+		//methodologie pour récuperer le decouvert autorisé dans tous les cas
+		//pas de découvert Autorisé présent dans le
+		if(CompteCourant.class.isInstance(compteDepart)) {
+			limiteDecouvert=((CompteCourant)compteDepart).getDecouvertAutorise();
+		} else {
+			limiteDecouvert=limiteDecouvertAutoriseEpargne;
+		}
+		if ((compteDepart.getSolde()-montantTransfere)>limiteDecouvert) {
+			compteDepart.setSolde(soldecompteDepart-montantTransfere);
+			compteArrivee.setSolde(soldecompteArrivee+montantTransfere);
+			compteDAO.save(compteDepart);
+			compteDAO.save(compteArrivee);
+		} else {
+			throw new ServiceException("Virement refusé. Si réalisé, découvert autorisé du compte "+compteDepart.getNumeroCompte()+"dépassé.");
+		}
+		
+		
 	}
 
 }
