@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Conseiller } from '../conseiller/conseiller';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
   logoImage = '/assets/logo_proxibanque.png';
 
-  user = {name: 'Bob'};
+  currentConseiller: Conseiller;
 
   navItems = [
     {label: 'Accueil', path: 'home'},
@@ -19,8 +21,12 @@ export class NavbarComponent implements OnInit {
     {label: 'Deconnexion', path: 'logout'}
   ];
 
-  constructor() { }
+  constructor(private as:AuthService) { }
 
   ngOnInit() {
+    this.as.getCurrentConseiller().subscribe(
+      conseiller => {
+        this.currentConseiller = conseiller;
+      });
   }
 }

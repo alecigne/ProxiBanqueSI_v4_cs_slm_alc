@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.as.signIn()
       .subscribe(conseiller => {
         if (conseiller) {
-          this.gotoFirstPage();
+          this.gotoClients();
         }
       });
   }
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   // Redirect the user to the admin homepage.
-  gotoFirstPage(event?: Event) {
+  gotoClients(event?: Event) {
     if (event) { event.preventDefault(); }
     this.router.navigate(['/clients']);
   }

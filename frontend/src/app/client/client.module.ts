@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: 'client/:clientId/editionclient', component: ClientFormComponent },
   { path: 'demohighchart', component: ChartDemoComponent},
   { path: 'client/:clientId', component:VisuClientComponent},
-  { path: '', redirectTo: 'clients', pathMatch: 'full' }
 ]
 
 @NgModule({
