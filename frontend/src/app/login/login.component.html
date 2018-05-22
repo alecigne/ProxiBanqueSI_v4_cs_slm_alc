@@ -5,7 +5,7 @@
   
       <ng-template #showUI>
         <div *ngIf="currentConseiller">
-          <p>Vous êtes identifié en tant que {{ currentConseiller.nom }} ({{ currentConseiller.prenom }}).</p>
+          <p>Vous êtes identifié en tant que {{ currentConseiller.prenom }} {{ currentConseiller.nom }}.</p>
           <p>
             <button class="btn btn-primary" (click)="gotoClients($event)">Accéder à la liste des clients</button>
             <button class="btn btn-default" (click)="doLogout()">Se déconnecter</button>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../client';
 import { ClientService } from '../client.service';
+import { Conseiller } from '../../conseiller/conseiller';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-client-list',
@@ -9,12 +11,21 @@ import { ClientService } from '../client.service';
 })
 export class ClientListComponent implements OnInit {
 
-  listeClients: Client[]=[];
+  isLoading = true;
+  currentConseiller: Conseiller;
+  listeClients: Client[] = [];
 
-  constructor(private cs: ClientService) { }
+  constructor(
+    private as: AuthService, private cs: ClientService) { }
 
   ngOnInit() {
-    this.cs.loadClients().subscribe(clients => this.listeClients = clients);
+    this.as.getCurrentConseiller().subscribe(
+      conseiller => {
+        // Aussitôt qu'un conseiller est observé, réaliser ces actions
+        this.currentConseiller = conseiller;
+        this.isLoading = false;
+        this.cs.loadClientsParConseiller(conseiller.idConseiller).subscribe(clients => this.listeClients = clients);
+      });
   }
 
 }
