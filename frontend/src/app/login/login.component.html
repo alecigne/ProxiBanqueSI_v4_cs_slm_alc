@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="jumbotron text-center">
+  
+      <p *ngIf="isLoading; else showUI">Chargement en cours...</p>
+  
+      <ng-template #showUI>
+        <div *ngIf="currentConseiller">
+          <p>Vous êtes identifié en tant que {{ currentConseiller.nom }} ({{ currentConseiller.prenom }}).</p>
+          <p>
+            <button class="btn btn-primary" (click)="gotoAdmin($event)">Accéder à l'admin</button>
+            <button class="btn btn-default" (click)="doLogout()">Se déconnecter</button>
+          </p>
+        </div>
+        <div *ngIf="!currentConseiller">
+          <p>Vous n'êtes pas identifié.</p>
+          <p><button class="btn btn-danger" (click)="doLogin()">S'authentifier</button></p>
+        </div>
+      </ng-template>
+  
+    </div>
+  </div>
+  

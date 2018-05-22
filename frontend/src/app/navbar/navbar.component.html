@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav">
         <li *ngFor="let item of navItems"><a [routerLink]="item.path">{{ item.label }}</a></li>
       </ul>
-      <p class="navbar-text navbar-right">Identifié comme <a href="#" class="navbar-link">{{ user.name }}</a></p>
+      <p class="navbar-text navbar-right">Identifié comme <a href="#" class="navbar-link">{{ conseiller.nom }}</a></p>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
