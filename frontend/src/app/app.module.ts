@@ -14,6 +14,9 @@ import { CcItemComponent } from './visu-client/cc-item/cc-item.component';
 import { CeItemComponent } from './visu-client/ce-item/ce-item.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
+import { VirementComponent } from './virement/virement.component';
+import { CompteAfficherComponent } from './virement/compte-afficher/compte-afficher.component';
+import { TransfertComponent } from './virement/transfert/transfert.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +35,12 @@ const routes: Routes = [
     CeItemComponent,
 
     LoginComponent,
+
+    VirementComponent,
+
+    CompteAfficherComponent,
+
+    TransfertComponent,
   ],
   imports: [
     BrowserModule,

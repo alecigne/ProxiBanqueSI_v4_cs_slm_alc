@@ -1,6 +1,7 @@
 package fr.proxibanque.proxibanquesi.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyLong;
 
 import org.mockito.InjectMocks;
@@ -19,7 +20,13 @@ import fr.proxibanque.proxibanquesi.config.SpringConfig;
 import fr.proxibanque.proxibanquesi.dao.ClientDAO;
 import fr.proxibanque.proxibanquesi.exceptions.ServiceException;
 import fr.proxibanque.proxibanquesi.model.Client;
+import fr.proxibanque.proxibanquesi.model.Compte;
+import fr.proxibanque.proxibanquesi.model.CompteCourant;
 
+/**
+ * @author adminl
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { SpringConfig.class })
 @WebAppConfiguration
@@ -153,5 +160,6 @@ public class ProxiBanqueServiceImpTest {
 		client.setIdClient(0);
 		pbs.modifierClient(client);
 	}
+
 
 }
