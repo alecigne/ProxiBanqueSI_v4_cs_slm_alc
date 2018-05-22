@@ -1,34 +1,34 @@
-<form *ngIf="clientForm" [formGroup]="clientForm" novalidate>
+<form novalidate *ngIf="clientForm" [formGroup]="clientForm" (ngSubmit)="saveClient()">
 
-  <app-field label="nom" [control]="clientForm.get('nom')">
+  <app-field label="Nom*" [control]="clientForm.get('nom')">
     <input formControlName="nom" type="text" class="form-control" placeholder="Nom">
   </app-field>
 
-  <app-field label="prenom" [control]="clientForm.get('prenom')">
-    <input formControlName="prenom" type="text" class="form-control" placeholder="prenom">
+  <app-field label="Prénom*" [control]="clientForm.get('prenom')">
+    <input formControlName="prenom" type="text" class="form-control" placeholder="Prénom">
   </app-field>
 
-  <app-field label="email" [control]="clientForm.get('email')">
-    <input formControlName="email" type="text" class="form-control" placeholder="email">
+  <app-field label="Email*" [control]="clientForm.get('email')">
+    <input formControlName="email" type="text" class="form-control" placeholder="Email">
   </app-field>
 
-  <app-field label="adresse" [control]="clientForm.get('adresse')">
-    <input formControlName="adresse" type="text" class="form-control" placeholder="adresse">
+  <app-field label="Adresse" [control]="clientForm.get('adresse')">
+    <input formControlName="adresse" type="text" class="form-control" placeholder="Adresse">
   </app-field>
 
-  <app-field label="codePostal" [control]="clientForm.get('codePostal')">
-    <input formControlName="codePostal" type="text" class="form-control" placeholder="codePostal">
+  <app-field label="Code Postal" [control]="clientForm.get('codePostal')">
+    <input formControlName="codePostal" type="text" class="form-control" placeholder="Code Postal">
   </app-field>
 
-  <app-field label="ville" [control]="clientForm.get('ville')">
-    <input formControlName="ville" type="text" class="form-control" placeholder="ville">
+  <app-field label="Ville" [control]="clientForm.get('ville')">
+    <input formControlName="ville" type="text" class="form-control" placeholder="Ville">
   </app-field>
 
-  <app-field label="telephone" [control]="clientForm.get('telephone')">
-    <input formControlName="telephone" type="text" class="form-control" placeholder="telephone">
+  <app-field label="Téléphone" [control]="clientForm.get('telephone')">
+    <input formControlName="telephone" type="text" class="form-control" placeholder="Téléphone">
   </app-field>
 
-  <button type="submit" class="btn btn-primary">Enregistrer</button>
-  <a routerLink="..">Annuler</a>
+  <button type="submit" class="btn btn-primary">Ajouter compte</button>
+  <a routerLink="/clients">Annuler</a>
 
 </form>

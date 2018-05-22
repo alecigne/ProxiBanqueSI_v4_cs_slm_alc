@@ -1,12 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { ClientModule } from './client/client.module';
 import { RouterModule, Routes, Router } from '@angular/router';
-import { ClientListComponent } from './client/client-list/client-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+
+import { ClientModule } from './client/client.module';
+import { ClientListComponent } from './client/client-list/client-list.component';
+
+import { CompteModule } from './compte/compte.module';
+
 import { ChartDemoComponent } from './demo/chart-demo/chart-demo.component';
 import { VisuClientComponent } from './visu-client/visu-client.component';
 import { ClientItemComponent } from './visu-client/client-item/client-item.component';
@@ -33,7 +38,6 @@ const routes: Routes = [
     ClientItemComponent,
     CcItemComponent,
     CeItemComponent,
-
     LoginComponent,
 
     VirementComponent,
@@ -47,10 +51,12 @@ const routes: Routes = [
     ClientModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
+    CompteModule,
+
   ],
   providers: [
     AuthService,
-    { provide: 'BACKEND_URL', useValue:'http://localhost:8080/proxibanquesi/'}
+    { provide: 'BACKEND_URL', useValue: 'http://localhost:8080/proxibanquesi/' }
   ],
   bootstrap: [
     AppComponent

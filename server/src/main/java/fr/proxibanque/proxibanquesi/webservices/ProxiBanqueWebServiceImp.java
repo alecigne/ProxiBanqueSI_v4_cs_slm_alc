@@ -29,7 +29,7 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 	@Override
 	@PostMapping(value = "/client/", produces = "application/json")
 	public ResponseEntity<Client> creerClient(@RequestBody Client client) {
-		try {
+		try {	
 			service.creerClient(client);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (ServiceException e) {
