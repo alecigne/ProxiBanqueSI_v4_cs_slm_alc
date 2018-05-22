@@ -68,7 +68,8 @@ public class ProxiBanqueServiceImp implements GestionClientService, GestionCompt
 		}
 		String nom = client.getNom();
 		String prenom = client.getPrenom();
-		// Teste si les nom et prénom sont null, vides, ou ne contiennent que des espaces
+		// Teste si les nom et prénom sont null, vides, ou ne contiennent que des
+		// espaces
 		if (nom == null || nom.trim().isEmpty()) {
 			return false;
 		} else if (prenom == null || prenom.trim().isEmpty()) {
@@ -114,24 +115,32 @@ public class ProxiBanqueServiceImp implements GestionClientService, GestionCompt
 	}
 
 	@Override
-	public void AttribuerCompteEpargneClient(long idClient, CompteEpargne compteEpargne) {
+	public void AttribuerCompteEpargneClient(long idClient, CompteEpargne compteEpargne) throws ServiceException {
 		// TODO Auto-generated method stub
 		Client client = obtenirClient(idClient);
-		compteEpargne.setNumeroCompte(genererNumero());
-		compteEpargne.setDateOuverture(today());
-		client.setCompteEpargne(compteEpargne);
-		clientDao.save(client);
+		if (client.getCompteEpargne()==null) {
+			compteEpargne.setNumeroCompte(genererNumero());
+			compteEpargne.setDateOuverture(today());
+			client.setCompteEpargne(compteEpargne);
+			clientDao.save(client);
+		}
+		else {
+			throw new ServiceException("le client a déjà un compte epargne");
+		}
 
 	}
 
 	@Override
-	public void AttribuerCompteCourantClient(long idClient, CompteCourant compteCourant) {
-		// TODO Auto-generated method stub
+	public void AttribuerCompteCourantClient(long idClient, CompteCourant compteCourant) throws ServiceException {
 		Client client = obtenirClient(idClient);
-		compteCourant.setNumeroCompte(genererNumero());
-		compteCourant.setDateOuverture(today());
-		client.setCompteCourant(compteCourant);
-		clientDao.save(client);
+		if(client.getCompteCourant()==null) {
+			compteCourant.setNumeroCompte(genererNumero());
+			compteCourant.setDateOuverture(today());
+			client.setCompteCourant(compteCourant);
+			clientDao.save(client);
+		} else {
+			throw new ServiceException("le client a déjà un compte courant");
+		}
 
 	}
 

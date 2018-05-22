@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.proxibanque.proxibanquesi.exceptions.ServiceException;
 import fr.proxibanque.proxibanquesi.model.Client;
+import fr.proxibanque.proxibanquesi.model.Compte;
+import fr.proxibanque.proxibanquesi.model.CompteCourant;
+import fr.proxibanque.proxibanquesi.model.CompteEpargne;
 import fr.proxibanque.proxibanquesi.service.ProxiBanqueServiceImp;
 
 @RestController
-public class ProxiBanqueWebServiceImp implements GestionClientWebService {
+public class ProxiBanqueWebServiceImp implements GestionClientWebService, GestionCompteWebService {
 
 	@Autowired
 	ProxiBanqueServiceImp service;
@@ -69,6 +72,47 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService {
 			e.printStackTrace(); // TODO Remplacer par l'AOP
 			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@Override
+	@PostMapping(value = "/client/{idClient}/CompteEpargne/", produces = "application/json")
+	public ResponseEntity<CompteEpargne> AttribuerCompteEpargneClient(@PathVariable long idClient, @RequestBody CompteEpargne compteEpargne) {
+		//
+		try {
+			service.AttribuerCompteEpargneClient(idClient, compteEpargne);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<CompteEpargne>(HttpStatus.BAD_REQUEST);
+			// TODO: integration AOP
+		}
+	}
+
+	@Override
+	@PostMapping(value = "/client/{idClient}/CompteCourant/", produces = "application/json")
+	public ResponseEntity<CompteCourant> AttribuerCompteCourantClient(@PathVariable long idClient, @RequestBody CompteCourant compteEpargne) {
+		// TODO Auto-generated method stub
+		try {
+			service.AttribuerCompteCourantClient(idClient, compteEpargne);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<CompteCourant>(HttpStatus.BAD_REQUEST);
+			// TODO: integration AOP
+		}
+	}
+
+	@Override
+	@GetMapping(value="/client/{idClient}/comptes", produces = "application/json")
+	public List<Compte> AfficherListeCompteClient(@PathVariable long idClient) {
+			return service.AfficherListeCompteClient(idClient);
+	}
+
+	@Override
+	@GetMapping(value="compte/{numCompte}")
+	public Compte AfficherCompteNumero(@PathVariable long numCompte) {
+		// TODO Auto-generated method stub
+			return service.AfficherCompteNumero(numCompte);
 	}
 
 }
