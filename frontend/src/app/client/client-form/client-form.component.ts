@@ -19,6 +19,8 @@ export class ClientFormComponent implements OnInit {
   clientForm: FormGroup;
   conseillerForm: FormGroup;
 
+  idClient=+this.route.snapshot.params['clientId'];
+
   constructor(private formBuilder: FormBuilder,
     private clientService: ClientService,
     private router: Router,

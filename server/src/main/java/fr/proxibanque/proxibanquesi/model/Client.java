@@ -32,8 +32,8 @@ public class Client {
 	private String codePostal;
 	private String ville;
 	private String telephone;
-	@Transient
-	private long idConseiller;
+//	@Transient
+//	private long idConseiller;
 
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinColumn(name = "compte_courant_id", unique = true)
@@ -141,13 +141,13 @@ public class Client {
 		this.compteEpargne = compteEpargne;
 	}
 
-	public long getIdConseiller() {
-		return idConseiller;
-	}
-
-	public void setIdConseiller(long idConseiller) {
-		this.idConseiller = idConseiller;
-	}
+	// public long getIdConseiller() {
+	// return idConseiller;
+	// }
+	//
+	// public void setIdConseiller(long idConseiller) {
+	// this.idConseiller = idConseiller;
+	// }
 
 	// *** OTHER METHODS ***
 

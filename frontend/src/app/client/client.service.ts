@@ -27,7 +27,7 @@ export class ClientService {
   * Affiche un client par son id.
   */
   loadClient(idClient: number): Observable<Client> {
-    return this.http.get(`${this.baseURL} client/${idClient}`)
+    return this.http.get(`${this.baseURL}client/${idClient}`)
       .map(clientData => new Client(clientData));
   }
 

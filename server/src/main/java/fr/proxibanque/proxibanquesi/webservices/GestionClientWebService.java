@@ -11,7 +11,7 @@ public interface GestionClientWebService {
 	// TODO Les annotations devraient être déplacées ici. Ceci semble causer des
 	// problèmes liés à Spring.
 
-	ResponseEntity<Client> creerClient(Client client,long idConseiller);
+	ResponseEntity<Client> creerClient(Client client);
 
 	Client obtenirClient(long idClient);
 

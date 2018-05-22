@@ -29,10 +29,8 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 
 	@Override
 	@PostMapping(value = "/client/", produces = "application/json")
-	public ResponseEntity<Client> creerClient(@RequestBody Client client, @RequestBody long idConseiller) {
+	public ResponseEntity<Client> creerClient(@RequestBody Client client) {
 		try {
-			Conseiller conseiller = service.obtenirConseiller(client.getIdConseiller());
-			conseiller.getListeClients().add(client);
 			service.creerClient(client);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (ServiceException e) {
@@ -40,6 +38,19 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+//	@PostMapping(value = "/client/", produces = "application/json")
+//	public ResponseEntity<Client> creerClient(@RequestBody Client client, @RequestBody long idConseiller) {
+//		try {
+//			Conseiller conseiller = service.obtenirConseiller(client.getIdConseiller());
+//			conseiller.getListeClients().add(client);
+//			service.creerClient(client);
+//			return new ResponseEntity<>(HttpStatus.OK);
+//		} catch (ServiceException e) {
+//			e.printStackTrace(); // TODO Remplacer par un log/AOP
+//			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
+//		}
+//	}
 
 	@Override
 	@GetMapping(value = "/client/{idClient}", produces = "application/json")
@@ -101,9 +112,9 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 	@Override
 	@PostMapping(value = "/client/{idClient}/CompteCourant/", produces = "application/json")
 	public ResponseEntity<CompteCourant> AttribuerCompteCourantClient(@PathVariable long idClient,
-			@RequestBody CompteCourant compteEpargne) {
+			@RequestBody CompteCourant compteCourant) {
 		try {
-			service.AttribuerCompteCourantClient(idClient, compteEpargne);
+			service.AttribuerCompteCourantClient(idClient, compteCourant);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
