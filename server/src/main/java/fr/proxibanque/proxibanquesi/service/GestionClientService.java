@@ -13,6 +13,8 @@ public interface GestionClientService {
 	
 	List<Client> obtenirTousClients();
 	
+	List<Client> obtenirClientsParIdConseiller(long idConseiller);
+	
 	void modifierClient(Client client) throws ServiceException;
 	
 	void supprimerClient(long idClient) throws ServiceException;

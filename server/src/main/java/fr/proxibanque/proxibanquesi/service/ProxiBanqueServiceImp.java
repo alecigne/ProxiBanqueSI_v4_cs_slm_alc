@@ -87,6 +87,11 @@ public class ProxiBanqueServiceImp implements GestionClientService, GestionCompt
 	public List<Client> obtenirTousClients() {
 		return clientDao.findAll();
 	};
+	
+	@Override
+	public List<Client> obtenirClientsParIdConseiller(long idConseiller) {
+		return clientDao.findByConseiller(idConseiller);
+	}
 
 	@Override
 	public void modifierClient(Client client) throws ServiceException {

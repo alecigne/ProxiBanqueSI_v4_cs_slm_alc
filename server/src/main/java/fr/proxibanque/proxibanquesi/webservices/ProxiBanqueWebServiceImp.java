@@ -49,6 +49,12 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 	public List<Client> obtenirTousClients() {
 		return service.obtenirTousClients();
 	}
+	
+	@Override
+	@GetMapping(value = "/client/{idConseiller}/all", produces = "application/json")
+	public List<Client> obtenirClientsParIdConseiller(@PathVariable long idConseiller) {
+		return service.obtenirClientsParIdConseiller(idConseiller);
+	}
 
 	@Override
 	@PutMapping(value = "/client/", produces = "application/json")

@@ -16,6 +16,8 @@ public interface GestionClientWebService {
 	Client obtenirClient(long idClient);
 
 	List<Client> obtenirTousClients();
+	
+	List<Client> obtenirClientsParIdConseiller(long idConseiller);
 
 	ResponseEntity<Client> modifierClient(Client client);
 
