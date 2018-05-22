@@ -2,16 +2,17 @@
   <h2>Aucun client trouvé</h2>
 </ng-template>
 
-<p>
-  <a routerLink="../client/nouveauclient" class="btn btn-default">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
-  </a>
-</p>
-
 <div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
 
-  <h1>Liste des clients ({{listeClients.length}})</h1>
+  <h1 class="text-center">Liste des clients ({{listeClients.length}})</h1>
 
+  <p>
+    <a routerLink="../client/nouveauclient" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
+    </a>
+  </p>
+
+  <br>
   <table class="table table-striped">
     <thead>
       <tr>

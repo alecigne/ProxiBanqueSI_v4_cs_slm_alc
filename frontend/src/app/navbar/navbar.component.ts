@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Conseiller } from '../conseiller/conseiller';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,18 +15,40 @@ export class NavbarComponent implements OnInit {
   navItems = [
     { label: 'Accueil', path: 'accueil' },
     { label: 'Gestion Client', path: 'clients' },
-    { label: 'Opérations', path: 'opérations' },
-    { label: 'Gestion conseiller', path: 'conseillers' },
-    { label: 'Connexion', path: 'login' },
-    { label: 'Deconnexion', path: 'logout' }
+    { label: 'Opérations', path: 'operations' },
+    { label: 'Gestion Conseiller', path: 'conseillers' },
+    { label: 'Transactions', path: 'transactions' },
+    // { label: 'Connexion', path: 'login' },
+    // { label: 'Deconnexion', path: 'logout' }
   ];
 
-  constructor(private as: AuthService) { }
+  constructor(private as: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.as.getCurrentConseiller().subscribe(
       conseiller => {
         this.currentConseiller = conseiller;
       });
+  }
+
+  doLogin() {
+    this.as.signIn()
+      .subscribe(conseiller => {
+        if (conseiller) {
+          this.gotoClients();
+        }
+      });
+  }
+
+  doLogout() {
+    this.as.signOut()
+      .subscribe(() => {
+        alert('Vous êtes déconnecté(e).');
+      });
+  }
+
+  gotoClients(event?: Event) {
+    if (event) { event.preventDefault(); }
+    this.router.navigate(['/clients']);
   }
 }
