@@ -22,6 +22,8 @@ import { AuthService } from './services/auth.service';
 import { VirementComponent } from './virement/virement.component';
 import { CompteAfficherComponent } from './virement/compte-afficher/compte-afficher.component';
 import { TransfertComponent } from './virement/transfert/transfert.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -52,7 +54,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     CompteModule,
-
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [
     AuthService,

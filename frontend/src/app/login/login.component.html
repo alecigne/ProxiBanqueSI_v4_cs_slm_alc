@@ -1,22 +1,35 @@
 <div class="container">
-    <div class="jumbotron text-center">
-  
-      <p *ngIf="isLoading; else showUI">Chargement en cours...</p>
-  
-      <ng-template #showUI>
-        <div *ngIf="currentConseiller">
-          <p>Vous êtes identifié en tant que {{ currentConseiller.prenom }} {{ currentConseiller.nom }}.</p>
-          <p>
-            <button class="btn btn-primary" (click)="gotoClients($event)">Accéder à la liste des clients</button>
-            <button class="btn btn-default" (click)="doLogout()">Se déconnecter</button>
-          </p>
-        </div>
-        <div *ngIf="!currentConseiller">
-          <p>Vous n'êtes pas identifié.</p>
-          <p><button class="btn btn-danger" (click)="doLogin()">S'authentifier</button></p>
-        </div>
-      </ng-template>
-  
-    </div>
+
+  <img src="../../assets/banner.jpeg">
+
+  <div class="jumbotron text-center col-md-4 col-md-offset-4">
+
+    <p *ngIf="isLoading; else showUI">Chargement en cours...</p>
+
+    <ng-template #showUI>
+      <div *ngIf="currentConseiller">
+        <p>Vous êtes identifié en tant que {{ currentConseiller.prenom }} {{ currentConseiller.nom }}.</p>
+        <p>
+          <button class="btn btn-primary" (click)="gotoClients($event)">Liste des clients</button>
+          <button class="btn btn-default" (click)="doLogout()">Se déconnecter</button>
+        </p>
+      </div>
+      <div *ngIf="!currentConseiller">
+        <form [formGroup]="loginForm" (ngSubmit)="doLogin()" novalidate>
+
+          <app-field label="Login*" [control]="loginForm.get('login')">
+            <input formControlName="login" type="text" class="form-control" placeholder="Login">
+          </app-field>
+
+          <app-field label="Mot de passe*" [control]="loginForm.get('password')">
+            <input formControlName="password" type="password" class="form-control" placeholder="Mot de passe">
+          </app-field>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+      </div>
+    </ng-template>
+
   </div>
-  
+</div>
