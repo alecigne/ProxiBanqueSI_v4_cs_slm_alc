@@ -8,6 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ChartDemoComponent } from './demo/chart-demo/chart-demo.component';
+import { VisuClientComponent } from './visu-client/visu-client.component';
+import { ClientItemComponent } from './visu-client/client-item/client-item.component';
+import { CcItemComponent } from './visu-client/cc-item/cc-item.component';
+import { CeItemComponent } from './visu-client/ce-item/ce-item.component';
 
 
 @NgModule({
@@ -16,6 +20,10 @@ import { ChartDemoComponent } from './demo/chart-demo/chart-demo.component';
     NavbarComponent,
     FooterComponent,
     ChartDemoComponent,
+    VisuClientComponent,
+    ClientItemComponent,
+    CcItemComponent,
+    CeItemComponent,
 
   ],
   imports: [
