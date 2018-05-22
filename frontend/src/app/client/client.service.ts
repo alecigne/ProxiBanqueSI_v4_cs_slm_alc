@@ -35,7 +35,7 @@ export class ClientService {
   * Sauvegarde le client du formulaire (nouveau ou édité selon l'url).
   */
   saveClient(client: Client): Observable<any> {
-    const url = `${this.baseURL}/client` + (client.id ? `${client.id}` : '');
+    const url = `${this.baseURL}client/` + (client.id ? `${client.id}` : '');
     const method = client.id ? 'put' : 'post';
     return this.http.request(method, url, { body: client });
   }
@@ -44,8 +44,8 @@ export class ClientService {
   /**
   * Supprime le client sélectionné.
   */
-  deleteQuiz(clientId: number): Observable<any> {
-    return this.http.delete(`${this.baseURL}/clients/${clientId}`);
+  deleteClient(clientId: number): Observable<any> {
+    return this.http.delete(`${this.baseURL}clients/${clientId}`);
   }
 
 }

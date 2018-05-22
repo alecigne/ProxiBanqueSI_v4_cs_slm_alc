@@ -33,7 +33,7 @@ export class Client {
     this.codePostal = options.codePostal || '';
     this.ville = options.ville || '';
     this.telephone = options.telephone || '';
-    this.compteCourant = options.compteCourant || {};
-    this.compteEpargne = options.compteEpargne || {};
+    this.compteCourant = options.compteCourant || null;
+    this.compteEpargne = options.compteEpargne || null;
   }
 }
