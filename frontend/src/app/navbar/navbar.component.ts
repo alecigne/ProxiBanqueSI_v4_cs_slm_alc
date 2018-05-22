@@ -7,12 +7,12 @@ import { Conseiller } from '../conseiller/conseiller';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent implements OnInit {
-  logoImage = '/assets/logo_proxibanque.png';
+  logoImage = '/assets/logo_proxibanque3.jpg';
 
   currentConseiller: Conseiller;
 
   navItems = [
-    { label: 'Accueil', path: 'home' },
+    { label: 'Accueil', path: 'accueil' },
     { label: 'Gestion Client', path: 'clients' },
     { label: 'Opérations', path: 'opérations' },
     { label: 'Gestion conseiller', path: 'conseillers' },

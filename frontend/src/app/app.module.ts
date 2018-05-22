@@ -22,9 +22,11 @@ import { AuthService } from './services/auth.service';
 import { VirementComponent } from './virement/virement.component';
 import { CompteAfficherComponent } from './virement/compte-afficher/compte-afficher.component';
 import { TransfertComponent } from './virement/transfert/transfert.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'accueil', component: AccueilComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ]
 
@@ -45,6 +47,8 @@ const routes: Routes = [
     CompteAfficherComponent,
 
     TransfertComponent,
+
+    AccueilComponent,
   ],
   imports: [
     BrowserModule,

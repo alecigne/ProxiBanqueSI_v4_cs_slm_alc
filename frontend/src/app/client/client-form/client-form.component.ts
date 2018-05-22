@@ -17,6 +17,7 @@ export class ClientFormComponent implements OnInit {
   currentClient: Client;
   currentConseiller: Conseiller
   clientForm: FormGroup;
+  conseillerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
     private clientService: ClientService,
@@ -50,13 +51,20 @@ export class ClientFormComponent implements OnInit {
       codePostal: [this.currentClient.codePostal, [Validators.maxLength(5), Validators.minLength(5)]],
       ville: [this.currentClient.ville],
       telephone: [this.currentClient.telephone, [Validators.maxLength(10), Validators.minLength(10)]],
-      //idConseiller: [this.currentConseiller.idConseiller]
     });
+
+    this.conseillerForm = this.formBuilder.group({
+      idConseiller: [this.currentConseiller.idConseiller]
+    })
+   
   }
 
 
   saveClient() {
     const client: Client = Object.assign(this.currentClient, this.clientForm.value);
+    const conseiller :Conseiller = this.conseillerForm.value;
+    console.log(client);
+    console.log(conseiller);
     this.clientService.saveClient(client).subscribe(() => {
       alert('Le client a été enregistré avec succès');
       this.router.navigate(['clients/']);

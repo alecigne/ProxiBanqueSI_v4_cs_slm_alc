@@ -24,7 +24,7 @@ import fr.proxibanque.proxibanquesi.model.Gerant;
 import fr.proxibanque.proxibanquesi.model.CompteEpargne;
 
 /**
- * @author Clothidle, Sandrine et Anthony
+ * @author Clothilde, Sandrine et Anthony
  *
  */
 @Service("service")
@@ -129,6 +129,13 @@ public class ProxiBanqueServiceImp
 	}
 
 	@Override
+	public Conseiller obtenirConseiller(long idConseiller) {
+		return conseillerDao.findOne(idConseiller);
+	}
+
+	// *** GESTION COMPTES ***
+
+	@Override
 	public void AttribuerCompteEpargneClient(long idClient, CompteEpargne compteEpargne) throws ServiceException {
 		// TODO Auto-generated method stub
 		Client client = obtenirClient(idClient);
@@ -155,17 +162,6 @@ public class ProxiBanqueServiceImp
 			throw new ServiceException("le client a déjà un compte courant");
 		}
 
-	}
-
-	private long genererNumero() {
-		long randomNumber = (long) (Math.random() * 1_000_000_000);
-		return randomNumber;
-	}
-
-	private String today() {
-		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		return sdfDate.format(date);
 	}
 
 	@Override
@@ -198,30 +194,46 @@ public class ProxiBanqueServiceImp
 		return compteDAO.findOne(numCompte);
 	}
 
+	// *** OPERATIONS ***
+
 	@Override
-	public void VirementCompteACompte(long numCompteDepart, long numCompteArrivee, double montantTransfere) throws ServiceException {
+	public void VirementCompteACompte(long numCompteDepart, long numCompteArrivee, double montantTransfere)
+			throws ServiceException {
 		Compte compteDepart = AfficherCompteNumero(numCompteDepart);
-		double soldecompteDepart =compteDepart.getSolde(); 
+		double soldecompteDepart = compteDepart.getSolde();
 		Compte compteArrivee = AfficherCompteNumero(numCompteArrivee);
-		double soldecompteArrivee=compteArrivee.getSolde();
+		double soldecompteArrivee = compteArrivee.getSolde();
 		double limiteDecouvert;
-		//methodologie pour récuperer le decouvert autorisé dans tous les cas
-		//pas de découvert Autorisé présent dans le
-		if(CompteCourant.class.isInstance(compteDepart)) {
-			limiteDecouvert=((CompteCourant)compteDepart).getDecouvertAutorise();
+		// methodologie pour récuperer le decouvert autorisé dans tous les cas
+		// pas de découvert Autorisé présent dans le
+		if (CompteCourant.class.isInstance(compteDepart)) {
+			limiteDecouvert = ((CompteCourant) compteDepart).getDecouvertAutorise();
 		} else {
-			limiteDecouvert=limiteDecouvertAutoriseEpargne;
+			limiteDecouvert = limiteDecouvertAutoriseEpargne;
 		}
-		if ((compteDepart.getSolde()-montantTransfere)>limiteDecouvert) {
-			compteDepart.setSolde(soldecompteDepart-montantTransfere);
-			compteArrivee.setSolde(soldecompteArrivee+montantTransfere);
+		if ((compteDepart.getSolde() - montantTransfere) > limiteDecouvert) {
+			compteDepart.setSolde(soldecompteDepart - montantTransfere);
+			compteArrivee.setSolde(soldecompteArrivee + montantTransfere);
 			compteDAO.save(compteDepart);
 			compteDAO.save(compteArrivee);
 		} else {
-			throw new ServiceException("Virement refusé. Si réalisé, découvert autorisé du compte "+compteDepart.getNumeroCompte()+"dépassé.");
+			throw new ServiceException("Virement refusé. Si réalisé, découvert autorisé du compte "
+					+ compteDepart.getNumeroCompte() + "dépassé.");
 		}
-		
-		
+
+	}
+
+	// *** METHODES ANNEXES ***
+
+	private long genererNumero() {
+		long randomNumber = (long) (Math.random() * 1_000_000_000);
+		return randomNumber;
+	}
+
+	private String today() {
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		return sdfDate.format(date);
 	}
 
 }

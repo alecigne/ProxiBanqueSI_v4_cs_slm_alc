@@ -10,7 +10,7 @@ export class ClientService {
   constructor(
     private http: HttpClient,
     @Inject('BACKEND_URL') private baseURL: string
-  ) {}
+  ) { }
 
   /**
   * Affiche la liste des clients.

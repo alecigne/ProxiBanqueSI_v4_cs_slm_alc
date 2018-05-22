@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  * Cette classe décrit les caractéristiques d'un client ProxiBanque.
@@ -31,6 +32,8 @@ public class Client {
 	private String codePostal;
 	private String ville;
 	private String telephone;
+	@Transient
+	private long idConseiller;
 
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinColumn(name = "compte_courant_id", unique = true)
@@ -136,6 +139,14 @@ public class Client {
 
 	public void setCompteEpargne(CompteEpargne compteEpargne) {
 		this.compteEpargne = compteEpargne;
+	}
+
+	public long getIdConseiller() {
+		return idConseiller;
+	}
+
+	public void setIdConseiller(long idConseiller) {
+		this.idConseiller = idConseiller;
 	}
 
 	// *** OTHER METHODS ***
