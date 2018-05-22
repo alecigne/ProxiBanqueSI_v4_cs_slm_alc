@@ -1,51 +1,55 @@
-<ng-template #noClientFound>
-  <h2>Aucun client trouvé</h2>
+<p *ngIf="isLoading; else showUI">Chargement en cours...</p>
+
+<ng-template #showUI>
+  <ng-template #noClientFound>
+    <h2>Aucun client trouvé</h2>
+  </ng-template>
+
+  <p>
+    <a routerLink="../client/nouveauclient" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
+    </a>
+  </p>
+
+  <div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
+
+    <h1>Liste des clients ({{listeClients.length}})</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Email</th>
+          <th>Compte Courant</th>
+          <th>Compte Epargne</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of listeClients">
+          <td>{{ client.nom }}</td>
+          <td>{{ client.prenom }}</td>
+          <td>{{ client.email }}</td>
+          <td>{{ client.compteCourant.solde }}
+            <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+          </td>
+          <td>
+            {{ client.compteEpargne.solde }}
+          </td>
+          <td>
+            <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient]">
+              <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
+            </a>
+            <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient,'editionclient']">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
+            </a>
+            <button class="btn btn-danger btn-sm">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </ng-template>
-
-<p>
-  <a routerLink="../client/nouveauclient" class="btn btn-default">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
-  </a>
-</p>
-
-<div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
-
-  <h1>Liste des clients ({{listeClients.length}})</h1>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Email</th>
-        <th>Compte Courant</th>
-        <th>Compte Epargne</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let client of listeClients">
-        <td>{{ client.nom }}</td>
-        <td>{{ client.prenom }}</td>
-        <td>{{ client.email }}</td>
-        <td>{{ client.compteCourant.solde }}
-          <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
-        </td>
-        <td>
-          {{ client.compteEpargne.solde }}
-        </td>
-        <td>
-          <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient]">
-            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
-          </a>
-          <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient,'editionclient']">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
-          </a>
-          <button class="btn btn-danger btn-sm">
-            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
