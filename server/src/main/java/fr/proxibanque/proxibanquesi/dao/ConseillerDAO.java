@@ -7,4 +7,7 @@ import fr.proxibanque.proxibanquesi.model.Conseiller;
 
 @Repository
 public interface ConseillerDAO extends JpaRepository<Conseiller, Long> {
+	
+	Conseiller findByLogin(String login);
+	
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fr.proxibanque.proxibanquesi.model.Auth;
 import fr.proxibanque.proxibanquesi.model.CarteBancaire;
 import fr.proxibanque.proxibanquesi.model.Client;
 import fr.proxibanque.proxibanquesi.model.CompteCourant;
@@ -77,5 +78,8 @@ public class InitBean implements InitializingBean {
 		// } catch (ServiceException e) {
 		// e.printStackTrace();
 		// }
+		
+//		Auth auth = new Auth("jdurand1", "4321");
+//		System.out.println(pbs.obtenirConseillerParAuth(auth));
 	}
 }

@@ -5,17 +5,21 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Conseiller extends Employe {
 
-	@OneToMany(cascade = { CascadeType.PERSIST })
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "conseiller_id")
 	private Set<Client> listeClients = new HashSet<>();
 
 	// *** CONSTRUCTEURS ***
+
+	public Conseiller() {
+	}
 
 	public Conseiller(String prenom, String nom, String login, String password) {
 		super(prenom, nom, login, password);

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.proxibanque.proxibanquesi.exceptions.ServiceException;
@@ -22,7 +24,8 @@ import fr.proxibanque.proxibanquesi.model.Conseiller;
 import fr.proxibanque.proxibanquesi.service.ProxiBanqueServiceImp;
 
 @RestController
-public class ProxiBanqueWebServiceImp implements GestionClientWebService, GestionCompteWebService, SIWebService {
+public class ProxiBanqueWebServiceImp
+		implements GestionClientWebService, GestionCompteWebService, SIWebService, GestionConseillerWebService {
 
 	@Autowired
 	ProxiBanqueServiceImp service;
@@ -38,19 +41,20 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-//	@PostMapping(value = "/client/", produces = "application/json")
-//	public ResponseEntity<Client> creerClient(@RequestBody Client client, @RequestBody long idConseiller) {
-//		try {
-//			Conseiller conseiller = service.obtenirConseiller(client.getIdConseiller());
-//			conseiller.getListeClients().add(client);
-//			service.creerClient(client);
-//			return new ResponseEntity<>(HttpStatus.OK);
-//		} catch (ServiceException e) {
-//			e.printStackTrace(); // TODO Remplacer par un log/AOP
-//			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
-//		}
-//	}
+
+	// @PostMapping(value = "/client/", produces = "application/json")
+	// public ResponseEntity<Client> creerClient(@RequestBody Client client,
+	// @RequestBody long idConseiller) {
+	// try {
+	// Conseiller conseiller = service.obtenirConseiller(client.getIdConseiller());
+	// conseiller.getListeClients().add(client);
+	// service.creerClient(client);
+	// return new ResponseEntity<>(HttpStatus.OK);
+	// } catch (ServiceException e) {
+	// e.printStackTrace(); // TODO Remplacer par un log/AOP
+	// return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
+	// }
+	// }
 
 	@Override
 	@GetMapping(value = "/client/{idClient}", produces = "application/json")
@@ -146,7 +150,12 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 			e.printStackTrace();
 
 		}
+	}
 
+	@Override
+	@GetMapping(value = "/conseiller/{login}/{password}", produces = "application/json")
+	public Conseiller obtenirConseillerParAuth(@PathVariable String login, @PathVariable String password) {
+		return service.obtenirConseillerParAuth(login, password);
 	}
 
 }
