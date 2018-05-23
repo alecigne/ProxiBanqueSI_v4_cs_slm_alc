@@ -77,5 +77,10 @@ public class InitBean implements InitializingBean {
 		// } catch (ServiceException e) {
 		// e.printStackTrace();
 		// }
+		
+		// Client 5 sans comptes 
+//		Client client5 = new Client("Dupont50", "Michel", "michel@dupont3.com", "3 rue de la Source", "75003", "Paris",
+//				"0100000003");
+//		pbs.creerClientAvecConseiller(client5, 2);
 	}
 }

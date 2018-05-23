@@ -3,11 +3,13 @@ import { Client } from './client';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { Conseiller } from '../conseiller/conseiller';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class ClientService {
 
-  constructor(
+  constructor(private route: ActivatedRoute,
     private http: HttpClient,
     @Inject('BACKEND_URL') private baseURL: string
   ) { }
@@ -36,6 +38,12 @@ export class ClientService {
   */
   saveClient(client: Client): Observable<any> {
     const url = `${this.baseURL}client/` + (client.id ? `${client.id}` : '');
+    const method = client.id ? 'put' : 'post';
+    return this.http.request(method, url, { body: client });
+  }
+
+  saveClientAvecConseiller(client: Client, idConseiller: number): Observable<any> {
+    const url = `${this.baseURL}conseiller/${idConseiller}/client/` + (client.id ? `${client.id}` : '');
     const method = client.id ? 'put' : 'post';
     return this.http.request(method, url, { body: client });
   }

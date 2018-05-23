@@ -1,4 +1,4 @@
-<form novalidate *ngIf="clientForm" [formGroup]="clientForm" (ngSubmit)="saveClient()">
+<form novalidate *ngIf="clientForm" [formGroup]="clientForm" (ngSubmit)="saveClientAvecConseiller()">
 
   <app-field label="Nom*" [control]="clientForm.get('nom')">
     <input formControlName="nom" type="text" class="form-control" placeholder="Nom">
@@ -29,17 +29,10 @@
   </app-field>
   <ng-container *ngIf="idClient;else creation">
     <button type="submit" class="btn btn-primary">Modifier</button>
+    <a routerLink="../../../clients">Annuler</a>
   </ng-container>
   <ng-template #creation>
     <button type="submit" class="btn btn-primary">Créer</button>
+    <a routerLink="../../clients">Annuler</a>
   </ng-template>
-  <a routerLink="/clients">Annuler</a>
-</form>
-<!-- <p></p>
-<div>
-  <form novalidate [formGroup]="conseillerForm">
-    <app-field label="ID Conseiller" [control]="conseillerForm.get('idConseiller')">
-      <input formControlName="idConseiller" type="text" class="form-control" placeholder="ID Conseiller">
-    </app-field>
   </form>
-</div> -->

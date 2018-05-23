@@ -14,12 +14,11 @@ import { ChartDemoComponent } from '../demo/chart-demo/chart-demo.component';
 import { VisuClientComponent } from '../visu-client/visu-client.component';
 
 const routes: Routes = [
-  { path: 'clients', component: ClientListComponent },
-  { path: 'client/:clientId/editionclient', component: ClientFormComponent },
-  { path: 'client/nouveauclient', component: ClientFormComponent },
-  { path: 'demohighchart', component: ChartDemoComponent},
-  { path: 'client/:clientId', component:VisuClientComponent},
-
+  { path: 'conseiller/:idConseiller/clients', component: ClientListComponent },
+  { path: 'conseiller/:idConseiller/client/nouveauclient', component: ClientFormComponent },
+  { path: 'conseiller/:idConseiller/client/:clientId/editionclient', component: ClientFormComponent },
+  { path: 'conseiller/:idConseiller/client/:clientId', component: VisuClientComponent },
+   { path: 'demohighchart', component: ChartDemoComponent },
 ]
 
 @NgModule({
