@@ -60,7 +60,8 @@ export class LoginComponent implements OnInit {
   // Redirect the user to the admin homepage.
   gotoClients(event?: Event) {
     const id=this.currentConseiller.idConseiller;
-        this.router.navigate([`conseiller/${id}/clients`]);
+        // this.router.navigate([`conseiller/${id}/clients`]);
+        this.router.navigate([`accueil`]);
   }
 
 }

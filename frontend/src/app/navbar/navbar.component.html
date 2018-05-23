@@ -17,15 +17,27 @@
     <p *ngIf="!currentConseiller" class="navbar-text">Non identifié</p>
 
     <ng-container *ngIf="currentConseiller">
-      <p class="navbar-text ">Identifié comme
-        <a href="#" class="navbar-link">{{ currentConseiller.prenom }} {{ currentConseiller.nom }} </a>
+      <p class="navbar-text ">Identifié :
+        <a href="#" class="navbar-link">{{ currentConseiller.login }} </a>
       </p>
 
       <div id="navbar" class="navbar-collapse collapse">
 
         <ul class="nav navbar-nav">
           <li *ngFor="let item of navItems">
-            <a [routerLink]="item.path">{{ item.label }}</a>
+            <a [routerLink]="item.path">
+              <ng-container *ngIf="item.label=='Accueil'">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+              </ng-container>
+
+              <ng-container *ngIf="item.label=='Gestion Client'">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              </ng-container>
+
+              <ng-container *ngIf="item.label=='Opérations'">
+                <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+              </ng-container>
+              {{ item.label }}</a>
           </li>
         </ul>
 

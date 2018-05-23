@@ -39,7 +39,7 @@ export class CompteEpargneFormComponent implements OnInit {
   buildForm() {
     this.compteEpargneForm = this.formBuilder.group({
       solde: [this.currentCompteEpargne.solde],
-      tauxRemuneration: [this.currentCompteEpargne.tauxRemun]
+      tauxRemun: [this.currentCompteEpargne.tauxRemun]
     });
   }
 

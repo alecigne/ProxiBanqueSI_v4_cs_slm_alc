@@ -11,7 +11,7 @@ import { CompteCourant } from '../../compte/compte';
 export class CcItemComponent implements OnInit {
   currentClient: Client;
   currentCompteCourant: CompteCourant;
-  currentCarte:string;
+  currentCarte: string;
 
   constructor(private aRoute: ActivatedRoute, private router: Router, private clientService: ClientService) { }
 
@@ -22,7 +22,6 @@ export class CcItemComponent implements OnInit {
       .subscribe(client => {
         this.currentClient = client;
         this.currentCompteCourant = this.currentClient.compteCourant;
-        console.log(this.currentCompteCourant);
       });
   }
 }

@@ -33,6 +33,7 @@
           <th class="text-center">Situation</th>
           <!-- <th class="text-center">Synthèse</th> -->
           <th class="text-center">Actions</th>
+          <th class="text-center">Editions</th>
         </tr>
       </thead>
       <tbody>
@@ -114,12 +115,20 @@
             <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient]">
               <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
             </a>
-            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'editionclient']">
-              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
-            </a>
             <button class="btn btn-danger btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'clients']" (click)="deleteClient(client.idClient)">
-              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supp
             </button>
+          </td>
+          <td>
+            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'editionclient']">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Client
+            </a>
+            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'editioncomptecourant']">
+              <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> C.Courant
+            </a>
+            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'editioncompteepargne']">
+              <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> C.Epargne
+            </a>
           </td>
         </tr>
       </tbody>

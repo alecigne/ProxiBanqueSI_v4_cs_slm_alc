@@ -1,31 +1,32 @@
-<div class="col-sm-4">
-  <div class="well">
-    <fieldset>
-      <legend>Compte Courant</legend>
-      <p>
-        Numero : {{currentCompteCourant.numeroCompte}}
-      </p>
-      <p>
-        Date d'ouverture : {{currentCompteCourant.dateOuverture}}
-      </p>
-      <p>
-        Solde : {{currentCompteCourant.solde}}
-      </p>
-      <p>
-        Découvert Autorisé : {{currentCompteCourant.decouvertAutorise}}
-      </p>
-      <div *ngIf="currentCompteCourant.carteBancaire">
-        <h4>Carte Banquaire</h4>
+<ng-container *ngIf="currentCompteCourant">
+  <div class="col-sm-4">
+    <div class="well">
+      <fieldset>
+        <legend>Compte Courant</legend>
         <p>
-          Numéro de carte : {{currentCompteCourant.carteBancaire.numeroCarte}}
+          Numero : {{currentCompteCourant.numeroCompte}}
         </p>
         <p>
-          Type de carte : {{currentCompteCourant.carteBancaire.typeCarte}}
+          Date d'ouverture : {{currentCompteCourant.dateOuverture}}
         </p>
-      </div>
-      <div class="text-right">
-        <!-- <a class="btn btn-info btn-lg">Bouton placeholder</a> -->
-      </div>
-    </fieldset>
+        <p>
+          Solde : {{currentCompteCourant.solde}}
+        </p>
+        <p>
+          Découvert Autorisé : {{currentCompteCourant.decouvertAutorise}}
+        </p>
+        <div *ngIf="currentCompteCourant.carteBancaire">
+          <p>
+            Numéro de carte : {{currentCompteCourant.carteBancaire.numeroCarte}}
+          </p>
+          <p>
+            Type de carte : {{currentCompteCourant.carteBancaire.typeCarte}}
+          </p>
+        </div>
+        <div class="text-right">
+          <!-- <a class="btn btn-info btn-lg">Bouton placeholder</a> -->
+        </div>
+      </fieldset>
+    </div>
   </div>
-</div>
+</ng-container>

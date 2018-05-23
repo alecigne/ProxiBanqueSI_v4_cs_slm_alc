@@ -13,11 +13,11 @@ import { CompteEpargneFormComponent } from './compte-epargne-form/compte-epargne
 
 
 const routes: Routes = [
-  { path: 'conseiller/:idConseiller/client/:idClient/editioncomptecourant/:numeroCompte', component: CompteCourantFormComponent },
-  { path: 'conseiller/:idConseiller/client/:idClient/editioncompteepargne/:numeroCompte', component: CompteCourantFormComponent },
+  { path: 'conseiller/:idConseiller/client/:idClient/editioncomptecourant', component: CompteCourantFormComponent },
+  { path: 'conseiller/:idConseiller/client/:idClient/editioncompteepargne', component: CompteCourantFormComponent },
   { path: 'conseiller/:idConseiller/client/:idClient/nouveaucomptecourant', component: CompteCourantFormComponent },
   { path: 'conseiller/:idConseiller/client/:idClient/nouveaucompteepargne', component: CompteEpargneFormComponent }
-  
+
 ]
 
 @NgModule({

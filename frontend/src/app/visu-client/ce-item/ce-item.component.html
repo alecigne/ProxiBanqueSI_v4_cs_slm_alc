@@ -1,23 +1,23 @@
-<div class="col-sm-4">
-  <div class="well">
-    <fieldset>
-      <legend>Compte Epargne</legend>
-      <!-- <h2>Compte Epargne</h2> -->
-      <p>
-        Numero : {{currentCompteEpargne.numeroCompte}}
-      </p>
-      <p>
-        Date d'ouverture : {{currentCompteEpargne.dateOuverture}}
-      </p>
-      <p>
-        Solde : {{currentCompteEpargne.solde}}
-      </p>
-      <p>
-        Taux de rémuneration : {{currentCompteEpargne.tauxRemun}}
-      </p>
-      <div class="text-right">
-        <!-- <a class="btn btn-info btn-lg">Bouton placeholder</a> -->
-      </div>
-    </fieldset>
+<ng-container *ngIf="currentCompteEpargne">
+  <div class="col-sm-4">
+    <div class="well">
+      <fieldset>
+        <legend>Compte Epargne</legend>
+        <p>
+          Numero : {{currentCompteEpargne.numeroCompte}}
+        </p>
+        <p>
+          Date d'ouverture : {{currentCompteEpargne.dateOuverture}}
+        </p>
+        <p>
+          Solde : {{currentCompteEpargne.solde}}
+        </p>
+        <p>
+          Taux de rémuneration : {{currentCompteEpargne.tauxRemun}}
+        </p>
+        <div class="text-right">
+        </div>
+      </fieldset>
+    </div>
   </div>
-</div>
+</ng-container>

@@ -8,17 +8,17 @@
     <app-field label="Découvert Autorisé" [control]="compteCourantForm.get('decouvertAutorise')">
       <input formControlName="decouvertAutorise" type="text" class="form-control" placeholder="Découvert Autorisé">
     </app-field>
-
-    <app-field label="Carte" [control]="compteCourantForm.get('carte')">
-      <br>
-      <input formControlName="carte" type="radio" value="AUCUNE" checked> Aucune
-      <br>
-      <input formControlName="carte" type="radio" value="ELECTRON"> Electron
-      <br>
-      <input formControlName="carte" type="radio" value="PREMIER"> Premier
-    </app-field>
-
-    <button type="submit" class="btn btn-primary">Créer</button>
+    <form novalidate *ngIf="carteBancaireForm" [formGroup]="carteBancaireForm">
+      <app-field label="Carte" [control]="carteBancaireForm.get('typeCarte')">
+        <br>
+        <input formControlName="typeCarte" type="radio" value="AUCUNE" checked> Aucune
+        <br>
+        <input formControlName="typeCarte" type="radio" value="ELECTRON"> Electron
+        <br>
+        <input formControlName="typeCarte" type="radio" value="PREMIER"> Premier
+      </app-field>
+    </form>
+    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Créer</button>
     <a routerLink="../../../clients">Annuler</a>
   </form>
 

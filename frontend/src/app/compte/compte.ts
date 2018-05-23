@@ -16,15 +16,15 @@ export abstract class Compte {
 
 export class CompteCourant extends Compte {
     decouvertAutorise: number = 1000;
-    carte: string = 'AUCUNE';
+    carteBancaire: CarteBancaire;
 
     constructor(options: {
         decouvertAutorise?: number;
-        carte?: string;
+        carteBancaire?: CarteBancaire;
     } = {}) {
         super();
         this.decouvertAutorise = options.decouvertAutorise || null;
-        this.carte = options.carte || '';
+        this.carteBancaire = options.carteBancaire || {typeCarte:'AUCUNE'};
     }
 }
 
@@ -37,4 +37,8 @@ export class CompteEpargne extends Compte {
         super();
         this.tauxRemun = options.tauxRemun || null;
     }
+}
+
+export class CarteBancaire {
+    typeCarte: string = 'AUCUNE';
 }
