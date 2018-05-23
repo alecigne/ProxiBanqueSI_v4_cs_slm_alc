@@ -2,30 +2,35 @@
 
 <ng-template #showUI>
   <ng-template #noClientFound>
-    <h2>Aucun client trouvé</h2>
+    <h2>Vous n'avez pas de client...</h2>
   </ng-template>
 
   <div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
 
-    <h1 class="text-center">Liste des clients ({{listeClients.length}})</h1>
+    <h1 class="text-center">Vous avez {{listeClients.length}} clients !</h1>
 
-    <p>
-      <a [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client','nouveauclient']" class="btn btn-default">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
-      </a>
-    </p>
+    <ng-container *ngIf="listeClients.length<10">
+      <p>
+        <a [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client','nouveauclient']" class="btn btn-default">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
+        </a>
+      </p>
+    </ng-container>
 
     <br>
-    <table class="table table-striped">
+    <table class="table table-striped text-center">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Prenom</th>
-          <th>Email</th>
-          <th>Compte Courant</th>
-          <th>Compte Epargne</th>
-          <th>Actions</th>
+          <th class="text-center">ID</th>
+          <th class="text-center">Nom</th>
+          <th class="text-center">Prenom</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Compte Courant</th>
+          <th class="text-center">Découvert</th>
+          <th class="text-center">Compte Epargne</th>
+          <th class="text-center">Situation</th>
+          <!-- <th class="text-center">Synthèse</th> -->
+          <th class="text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -36,8 +41,23 @@
           <td>{{ client.email }}</td>
 
           <ng-container *ngIf="client.compteCourant;else ajoutcc">
-            <td>{{ client.compteCourant.solde }}
-              <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+            <td>{{ client.compteCourant.solde }} € </td>
+            <td>
+              <ng-container *ngIf="client.compteCourant.solde>0">
+                <span class="glyphicon glyphicon-ok" style="color: rgb(34, 204, 0);" aria-hidden="true"></span>
+              </ng-container>
+
+              <ng-container *ngIf="client.compteCourant.solde==0">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+              </ng-container>
+
+              <ng-container *ngIf="client.compteCourant.solde<(-client.compteCourant.decouvertAutorise)">
+                <span class="glyphicon glyphicon-remove" style="color: #c00;" aria-hidden="true"></span>
+              </ng-container>
+
+              <ng-container *ngIf="client.compteCourant.solde>(-client.compteCourant.decouvertAutorise) && client.compteCourant.solde<0">
+                <span class="glyphicon glyphicon-ok" style="color: rgb(204, 122, 0);" aria-hidden="true"></span>
+              </ng-container>
             </td>
           </ng-container>
           <ng-template #ajoutcc>
@@ -46,11 +66,32 @@
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </a>
             </td>
+            <td> </td>
           </ng-template>
 
           <ng-container *ngIf="client.compteEpargne;else ajoutce">
             <td>
-              {{ client.compteEpargne.solde }}
+              {{ client.compteEpargne.solde }} €
+            </td>
+            <td>
+              <ng-container *ngIf="client.compteEpargne.solde<5000 && client.compteEpargne.solde>=0">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+              </ng-container>
+
+              <ng-container *ngIf="client.compteEpargne.solde>5000 && client.compteEpargne.solde<15000">
+                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+              </ng-container>
+
+              <ng-container *ngIf="client.compteEpargne.solde>=15000 && client.compteEpargne.solde<40000">
+                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+              </ng-container>
+
+              <ng-container *ngIf="client.compteEpargne.solde>=40000">
+                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+              </ng-container>
             </td>
           </ng-container>
           <ng-template #ajoutce>
@@ -59,9 +100,15 @@
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </a>
             </td>
+            <td> </td>
           </ng-template>
+          <!-- <ng-container *ngIf="client.compteCourant.solde==null && client.compteEpargne.solde ==null; else synthese">
+            <td> dfhd</td>
+          </ng-container>
+          <ng-template #synthese>
+            <td> {{ client.compteCourant.solde + client.compteEpargne.solde }} €</td>
+          </ng-template> -->
           <td>
-
             <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient]">
               <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
             </a>

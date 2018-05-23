@@ -20,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
 import { AccueilComponent } from './accueil/accueil.component';
 import { OperationsModule } from './operations/operations.module';
 import { ConseillerService } from './conseiller/conseiller.service';
+import { CarouselComponent } from './carousel/carousel.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
     CeItemComponent,
     LoginComponent,
     AccueilComponent,
+    CarouselComponent,
 ],
 
   imports: [

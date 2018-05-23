@@ -18,8 +18,6 @@ export class NavbarComponent implements OnInit {
     { label: 'Opérations', path: 'operations' },
     // { label: 'Gestion Conseiller', path: 'conseillers' },
     // { label: 'Transactions', path: 'transactions' },
-    // { label: 'Connexion', path: 'login' },
-    // { label: 'Deconnexion', path: 'logout' }
   ];
 
   constructor(private as: AuthService, private router: Router) { }
