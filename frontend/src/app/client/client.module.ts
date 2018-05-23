@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'conseiller/:idConseiller/client/nouveauclient', component: ClientFormComponent },
   { path: 'conseiller/:idConseiller/client/:clientId/editionclient', component: ClientFormComponent },
   { path: 'conseiller/:idConseiller/client/:clientId', component: VisuClientComponent },
-   { path: 'demohighchart', component: ChartDemoComponent },
+  { path: 'demohighchart', component: ChartDemoComponent },
 ]
 
 @NgModule({

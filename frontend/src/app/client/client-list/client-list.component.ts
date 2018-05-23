@@ -3,6 +3,7 @@ import { Client } from '../client';
 import { ClientService } from '../client.service';
 import { Conseiller } from '../../conseiller/conseiller';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-list',
@@ -14,10 +15,10 @@ export class ClientListComponent implements OnInit {
   currentConseiller: Conseiller;
   listeClients: Client[] = [];
 
-  constructor(
+  constructor(private router: Router,
     private as: AuthService,
     private cs: ClientService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.as.getCurrentConseiller().subscribe(
@@ -30,7 +31,7 @@ export class ClientListComponent implements OnInit {
       });
   }
 
-// Suppression client
+  // Suppression client
 
   deleteClient(id: number) {
     this.cs.deleteClient(id).subscribe();

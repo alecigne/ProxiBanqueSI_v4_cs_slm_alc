@@ -36,7 +36,9 @@ export class LoginComponent implements OnInit {
       login: ['', [Validators.required, Validators.maxLength(20)]],
       password: ['', [Validators.required, Validators.maxLength(50)]]
     });
-    this.cs.loadConseillerParAuth("jdurand1", "4321").subscribe(conseiller => this.testConseiller = conseiller.login);
+    if (this.currentConseiller) {
+      this.cs.loadConseillerParAuth("jdurand1", "4321").subscribe(conseiller => this.testConseiller = conseiller.login);
+    }
   }
 
   doLogin() {
@@ -57,8 +59,8 @@ export class LoginComponent implements OnInit {
 
   // Redirect the user to the admin homepage.
   gotoClients(event?: Event) {
-    if (event) { event.preventDefault(); }
-    this.router.navigate(['/clients']);
+    const id=this.currentConseiller.idConseiller;
+        this.router.navigate([`conseiller/${id}/clients`]);
   }
 
 }

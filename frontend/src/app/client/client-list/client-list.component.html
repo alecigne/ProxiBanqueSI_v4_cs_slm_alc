@@ -69,7 +69,7 @@
             <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'editionclient']">
               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
             </a>
-            <button class="btn btn-danger btn-sm" (click)="deleteClient(client.id)">
+            <button class="btn btn-danger btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'clients']" (click)="deleteClient(client.idClient)">
               <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
             </button>
           </td>
