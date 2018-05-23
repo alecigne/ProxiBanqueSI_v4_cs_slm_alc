@@ -5,7 +5,7 @@ import { CompteSelectionComponent } from './compte-selection/compte-selection.co
 import { TransfertComponent } from './transfert/transfert.component';
 import { VirementComponent } from './virement/virement.component';
 import { OperationsService } from './operations.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FieldComponent } from '../shared/field/field.component';
 import { SharedModule } from '../shared/shared.module';
 
@@ -17,6 +17,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
     ReactiveFormsModule,
     SharedModule
   ],

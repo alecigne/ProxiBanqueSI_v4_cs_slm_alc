@@ -18,10 +18,7 @@ export class CompteCourant extends Compte {
     decouvertAutorise: number = 1000;
     carte: string = 'AUCUNE';
 
-    constructor(options: {
-        decouvertAutorise?: number;
-        carte?: string;
-    } = {}) {
+    constructor(options: any) {
         super();
         this.decouvertAutorise = options.decouvertAutorise || null;
         this.carte = options.carte || '';
@@ -31,9 +28,7 @@ export class CompteCourant extends Compte {
 export class CompteEpargne extends Compte {
     tauxRemuneration: number = 0.3;
 
-    constructor(options: {
-        tauxRemuneration?: number;
-    } = {}) {
+    constructor(options: any) {
         super();
         this.tauxRemuneration = options.tauxRemuneration || null;
     }

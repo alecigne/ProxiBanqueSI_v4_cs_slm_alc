@@ -12,13 +12,17 @@ import { Compte } from '../../compte/compte';
 })
 export class CompteSelectionComponent implements OnInit {
   @Input() departOuArrivee: string;
-  @Output() numeroCompte:EventEmitter<number> = new EventEmitter<number>();
-  comptenum:number;
+
+  @Output() numeroCompte: EventEmitter<number> = new EventEmitter<number>();
+  // comptenum: number;
   clients: Client[];
   currentConseiller: Conseiller;
-  isLoading = true;
-  currentClient: Client;
+  // isLoading = true;
+  // currentClient: Client;
   listeCompte: Compte[];
+
+  selectedAccount
+  selectedClient
 
   constructor(private service: ClientService, private as: AuthService) { }
 
@@ -28,30 +32,25 @@ export class CompteSelectionComponent implements OnInit {
         this.currentConseiller = conseiller;
         this.service.loadClientsParConseiller(conseiller.idConseiller).subscribe(listeClients => {
           this.clients = listeClients;
-          this.isLoading = false;
+          // this.isLoading = false;
         });
 
-      })}
-
-  selectClient(idClient: number) {
-    if (idClient) {
-      this.currentClient = this.clients.filter(value => value.idClient === +idClient).shift();
-      console.log(this.currentClient);
-      this.listeCompte = [this.currentClient.compteCourant, this.currentClient.compteEpargne];
-    }
-
+      })
   }
 
-  selectAccount(numCompte: number) {
-    if (numCompte) {
-      this.comptenum = numCompte;
-      console.log(`account ${(numCompte)} ${(this.comptenum)} selected!`);
-      this.declencher();
-    }
+  currentClient(){
+    return  this.selectedClient ? this.clients.filter(value => value.idClient === +this.selectedClient).shift() : undefined;
   }
+  // selectClient(idClient: number) {
+  //   this.currentClient = idClient ? this.clients.filter(value => value.idClient === +idClient).shift() : undefined;
+  //   this.selectedAccount=undefined;
+  // }
 
-  declencher() {
-    this.numeroCompte.emit(this.comptenum);
+  emit() {
+    // this.comptenum = numCompte ? numCompte : undefined;
+    // console.log(`account ${(numCompte)} ${(this.comptenum)} selected!`);
+    this.numeroCompte.emit(this.selectedAccount?this.selectedAccount:undefined);
+    // console.log('----',this.selectedAccount)
   }
 
 

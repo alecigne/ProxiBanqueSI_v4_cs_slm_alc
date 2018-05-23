@@ -1,21 +1,26 @@
-<div class="col-sm-4">
+<div>
   <h2>Compte de {{departOuArrivee}}</h2>
   <div class="row bg-white z-depth-2">
     <div class="small-2">
 
       Client :
-      <select (change)="selectClient($event.target.value)">
-        <option> Clients</option>
+      <select [(ngModel)]="selectedClient" (change)="emit()">
+        <option value=""> Clients</option>
         <option *ngFor="let client of clients" [value]="client.idClient">{{client.idClient}} {{client.prenom}} {{client.nom}} {{client.email}}</option>
       </select>
 
     </div>
-    <div class="small-2">
-
+    <div *ngIf="selectedClient" class="small-2">
       Compte :
-      <select (change)="selectAccount($event.target.value)" >
-        <option >comptes </option>
-        <option *ngFor="let account of listeCompte" [value]="account.numeroCompte">{{account.numeroCompte}}</option>
+      <!-- <select (change)="selectAccount($event.target.value)">
+        <option value="">comptes </option>
+        <option [value]="currentClient?.compteCourant?.numeroCompte">Compte Courant : {{currentClient?.compteCourant?.numeroCompte}}</option>
+        <option [value]="currentClient?.compteEpargne?.numeroCompte">Compte Epargne : {{currentClient?.compteEpargne?.numeroCompte}}</option>
+      </select> -->
+      <select [(ngModel)]="selectedAccount" (change)="emit()">
+        <option value="">comptes </option>
+        <option [value]="currentClient()?.compteCourant?.numeroCompte">Compte Courant : {{currentClient()?.compteCourant?.numeroCompte}}</option>
+        <option [value]="currentClient()?.compteEpargne?.numeroCompte">Compte Epargne : {{currentClient()?.compteEpargne?.numeroCompte}}</option>
       </select>
 
     </div>
