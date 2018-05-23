@@ -20,7 +20,7 @@ export class ClientService {
   }
 
   loadClientsParConseiller(idConseiller: number): Observable<Client[]> {
-    return this.http.get<Client[]>(this.baseURL + '/client/' + idConseiller + "/all");
+    return this.http.get<Client[]>(this.baseURL + 'client/' + idConseiller + "/all");
   }
 
   /**
