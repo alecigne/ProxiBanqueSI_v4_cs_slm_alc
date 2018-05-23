@@ -10,7 +10,7 @@ export class ClientService {
   constructor(
     private http: HttpClient,
     @Inject('BACKEND_URL') private baseURL: string
-  ) {}
+  ) { }
 
   /**
   * Affiche la liste des clients.
@@ -27,7 +27,7 @@ export class ClientService {
   * Affiche un client par son id.
   */
   loadClient(idClient: number): Observable<Client> {
-    return this.http.get(`${this.baseURL}/client/${idClient}`)
+    return this.http.get(`${this.baseURL}client/${idClient}`)
       .map(clientData => new Client(clientData));
   }
 
@@ -35,7 +35,7 @@ export class ClientService {
   * Sauvegarde le client du formulaire (nouveau ou édité selon l'url).
   */
   saveClient(client: Client): Observable<any> {
-    const url = `${this.baseURL}/client` + (client.id ? `${client.id}` : '');
+    const url = `${this.baseURL}client/` + (client.id ? `${client.id}` : '');
     const method = client.id ? 'put' : 'post';
     return this.http.request(method, url, { body: client });
   }

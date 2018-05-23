@@ -10,18 +10,16 @@
     </app-field>
 
     <app-field label="Carte" [control]="compteCourantForm.get('carte')">
-      <input formControlName="carte" type="checkbox">
+      <br>
+      <input formControlName="carte" type="radio" value="AUCUNE" checked> Aucune
+      <br>
+      <input formControlName="carte" type="radio" value="ELECTRON"> Electron
+      <br>
+      <input formControlName="carte" type="radio" value="PREMIER"> Premier
     </app-field>
 
+    <button type="submit" class="btn btn-primary">Créer</button>
+    <a routerLink="/clients">Annuler</a>
   </form>
 
-  <button type="submit" class="btn btn-primary">Créer</button>
-
 </fieldset>
-
-<fieldset>
-  <legend>Compte Epargne</legend>
-  <button type="submit" class="btn btn-primary">Créer</button>
-</fieldset>
-
-<a routerLink="../clients">Fin de création du client</a>

@@ -5,14 +5,17 @@
     <h2>Aucun client trouvé</h2>
   </ng-template>
 
+<div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
+
+  <h1 class="text-center">Liste des clients ({{listeClients.length}})</h1>
+
   <p>
     <a routerLink="../client/nouveauclient" class="btn btn-default">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
     </a>
   </p>
 
-  <div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
-
+  <br>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -31,12 +34,32 @@
         <td>{{ client.nom }}</td>
         <td>{{ client.prenom }}</td>
         <td>{{ client.email }}</td>
-        <td>{{ client.compteCourant.solde }}
-          <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
-        </td>
-        <td>
-          {{ client.compteEpargne.solde }}
-        </td>
+
+        <ng-container *ngIf="client.compteCourant;else ajoutcc">
+          <td>{{ client.compteCourant.solde }}
+            <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+          </td>
+        </ng-container>
+        <ng-template #ajoutcc>
+          <td>
+            <a class="btn btn-default btn-sm"  [routerLink]="['/client', client.idClient,'nouveaucomptecourant']"> 
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+          </td>
+        </ng-template>
+
+        <ng-container *ngIf="client.compteEpargne;else ajoutce">
+          <td>
+            {{ client.compteEpargne.solde }}
+          </td>
+        </ng-container>
+        <ng-template #ajoutce>
+          <td>
+            <a class="btn btn-default btn-sm"  [routerLink]="['/client', client.idClient,'nouveaucompteepargne']">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+          </td>
+        </ng-template>
         <td>
           <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient]">
             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir

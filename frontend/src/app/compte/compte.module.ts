@@ -4,16 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CompteService } from './compte.service';
-import { CompteFormComponent } from './compte-form/compte-form.component';
+import { CompteCourantFormComponent } from './compte-courant-form/compte-courant-form.component';
 import { ClientModule } from '../client/client.module';
 
 import { SharedModule } from '../shared/shared.module';
 import { FieldComponent } from '../shared/field/field.component';
+import { CompteEpargneFormComponent } from './compte-epargne-form/compte-epargne-form.component';
 
 
 const routes: Routes = [
-  { path: 'nouveaucompte', component: CompteFormComponent },
-  { path: 'editioncompte/:numeroCompte', component: CompteFormComponent }
+  { path: 'client/:idClient/nouveaucomptecourant', component: CompteCourantFormComponent },
+  { path: 'client/:idClient/nouveaucompteepargne', component: CompteEpargneFormComponent },
+  { path: 'editioncompte/:numeroCompte', component: CompteCourantFormComponent }
 ]
 
 @NgModule({
@@ -24,7 +26,8 @@ const routes: Routes = [
     SharedModule
   ],
   declarations: [
-    CompteFormComponent,
+    CompteCourantFormComponent,
+    CompteEpargneFormComponent,
   ],
   providers: [
     CompteService

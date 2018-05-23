@@ -18,6 +18,7 @@ import fr.proxibanque.proxibanquesi.model.Client;
 import fr.proxibanque.proxibanquesi.model.Compte;
 import fr.proxibanque.proxibanquesi.model.CompteCourant;
 import fr.proxibanque.proxibanquesi.model.CompteEpargne;
+import fr.proxibanque.proxibanquesi.model.Conseiller;
 import fr.proxibanque.proxibanquesi.service.ProxiBanqueServiceImp;
 
 @RestController
@@ -29,7 +30,7 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 	@Override
 	@PostMapping(value = "/client/", produces = "application/json")
 	public ResponseEntity<Client> creerClient(@RequestBody Client client) {
-		try {	
+		try {
 			service.creerClient(client);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (ServiceException e) {
@@ -37,6 +38,19 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+//	@PostMapping(value = "/client/", produces = "application/json")
+//	public ResponseEntity<Client> creerClient(@RequestBody Client client, @RequestBody long idConseiller) {
+//		try {
+//			Conseiller conseiller = service.obtenirConseiller(client.getIdConseiller());
+//			conseiller.getListeClients().add(client);
+//			service.creerClient(client);
+//			return new ResponseEntity<>(HttpStatus.OK);
+//		} catch (ServiceException e) {
+//			e.printStackTrace(); // TODO Remplacer par un log/AOP
+//			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
+//		}
+//	}
 
 	@Override
 	@GetMapping(value = "/client/{idClient}", produces = "application/json")
@@ -49,7 +63,7 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 	public List<Client> obtenirTousClients() {
 		return service.obtenirTousClients();
 	}
-	
+
 	@Override
 	@GetMapping(value = "/client/{idConseiller}/all", produces = "application/json")
 	public List<Client> obtenirClientsParIdConseiller(@PathVariable long idConseiller) {
@@ -82,7 +96,8 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 
 	@Override
 	@PostMapping(value = "/client/{idClient}/CompteEpargne/", produces = "application/json")
-	public ResponseEntity<CompteEpargne> AttribuerCompteEpargneClient(@PathVariable long idClient, @RequestBody CompteEpargne compteEpargne) {
+	public ResponseEntity<CompteEpargne> AttribuerCompteEpargneClient(@PathVariable long idClient,
+			@RequestBody CompteEpargne compteEpargne) {
 		//
 		try {
 			service.AttribuerCompteEpargneClient(idClient, compteEpargne);
@@ -96,9 +111,10 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 
 	@Override
 	@PostMapping(value = "/client/{idClient}/CompteCourant/", produces = "application/json")
-	public ResponseEntity<CompteCourant> AttribuerCompteCourantClient(@PathVariable long idClient, @RequestBody CompteCourant compteEpargne) {
+	public ResponseEntity<CompteCourant> AttribuerCompteCourantClient(@PathVariable long idClient,
+			@RequestBody CompteCourant compteCourant) {
 		try {
-			service.AttribuerCompteCourantClient(idClient, compteEpargne);
+			service.AttribuerCompteCourantClient(idClient, compteCourant);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,28 +124,29 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 	}
 
 	@Override
-	@GetMapping(value="/client/{idClient}/comptes", produces = "application/json")
+	@GetMapping(value = "/client/{idClient}/comptes", produces = "application/json")
 	public List<Compte> AfficherListeCompteClient(@PathVariable long idClient) {
-			return service.AfficherListeCompteClient(idClient);
+		return service.AfficherListeCompteClient(idClient);
 	}
 
 	@Override
-	@GetMapping(value="compte/{numCompte}")
+	@GetMapping(value = "compte/{numCompte}")
 	public Compte AfficherCompteNumero(@PathVariable long numCompte) {
 		// TODO Auto-generated method stub
-			return service.AfficherCompteNumero(numCompte);
+		return service.AfficherCompteNumero(numCompte);
 	}
 
 	@Override
-	@PutMapping(value="virement/{numCompteDepart}/{numCompteArrivee}/{montantTransfere}")
-	public void VirementCompteACompte(@PathVariable long numCompteDepart, @PathVariable long numCompteArrivee, @PathVariable double montantTransfere) {
+	@PutMapping(value = "virement/{numCompteDepart}/{numCompteArrivee}/{montantTransfere}")
+	public void VirementCompteACompte(@PathVariable long numCompteDepart, @PathVariable long numCompteArrivee,
+			@PathVariable double montantTransfere) {
 		try {
 			service.VirementCompteACompte(numCompteDepart, numCompteArrivee, montantTransfere);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
-		
+
 	}
 
 }

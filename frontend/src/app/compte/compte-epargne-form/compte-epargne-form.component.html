@@ -1,0 +1,15 @@
+<fieldset>
+  <legend>Compte Epargne</legend>
+  <form novalidate *ngIf="compteEpargneForm" [formGroup]="compteEpargneForm" (ngSubmit)="saveCompteEpargne()">
+    <app-field label="Solde" [control]="compteEpargneForm.get('solde')">
+      <input formControlName="solde" type="text" class="form-control" placeholder="Solde">
+    </app-field>
+
+    <app-field label="Taux de rémunération" [control]="compteEpargneForm.get('tauxRemuneration')">
+      <input formControlName="tauxRemuneration" type="text" class="form-control" placeholder="Taux de rémunéraiton">
+    </app-field>
+
+    <button type="submit" class="btn btn-primary">Créer</button>
+    <a routerLink="/clients">Annuler</a>
+  </form>
+</fieldset>

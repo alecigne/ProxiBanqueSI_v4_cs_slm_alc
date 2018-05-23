@@ -27,8 +27,19 @@
   <app-field label="Téléphone" [control]="clientForm.get('telephone')">
     <input formControlName="telephone" type="text" class="form-control" placeholder="Téléphone">
   </app-field>
-
-  <button type="submit" class="btn btn-primary">Ajouter compte</button>
+  <ng-container *ngIf="idClient;else creation">
+    <button type="submit" class="btn btn-primary">Modifier</button>
+  </ng-container>
+  <ng-template #creation>
+    <button type="submit" class="btn btn-primary">Créer</button>
+  </ng-template>
   <a routerLink="/clients">Annuler</a>
-
 </form>
+<!-- <p></p>
+<div>
+  <form novalidate [formGroup]="conseillerForm">
+    <app-field label="ID Conseiller" [control]="conseillerForm.get('idConseiller')">
+      <input formControlName="idConseiller" type="text" class="form-control" placeholder="ID Conseiller">
+    </app-field>
+  </form>
+</div> -->

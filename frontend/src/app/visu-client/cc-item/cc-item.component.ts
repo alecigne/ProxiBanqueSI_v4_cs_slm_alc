@@ -7,7 +7,6 @@ import { ClientService } from '../../client/client.service';
 @Component({
   selector: 'app-cc-item',
   templateUrl: './cc-item.component.html',
-  styleUrls: ['./cc-item.component.css']
 })
 export class CcItemComponent implements OnInit {
   currentClient: Client;
