@@ -2,7 +2,7 @@ import { Compte, CompteCourant, CompteEpargne } from "../compte/compte";
 
 
 export class Client {
-  id: Number;
+  id: number;
   nom: string;
   prenom: string;
   email: string;
@@ -14,7 +14,7 @@ export class Client {
   compteEpargne: CompteEpargne;
 
   constructor(options: {
-    id?: Number;
+    id?: number;
     nom?: string;
     prenom?: string;
     email?: string;
