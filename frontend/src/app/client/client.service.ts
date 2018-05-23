@@ -18,11 +18,13 @@ export class ClientService {
   * Affiche la liste des clients.
   */
   loadClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(this.baseURL + 'client/all');
+    return this.http.get<Client[]>(this.baseURL + 'client/all')
+    .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));
   }
 
   loadClientsParConseiller(idConseiller: number): Observable<Client[]> {
-    return this.http.get<Client[]>(this.baseURL + 'client/' + idConseiller + "/all");
+    return this.http.get<Client[]>(this.baseURL + 'client/' + idConseiller + "/all")
+    .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));
   }
 
   /**

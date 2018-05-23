@@ -143,6 +143,7 @@ public class ProxiBanqueWebServiceImp
 	public void VirementCompteACompte(@PathVariable long numCompteDepart, @PathVariable long numCompteArrivee,
 			@PathVariable double montantTransfere) {
 		try {
+			System.out.println("passage par le web service pour le virement");
 			service.VirementCompteACompte(numCompteDepart, numCompteArrivee, montantTransfere);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -46,10 +46,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     CompteModule,
+    OperationsModule,
     ReactiveFormsModule,
     SharedModule,
     OperationsModule,
-
   ],
   providers: [
     AuthService,
