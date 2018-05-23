@@ -4,6 +4,7 @@ import { ClientService } from '../client.service';
 import { Conseiller } from '../../conseiller/conseiller';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-client-list',
@@ -31,11 +32,22 @@ export class ClientListComponent implements OnInit {
       });
   }
 
-  // Suppression client
-
   deleteClient(id: number) {
-    this.cs.deleteClient(id).subscribe();
-    alert('Client effacé !');
+    this.showConfirmationModal()
+      .subscribe({
+        complete: () => this.cs.deleteClient(id).subscribe(),
+        error: () => { }
+      });
+    return false;
   }
 
+  showConfirmationModal(): Observable<any> {
+    return Observable.create(observer => {
+      if (confirm('Êtes-vous certain de vouloir effacer ce client de notre agence ?')) {
+        observer.complete();
+      } else {
+        observer.error();
+      }
+    });
+  }
 }
