@@ -5,73 +5,75 @@
     <h2>Aucun client trouvé</h2>
   </ng-template>
 
-<div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
+  <div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
 
-  <h1 class="text-center">Liste des clients ({{listeClients.length}})</h1>
+    <h1 class="text-center">Liste des clients ({{listeClients.length}})</h1>
 
-  <p>
-    <a [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client','nouveauclient']" class="btn btn-default">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
-    </a>
-  </p>
+    <p>
+      <a [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client','nouveauclient']" class="btn btn-default">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
+      </a>
+    </p>
 
-  <br>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Email</th>
-        <th>Compte Courant</th>
-        <th>Compte Epargne</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let client of listeClients">
-        <td>{{ client.id }}</td>
-        <td>{{ client.nom }}</td>
-        <td>{{ client.prenom }}</td>
-        <td>{{ client.email }}</td>
+    <br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Email</th>
+          <th>Compte Courant</th>
+          <th>Compte Epargne</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of listeClients">
+          <td>{{ client.id }}</td>
+          <td>{{ client.nom }}</td>
+          <td>{{ client.prenom }}</td>
+          <td>{{ client.email }}</td>
 
-        <ng-container *ngIf="client.compteCourant;else ajoutcc">
-          <td>{{ client.compteCourant.solde }}
-            <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
-          </td>
-        </ng-container>
-        <ng-template #ajoutcc>
+          <ng-container *ngIf="client.compteCourant;else ajoutcc">
+            <td>{{ client.compteCourant.solde }}
+              <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+            </td>
+          </ng-container>
+          <ng-template #ajoutcc>
+            <td>
+
+              <a class="btn btn-default btn-sm" [routerLink]="['/client', client.id,'nouveaucomptecourant']">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </a>
+            </td>
+          </ng-template>
+
+          <ng-container *ngIf="client.compteEpargne;else ajoutce">
+            <td>
+              {{ client.compteEpargne.solde }}
+            </td>
+          </ng-container>
+          <ng-template #ajoutce>
+            <td>
+              <a class="btn btn-default btn-sm" [routerLink]="['/client', client.id,'nouveaucompteepargne']">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </a>
+            </td>
+          </ng-template>
           <td>
-            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'nouveaucomptecourant']">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+
+            <a class="btn btn-default btn-sm" [routerLink]="['/client', client.id]">
+              <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
             </a>
-          </td>
-        </ng-template>
-
-        <ng-container *ngIf="client.compteEpargne;else ajoutce">
-          <td>
-            {{ client.compteEpargne.solde }}
-          </td>
-        </ng-container>
-        <ng-template #ajoutce>
-          <td>
-            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'nouveaucompteepargne']">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <a class="btn btn-default btn-sm" [routerLink]="['/client', client.id,'editionclient']">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
             </a>
+            <button class="btn btn-danger btn-sm" (click)="deleteClient(client.id)">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
+            </button>
           </td>
-        </ng-template>
-        <td>
-          <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient]">
-            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
-          </a>
-          <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'editionclient']">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
-          </a>
-          <button class="btn btn-danger btn-sm" (click)="deleteClient(client.idClient)">
-            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        </tr>
+      </tbody>
+    </table>
+  </div>

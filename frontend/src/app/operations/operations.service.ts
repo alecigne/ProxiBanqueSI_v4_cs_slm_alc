@@ -10,7 +10,7 @@ export class OperationsService {
 
   virement(numCompteDepart, numCompteArrivee, montant){
     console.log('URL requete : '+this.baseURL + 'virement/'+numCompteDepart+'/'+numCompteArrivee+'/'+montant)
-    this.http.put(this.baseURL + 'virement/'+numCompteDepart+'/'+numCompteArrivee+'/'+montant,'',{});
+    this.http.put(this.baseURL + 'virement/'+numCompteDepart+'/'+numCompteArrivee+'/'+montant,'', null);
   }
 
 }
