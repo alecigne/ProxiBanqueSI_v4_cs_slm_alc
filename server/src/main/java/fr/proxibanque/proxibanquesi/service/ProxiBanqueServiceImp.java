@@ -194,7 +194,6 @@ public class ProxiBanqueServiceImp
 		} else {
 			throw new ServiceException("le client a déjà un compte courant");
 		}
-
 	}
 
 	@Override

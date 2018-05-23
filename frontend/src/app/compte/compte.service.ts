@@ -23,13 +23,13 @@ export class CompteService {
   }
 
   saveCompteCourant(idClient: number, compteCourant: CompteCourant): Observable<any> {
-    const url = `${this.baseUrl}client/${idClient}/CompteCourant` + (compteCourant.numeroCompte ? `/${compteCourant.numeroCompte}` : '');
+    const url = `${this.baseUrl}client/${idClient}/CompteCourant/` + (compteCourant.numeroCompte ? `/${compteCourant.numeroCompte}` : '');
     const method = compteCourant.numeroCompte ? 'put' : 'post';
     return this.http.request(method, url, { body: compteCourant });
   }
 
   saveCompteEpargne(idClient: number, compteEpargne: CompteEpargne): Observable<any> {
-    const url = `${this.baseUrl}client/${idClient}/CompteEpargne` + (compteEpargne.numeroCompte ? `/${compteEpargne.numeroCompte}` : '');
+    const url = `${this.baseUrl}client/${idClient}/CompteEpargne/` + (compteEpargne.numeroCompte ? `/${compteEpargne.numeroCompte}` : '');
     const method = compteEpargne.numeroCompte ? 'put' : 'post';
     return this.http.request(method, url, { body: compteEpargne });
   }

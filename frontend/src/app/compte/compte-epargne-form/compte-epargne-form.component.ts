@@ -43,10 +43,9 @@ export class CompteEpargneFormComponent implements OnInit {
     });
   }
 
-
   saveCompteEpargne() {
     const clientId = +this.route.snapshot.params['idClient'];
-    console.log(clientId);
+    // console.log(clientId);
     const compteEpargne: CompteEpargne = Object.assign(this.currentCompteEpargne, this.compteEpargneForm.value);
     this.compteService.saveCompteEpargne(clientId, compteEpargne).subscribe(() => {
       alert('Le compte a été enregistré avec succès');
