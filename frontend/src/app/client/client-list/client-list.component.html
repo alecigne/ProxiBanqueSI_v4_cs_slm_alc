@@ -42,7 +42,7 @@
         </ng-container>
         <ng-template #ajoutcc>
           <td>
-            <a class="btn btn-default btn-sm"  [routerLink]="['/client', client.idClient,'nouveaucomptecourant']"> 
+            <a class="btn btn-default btn-sm"  [routerLink]="['/client', client.id,'nouveaucomptecourant']"> 
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
           </td>
@@ -55,19 +55,19 @@
         </ng-container>
         <ng-template #ajoutce>
           <td>
-            <a class="btn btn-default btn-sm"  [routerLink]="['/client', client.idClient,'nouveaucompteepargne']">
+            <a class="btn btn-default btn-sm"  [routerLink]="['/client', client.id,'nouveaucompteepargne']">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
           </td>
         </ng-template>
         <td>
-          <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient]">
+          <a class="btn btn-default btn-sm" [routerLink]="['/client', client.id]">
             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
           </a>
-          <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient,'editionclient']">
+          <a class="btn btn-default btn-sm" [routerLink]="['/client', client.id,'editionclient']">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
           </a>
-          <button class="btn btn-danger btn-sm" (click)="deleteClient(client.idClient)">
+          <button class="btn btn-danger btn-sm" (click)="deleteClient(client.id)">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
           </button>
         </td>
