@@ -48,14 +48,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     CompteModule,
-<<<<<<< HEAD
-    OperationsModule,
-
-=======
     ReactiveFormsModule,
     SharedModule,
     OperationsModule,
->>>>>>> alc
   ],
   providers: [
     AuthService,
