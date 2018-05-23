@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,12 +14,10 @@ import fr.proxibanque.proxibanquesi.dao.ClientDAO;
 import fr.proxibanque.proxibanquesi.dao.ConseillerDAO;
 import fr.proxibanque.proxibanquesi.dao.CompteDAO;
 import fr.proxibanque.proxibanquesi.exceptions.ServiceException;
-import fr.proxibanque.proxibanquesi.model.CarteBancaire;
 import fr.proxibanque.proxibanquesi.model.Client;
 import fr.proxibanque.proxibanquesi.model.Compte;
 import fr.proxibanque.proxibanquesi.model.CompteCourant;
 import fr.proxibanque.proxibanquesi.model.Conseiller;
-import fr.proxibanque.proxibanquesi.model.Gerant;
 import fr.proxibanque.proxibanquesi.model.CompteEpargne;
 
 /**
@@ -146,6 +142,28 @@ public class ProxiBanqueServiceImp
 		Conseiller conseiller = conseillerDao.findOne(idConseiller);
 		Set<Client> listeClients = conseiller.getListeClients();
 		return conseillerDao.findOne(idConseiller);
+	}
+
+	@Override
+	public Conseiller obtenirConseillerParAuth(String login, String password) {
+		Conseiller conseiller = obtenirConseillerParLogin(login);
+		if (pwdIsCorrect(conseiller, password)) {
+			return conseiller;
+		} else {
+			return null;
+		}
+	}
+
+	private Conseiller obtenirConseillerParLogin(String login) {
+		return conseillerDao.findByLogin(login);
+	}
+
+	private boolean pwdIsCorrect(Conseiller conseiller, String password) {
+		if (conseiller.getPassword().equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	// *** GESTION COMPTES ***

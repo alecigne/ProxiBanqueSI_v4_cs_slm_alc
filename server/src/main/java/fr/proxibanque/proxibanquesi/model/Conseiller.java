@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Conseiller extends Employe {
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "conseiller_id")
 	private Set<Client> listeClients = new HashSet<>();
 

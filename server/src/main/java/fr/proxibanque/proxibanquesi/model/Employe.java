@@ -33,7 +33,6 @@ public abstract class Employe {
 	// *** CONSTRUCTORS ***
 
 	public Employe() {
-
 	}
 
 	public Employe(String prenom, String nom, String login, String password) {
