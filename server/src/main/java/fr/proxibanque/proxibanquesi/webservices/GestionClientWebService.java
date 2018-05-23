@@ -13,6 +13,8 @@ public interface GestionClientWebService {
 
 	ResponseEntity<Client> creerClient(Client client);
 
+	ResponseEntity<Client> creerClientAvecConseiller(Client client, long idConseiller);
+
 	Client obtenirClient(long idClient);
 
 	List<Client> obtenirTousClients();

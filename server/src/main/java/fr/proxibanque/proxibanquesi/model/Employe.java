@@ -24,13 +24,17 @@ public abstract class Employe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_employe")
-	private int idEmploye;
+	private long idEmploye;
 	private String nom;
 	private String prenom;
 	private String login;
 	private String password;
 
 	// *** CONSTRUCTORS ***
+
+	public Employe() {
+
+	}
 
 	public Employe(String prenom, String nom, String login, String password) {
 		this.prenom = prenom;
@@ -41,7 +45,7 @@ public abstract class Employe {
 
 	// *** GETTERS and SETTERS ***
 
-	public int getId() {
+	public long getId() {
 		return idEmploye;
 	}
 

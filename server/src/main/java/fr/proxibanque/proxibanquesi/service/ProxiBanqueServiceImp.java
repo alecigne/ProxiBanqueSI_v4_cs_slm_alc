@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -71,6 +72,18 @@ public class ProxiBanqueServiceImp
 		}
 	}
 
+	@Override
+	public void creerClientAvecConseiller(Client client, long idConseiller) throws ServiceException {
+		Conseiller conseiller = this.obtenirConseiller(idConseiller);
+		if (conseiller == null) {
+			throw new ServiceException("Conseiller inexistant !");
+		} else {
+			conseiller.getListeClients().add(client);
+			conseillerDao.save(conseiller);
+		}
+
+	}
+
 	private boolean clientEstValide(Client client) {
 		if (client == null) {
 			return false;
@@ -130,6 +143,8 @@ public class ProxiBanqueServiceImp
 
 	@Override
 	public Conseiller obtenirConseiller(long idConseiller) {
+		Conseiller conseiller = conseillerDao.findOne(idConseiller);
+		Set<Client> listeClients = conseiller.getListeClients();
 		return conseillerDao.findOne(idConseiller);
 	}
 

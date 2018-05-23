@@ -39,18 +39,17 @@ public class ProxiBanqueWebServiceImp implements GestionClientWebService, Gestio
 		}
 	}
 	
-//	@PostMapping(value = "/client/", produces = "application/json")
-//	public ResponseEntity<Client> creerClient(@RequestBody Client client, @RequestBody long idConseiller) {
-//		try {
-//			Conseiller conseiller = service.obtenirConseiller(client.getIdConseiller());
-//			conseiller.getListeClients().add(client);
-//			service.creerClient(client);
-//			return new ResponseEntity<>(HttpStatus.OK);
-//		} catch (ServiceException e) {
-//			e.printStackTrace(); // TODO Remplacer par un log/AOP
-//			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
-//		}
-//	}
+	@PostMapping(value = "/conseiller/{idConseiller}/client/", produces = "application/json")
+	public ResponseEntity<Client> creerClientAvecConseiller(@RequestBody Client client, @PathVariable long idConseiller) {
+		try {
+			
+			service.creerClientAvecConseiller(client, idConseiller);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (ServiceException e) {
+			e.printStackTrace(); // TODO Remplacer par un log/AOP
+			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@Override
 	@GetMapping(value = "/client/{idClient}", produces = "application/json")

@@ -9,6 +9,8 @@ public interface GestionClientService {
 	
 	void creerClient(Client client) throws ServiceException;
 	
+	void creerClientAvecConseiller(Client client, long idConseiller) throws ServiceException;
+	
 	Client obtenirClient(long idClient);
 	
 	List<Client> obtenirTousClients();
