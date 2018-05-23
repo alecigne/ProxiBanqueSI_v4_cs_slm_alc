@@ -8,6 +8,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class AccueilComponent implements OnInit {
 
+  items = [
+    { image: '/assets/ethique.jpg' },
+    { image: '/assets/ethique.jpg' },
+    { image: '/assets/ethique.jpg' },
+  ]
+
   currentConseiller: Conseiller;
 
   maintenant = new Date();
@@ -29,4 +35,9 @@ export class AccueilComponent implements OnInit {
       });
   }
 
+  // addSlide() {
+  //   this.items.push({
+  //     title: `Slide 4`
+  //   });
+  // }
 }
