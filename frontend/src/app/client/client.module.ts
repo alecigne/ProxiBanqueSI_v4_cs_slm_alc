@@ -12,6 +12,7 @@ import { FieldComponent } from '../shared/field/field.component';
 
 import { ChartDemoComponent } from '../demo/chart-demo/chart-demo.component';
 import { VisuClientComponent } from '../visu-client/visu-client.component';
+import { LoadingComponent } from '../shared/loading/loading.component';
 
 const routes: Routes = [
   { path: 'conseiller/:idConseiller/clients', component: ClientListComponent },

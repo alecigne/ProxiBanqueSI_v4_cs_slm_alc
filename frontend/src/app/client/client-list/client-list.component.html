@@ -1,4 +1,6 @@
-<p *ngIf="isLoading; else showUI">Chargement en cours...</p>
+<div *ngIf="isLoading; else showUI">
+  <app-loading></app-loading>
+</div>
 
 <ng-template #showUI>
   <ng-template #noClientFound>
