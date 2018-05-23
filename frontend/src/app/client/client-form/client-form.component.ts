@@ -19,7 +19,7 @@ export class ClientFormComponent implements OnInit {
   clientForm: FormGroup;
   conseillerForm: FormGroup;
 
-  idClient=+this.route.snapshot.params['clientId'];
+  idClient = +this.route.snapshot.params['clientId'];
 
   constructor(private formBuilder: FormBuilder,
     private clientService: ClientService,
@@ -42,9 +42,6 @@ export class ClientFormComponent implements OnInit {
   }
 
   buildForm() {
-    this.authService.getCurrentConseiller().subscribe(
-      conseiller => { this.currentConseiller = conseiller })
-
     this.clientForm = this.formBuilder.group({
       nom: [this.currentClient.nom, [Validators.required, Validators.minLength(2)]],
       prenom: [this.currentClient.prenom, Validators.required],
@@ -53,29 +50,31 @@ export class ClientFormComponent implements OnInit {
       codePostal: [this.currentClient.codePostal, [Validators.maxLength(5), Validators.minLength(5)]],
       ville: [this.currentClient.ville],
       telephone: [this.currentClient.telephone, [Validators.maxLength(10), Validators.minLength(10)]],
-      conseiller:[]
+      conseiller: []
     });
 
-    this.conseillerForm = this.formBuilder.group({
-      idConseiller: [this.currentConseiller.idConseiller]
-    })
-   
   }
 
 
   saveClient() {
     const client: Client = Object.assign(this.currentClient, this.clientForm.value);
-    const conseiller :Conseiller = this.conseillerForm.value;
+    const conseiller: Conseiller = this.conseillerForm.value;
     console.log(client);
     console.log(conseiller);
     this.clientService.saveClient(client).subscribe(() => {
       alert('Le client a été enregistré avec succès');
-      this.router.navigate(['clients/']);
+      this.router.navigate([`../../clients/`]);
       // this.router.navigate([`client/${client.id}/nouveaucompte`]);
-});
-
+    });
   }
 
+  saveClientAvecConseiller() {
+    const idConseiller = +this.route.snapshot.params['idConseiller'];
 
+    const client: Client = Object.assign(this.currentClient, this.clientForm.value);
+    this.clientService.saveClientAvecConseiller(client, idConseiller).subscribe(() => {
+      alert('Le client a été enregistré avec succès');
+      this.router.navigate([`../../conseiller/idConseiller/clients/`]);
+    })
+  }
 }
-

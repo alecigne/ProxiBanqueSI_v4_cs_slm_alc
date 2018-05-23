@@ -13,9 +13,11 @@ import { CompteEpargneFormComponent } from './compte-epargne-form/compte-epargne
 
 
 const routes: Routes = [
-  { path: 'client/:idClient/nouveaucomptecourant', component: CompteCourantFormComponent },
-  { path: 'client/:idClient/nouveaucompteepargne', component: CompteEpargneFormComponent },
-  { path: 'editioncompte/:numeroCompte', component: CompteCourantFormComponent }
+  { path: 'conseiller/:idConseiller/client/:idClient/editioncomptecourant/:numeroCompte', component: CompteCourantFormComponent },
+  { path: 'conseiller/:idConseiller/client/:idClient/editioncompteepargne/:numeroCompte', component: CompteCourantFormComponent },
+  { path: 'conseiller/:idConseiller/client/:idClient/nouveaucomptecourant', component: CompteCourantFormComponent },
+  { path: 'conseiller/:idConseiller/client/:idClient/nouveaucompteepargne', component: CompteEpargneFormComponent }
+  
 ]
 
 @NgModule({

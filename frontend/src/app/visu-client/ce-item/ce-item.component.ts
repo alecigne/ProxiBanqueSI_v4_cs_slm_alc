@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../../client/client';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '../../client/client.service';
-import { Compte } from '../../client/compte';
+import { CompteEpargne } from '../../compte/compte';
 
 @Component({
   selector: 'app-ce-item',
@@ -11,7 +11,7 @@ import { Compte } from '../../client/compte';
 export class CeItemComponent implements OnInit {
 
   currentClient: Client;
-  currentCompteEpargne: Compte;
+  currentCompteEpargne: CompteEpargne;
 
   constructor(private aRoute: ActivatedRoute, private router: Router, private clientService: ClientService) { }
 

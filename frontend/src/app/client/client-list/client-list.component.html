@@ -7,7 +7,7 @@
   <h1 class="text-center">Liste des clients ({{listeClients.length}})</h1>
 
   <p>
-    <a routerLink="../client/nouveauclient" class="btn btn-default">
+    <a [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client','nouveauclient']" class="btn btn-default">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
     </a>
   </p>
@@ -22,7 +22,7 @@
         <th>Email</th>
         <th>Compte Courant</th>
         <th>Compte Epargne</th>
-        <th>Action</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -39,7 +39,7 @@
         </ng-container>
         <ng-template #ajoutcc>
           <td>
-            <a class="btn btn-default btn-sm"  [routerLink]="['/client', client.idClient,'nouveaucomptecourant']"> 
+            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'nouveaucomptecourant']">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
           </td>
@@ -52,16 +52,16 @@
         </ng-container>
         <ng-template #ajoutce>
           <td>
-            <a class="btn btn-default btn-sm"  [routerLink]="['/client', client.idClient,'nouveaucompteepargne']">
+            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'nouveaucompteepargne']">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
           </td>
         </ng-template>
         <td>
-          <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient]">
+          <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient]">
             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
           </a>
-          <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient,'editionclient']">
+          <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'editionclient']">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
           </a>
           <button class="btn btn-danger btn-sm">

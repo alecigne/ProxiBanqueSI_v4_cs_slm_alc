@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   navItems = [
     { label: 'Accueil', path: 'accueil' },
-    { label: 'Gestion Client', path: 'clients' },
+    { label: 'Gestion Client', path: 'conseiller/:idConseiller/clients' },
     { label: 'Opérations', path: 'operations' },
     { label: 'Gestion Conseiller', path: 'conseillers' },
     { label: 'Transactions', path: 'transactions' },
