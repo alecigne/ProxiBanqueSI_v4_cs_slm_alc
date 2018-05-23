@@ -1,20 +1,22 @@
-<ng-template #noClientFound>
-  <h2>Aucun client trouvé</h2>
-</ng-template>
+<p *ngIf="isLoading; else showUI">Chargement en cours...</p>
 
-<p>
-  <a routerLink="../client/nouveauclient" class="btn btn-default">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
-  </a>
-</p>
+<ng-template #showUI>
+  <ng-template #noClientFound>
+    <h2>Aucun client trouvé</h2>
+  </ng-template>
 
-<div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
+  <p>
+    <a routerLink="../client/nouveauclient" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
+    </a>
+  </p>
 
-  <h1>Liste des clients ({{listeClients.length}})</h1>
+  <div class="row" *ngIf="listeClients.length !== 0; else noClientFound">
 
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Nom</th>
         <th>Prenom</th>
         <th>Email</th>
@@ -25,6 +27,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let client of listeClients">
+        <td>{{ client.idClient }}</td>
         <td>{{ client.nom }}</td>
         <td>{{ client.prenom }}</td>
         <td>{{ client.email }}</td>
@@ -41,7 +44,7 @@
           <a class="btn btn-default btn-sm" [routerLink]="['/client', client.idClient,'editionclient']">
             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Éditer
           </a>
-          <button class="btn btn-danger btn-sm">
+          <button class="btn btn-danger btn-sm" (click)="deleteClient(client.idClient)">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
           </button>
         </td>

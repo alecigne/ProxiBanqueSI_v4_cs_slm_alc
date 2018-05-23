@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Client } from '../client';
 import { ClientService } from '../client.service';
 import { Conseiller } from '../../conseiller/conseiller';
@@ -15,16 +15,26 @@ export class ClientListComponent implements OnInit {
   listeClients: Client[] = [];
 
   constructor(
-    private as: AuthService, private cs: ClientService) { }
+    private as: AuthService,
+    private cs: ClientService
+  ) {}
 
   ngOnInit() {
     this.as.getCurrentConseiller().subscribe(
       conseiller => {
-        // Aussitôt qu'un conseiller est observé, réaliser ces actions
         this.currentConseiller = conseiller;
-        this.isLoading = false;
-        this.cs.loadClientsParConseiller(conseiller.idConseiller).subscribe(clients => this.listeClients = clients);
+        this.cs.loadClientsParConseiller(conseiller.idConseiller).subscribe(clients => {
+          this.listeClients = clients;
+          this.isLoading = false;
+        });
       });
+  }
+
+// Suppression client
+
+  deleteClient(id: number) {
+    this.cs.deleteClient(id).subscribe();
+    alert('Client effacé !');
   }
 
 }

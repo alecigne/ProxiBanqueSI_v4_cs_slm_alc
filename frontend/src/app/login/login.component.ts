@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Conseiller } from '../conseiller/conseiller';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   isLoading = true;
   currentConseiller: Conseiller;
+  loginForm: FormGroup;
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private as: AuthService) {
   }
@@ -26,6 +29,11 @@ export class LoginComponent implements OnInit {
       error => {
         this.isLoading = false;
       });
+    this.loginForm = this.fb.group({
+      // Les validateurs doivent être exploités
+      login: ['', [Validators.required, Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.maxLength(50)]]
+    })
   }
 
   doLogin() {

@@ -27,7 +27,7 @@ export class ClientService {
   * Affiche un client par son id.
   */
   loadClient(idClient: number): Observable<Client> {
-    return this.http.get(`${this.baseURL} client/${idClient}`)
+    return this.http.get(`${this.baseURL}/client/${idClient}`)
       .map(clientData => new Client(clientData));
   }
 
@@ -44,8 +44,8 @@ export class ClientService {
   /**
   * Supprime le client sélectionné.
   */
-  deleteQuiz(clientId: number): Observable<any> {
-    return this.http.delete(`${this.baseURL}/clients/${clientId}`);
+  deleteClient(clientId: number): Observable<any> {
+    return this.http.delete(`${this.baseURL}/client/${clientId}`);
   }
 
 }

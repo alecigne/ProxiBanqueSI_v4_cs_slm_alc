@@ -1,8 +1,7 @@
 import { Compte, CompteCourant, CompteEpargne } from "../compte/compte";
 
-
 export class Client {
-  id: Number;
+  id: number;
   nom: string;
   prenom: string;
   email: string;
@@ -14,7 +13,7 @@ export class Client {
   compteEpargne: CompteEpargne;
 
   constructor(options: {
-    id?: Number;
+    id?: number;
     nom?: string;
     prenom?: string;
     email?: string;
@@ -33,7 +32,7 @@ export class Client {
     this.codePostal = options.codePostal || '';
     this.ville = options.ville || '';
     this.telephone = options.telephone || '';
-    this.compteCourant = options.compteCourant || {};
-    this.compteEpargne = options.compteEpargne || {};
+    this.compteCourant = options.compteCourant || null;
+    this.compteEpargne = options.compteEpargne || null;
   }
 }

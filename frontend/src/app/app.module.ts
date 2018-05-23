@@ -20,6 +20,9 @@ import { CeItemComponent } from './visu-client/ce-item/ce-item.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 import { OperationsModule } from './operations/operations.module';
 
 const routes: Routes = [
@@ -45,8 +48,14 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     CompteModule,
+<<<<<<< HEAD
     OperationsModule,
 
+=======
+    ReactiveFormsModule,
+    SharedModule,
+    OperationsModule,
+>>>>>>> alc
   ],
   providers: [
     AuthService,
