@@ -15,7 +15,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -24,6 +23,12 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * Configuration générale de l'injection de dépendances via Spring.
+ * 
+ * @author Clothilde Szymezak, Sandrine Le Mentec, Anthony Le Cigne
+ *
+ */
 @Configuration
 @EnableJpaRepositories(basePackages = { "fr.proxibanque.proxibanquesi" })
 @EnableTransactionManagement
@@ -44,19 +49,24 @@ public class SpringConfig {
 		return dataSource;
 	}
 
-//	private DatabasePopulator databasePopulator() {
-//		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
-//		databasePopulator.setContinueOnError(false);
-//		databasePopulator.addScript(new ClassPathResource("test-data.sql"));
-//		return databasePopulator;
-//	}
-	
+	/**
+	 * Permet de peupler la base de données à l'aide d'un fichier de requêtes SQL.
+	 * 
+	 * @return
+	 */
+	private DatabasePopulator databasePopulator() {
+		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+		databasePopulator.setContinueOnError(false);
+		databasePopulator.addScript(new ClassPathResource("test-data.sql"));
+		return databasePopulator;
+	}
+
 	@Bean
 	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 		JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
 		jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
 		// Exécution du database populator (optionnel)
-//		DatabasePopulatorUtils.execute(databasePopulator(), dataSource());
+		// DatabasePopulatorUtils.execute(databasePopulator(), dataSource());
 		return jpaTransactionManager;
 	}
 
