@@ -13,7 +13,7 @@ export class Client {
   compteEpargne: CompteEpargne;
 
   constructor(options: {
-    idClient?: number;
+    id?: number;
     nom?: string;
     prenom?: string;
     email?: string;
