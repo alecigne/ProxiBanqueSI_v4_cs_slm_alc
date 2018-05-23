@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
 })
-export class ClientListComponent implements OnInit, OnChanges {
+export class ClientListComponent implements OnInit {
 
   isLoading = true;
   currentConseiller: Conseiller;
@@ -25,11 +25,16 @@ export class ClientListComponent implements OnInit, OnChanges {
         this.currentConseiller = conseiller;
         this.cs.loadClientsParConseiller(conseiller.idConseiller).subscribe(clients => {
           this.listeClients = clients;
-          this.isLoading = false
+          this.isLoading = false;
         });
       });
   }
 
-  ngOnChanges() {}
+// Suppression client
+
+  deleteClient(id: number) {
+    this.cs.deleteClient(id).subscribe();
+    alert('Client effacé !');
+  }
 
 }

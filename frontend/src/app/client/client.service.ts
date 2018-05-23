@@ -20,14 +20,15 @@ export class ClientService {
   }
 
   loadClientsParConseiller(idConseiller: number): Observable<Client[]> {
-    return this.http.get<Client[]>(this.baseURL + '/client/' + idConseiller + "/all");
+    return this.http.get<Client[]>(this.baseURL + '/client/' + idConseiller + "/all")
+      .map((clientData: Array<Client>) => clientData.map(client => new Client(client)));
   }
 
   /**
   * Affiche un client par son id.
   */
   loadClient(idClient: number): Observable<Client> {
-    return this.http.get(`${this.baseURL} client/${idClient}`)
+    return this.http.get(`${this.baseURL}/client/${idClient}`)
       .map(clientData => new Client(clientData));
   }
 
@@ -44,8 +45,8 @@ export class ClientService {
   /**
   * Supprime le client sélectionné.
   */
-  deleteQuiz(clientId: number): Observable<any> {
-    return this.http.delete(`${this.baseURL}/clients/${clientId}`);
+  deleteClient(clientId: number): Observable<any> {
+    return this.http.delete(`${this.baseURL}/client/${clientId}`);
   }
 
 }
