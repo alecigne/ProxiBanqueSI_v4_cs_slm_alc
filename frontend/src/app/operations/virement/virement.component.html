@@ -1,6 +1,8 @@
 
-<div>
-<app-compte-selection></app-compte-selection>
-<app-compte-selection></app-compte-selection>
+<div >
+<app-compte-selection departOuArrivee="depart" (numeroCompte)="ReceptionMessage('depart',$event)"></app-compte-selection >
+<app-compte-selection departOuArrivee= "arrivee" (numeroCompte)="ReceptionMessage('arrivee',$event)"></app-compte-selection>
 <app-transfert></app-transfert>
+
+<a class="btn btn-info btn-lg" (click)="faireVirement()">valider</a>
 </div>

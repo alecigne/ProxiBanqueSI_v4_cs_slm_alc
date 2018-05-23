@@ -205,9 +205,10 @@ public class ProxiBanqueServiceImp
 		double soldecompteArrivee = compteArrivee.getSolde();
 		double limiteDecouvert;
 		// methodologie pour récuperer le decouvert autorisé dans tous les cas
-		// pas de découvert Autorisé présent dans le
+		// pas de découvert Autorisé présent dans le compte epargne
 		if (CompteCourant.class.isInstance(compteDepart)) {
-			limiteDecouvert = ((CompteCourant) compteDepart).getDecouvertAutorise();
+			//*-1.0 : découvert autorisé en positif dans la base 
+			limiteDecouvert = -1.0*((CompteCourant) compteDepart).getDecouvertAutorise();
 		} else {
 			limiteDecouvert = limiteDecouvertAutoriseEpargne;
 		}

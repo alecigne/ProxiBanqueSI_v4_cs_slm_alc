@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Client } from '../../client/client';
 import { ClientService } from '../../client/client.service';
 import { AuthService } from '../../services/auth.service';
@@ -11,7 +11,9 @@ import { Compte } from '../../compte/compte';
   styleUrls: ['./compte-selection.component.css']
 })
 export class CompteSelectionComponent implements OnInit {
-  @Input() compte: string;
+  @Input() departOuArrivee: string;
+  @Output() numeroCompte:EventEmitter<number> = new EventEmitter<number>();
+  comptenum:number;
   clients: Client[];
   currentConseiller: Conseiller;
   isLoading = true;
@@ -32,9 +34,6 @@ export class CompteSelectionComponent implements OnInit {
 
   selectClient(idClient: number) {
     if (idClient) {
-      console.log(this.clients);
-      //this.clients.forEach(element => {element.id=element.idClient})
-
       this.currentClient = this.clients.filter(value => value.id === +idClient).shift();
       console.log(this.currentClient);
       this.listeCompte = [this.currentClient.compteCourant, this.currentClient.compteEpargne];
@@ -42,10 +41,16 @@ export class CompteSelectionComponent implements OnInit {
 
   }
 
-  selectAccount(numCompte: Number) {
+  selectAccount(numCompte: number) {
     if (numCompte) {
-      console.log(`account ${(numCompte)} selected!`)
+      this.comptenum = numCompte;
+      console.log(`account ${(numCompte)} ${(this.comptenum)} selected!`)
     }
+  }
+
+  declencher() {
+    this.numeroCompte.emit(this.comptenum);
+    //console.log(this.comptenum, this.departOuArrivee);
   }
 
 

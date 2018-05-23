@@ -1,16 +1,25 @@
-<div class="row bg-white z-depth-2">
-  <div class="small-2">
+<div class="col-sm-4">
+  <h2>Compte de {{departOuArrivee}}</h2>
+  <div class="row bg-white z-depth-2">
+    <div class="small-2">
 
-    <select (change)="selectClient($event.target.value)">
-      <option *ngFor="let client of clients" [value]="client.id">{{client.id}} {{client.prenom}} {{client.nom}} {{client.email}}</option>
-    </select>
+      Client :
+      <select (change)="selectClient($event.target.value)">
+        <option> Clients</option>
+        <option *ngFor="let client of clients" [value]="client.id">{{client.id}} {{client.prenom}} {{client.nom}} {{client.email}}</option>
+      </select>
 
-  </div>
-  <div class="small-2">
+    </div>
+    <div class="small-2">
 
-    <select (change)="selectAccount($event.target.value)" [disabled]="!currenctClient">
-      <option *ngFor="let account of listeCompte" [value]="account.numeroCompte">{{account.numeroCompte}}</option>
-    </select>
+      Compte :
+      <select (change)="selectAccount($event.target.value)" >
+        <option >comptes </option>
+        <option *ngFor="let account of listeCompte" [value]="account.numeroCompte">{{account.numeroCompte}}</option>
+      </select>
+
+    </div>
+    <a class="btn btn-info btn-lg" (click)="declencher()">valider</a>
 
   </div>
 </div>
