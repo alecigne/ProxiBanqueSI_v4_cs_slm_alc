@@ -8,9 +8,13 @@ import { OperationsService } from './operations.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FieldComponent } from '../shared/field/field.component';
 import { SharedModule } from '../shared/shared.module';
+import { MenuComponent } from './menu/menu.component';
+import { AuditComponent } from './audit/audit.component';
 
 const routes: Routes = [
   { path: 'virement', component: VirementComponent },
+  { path: 'operations/audit', component: AuditComponent},
+  { path: 'operations', component: MenuComponent }
 ]
 
 @NgModule({
@@ -24,10 +28,10 @@ const routes: Routes = [
     VirementComponent,
     CompteSelectionComponent,
     TransfertComponent, 
-    CompteSelectionComponent,
- 
-
-  ],
+    CompteSelectionComponent, MenuComponent,
+    MenuComponent,
+    AuditComponent
+   ],
   providers:[
     OperationsService
   ]

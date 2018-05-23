@@ -58,4 +58,9 @@ export class ClientService {
     return this.http.delete(`${this.baseURL}client/${clientId}`);
   }
 
+  auditAgence(): Observable<Client[]> {
+    return this.http.get<Client[]>(this.baseURL + 'audit')
+      .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));
+  }
+
 }

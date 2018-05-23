@@ -1,0 +1,26 @@
+<h1 class="text-center">Clients à surveiller : {{listeClients.length}}</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Email</th>
+      <th>Téléphone</th>
+      <th>Compte Courant</th>
+      <th>Compte Epargne</th>
+      <th>Bilan net</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of listeClients">
+      <td>{{ client.nom }}</td>
+      <td>{{ client.prenom }}</td>
+      <td>{{ client.email }}</td>
+      <td>{{ client.telephone }}</td>
+      <td>{{ client.compteCourant.solde }}</td>
+      <td>{{ client.compteEpargne.solde }}</td>
+      <td>{{ client.compteEpargne.solde + client.compteCourant.solde }} €</td>
+    </tr>
+  </tbody>
+</table>
