@@ -24,7 +24,7 @@ export class ClientService {
 
   loadClientsParConseiller(idConseiller: number): Observable<Client[]> {
     return this.http.get<Client[]>(this.baseURL + 'client/' + idConseiller + "/all")
-    .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));
+      .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));
   }
 
   /**
@@ -39,14 +39,14 @@ export class ClientService {
   * Sauvegarde le client du formulaire (nouveau ou édité selon l'url).
   */
   saveClient(client: Client): Observable<any> {
-    const url = `${this.baseURL}client/` + (client.id ? `${client.id}` : '');
-    const method = client.id ? 'put' : 'post';
+    const url = `${this.baseURL}client/` + (client.idClient ? `${client.idClient}` : '');
+    const method = client.idClient ? 'put' : 'post';
     return this.http.request(method, url, { body: client });
   }
 
   saveClientAvecConseiller(client: Client, idConseiller: number): Observable<any> {
-    const url = `${this.baseURL}conseiller/${idConseiller}/client/` + (client.id ? `${client.id}` : '');
-    const method = client.id ? 'put' : 'post';
+    const url = `${this.baseURL}conseiller/${idConseiller}/client/` + (client.idClient ? `${client.idClient}` : '');
+    const method = client.idClient ? 'put' : 'post';
     return this.http.request(method, url, { body: client });
   }
 

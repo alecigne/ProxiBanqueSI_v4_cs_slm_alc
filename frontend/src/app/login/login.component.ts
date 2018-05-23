@@ -3,6 +3,7 @@ import { Conseiller } from '../conseiller/conseiller';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ConseillerService } from '../conseiller/conseiller.service';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +13,13 @@ export class LoginComponent implements OnInit {
   isLoading = true;
   currentConseiller: Conseiller;
   loginForm: FormGroup;
+  testConseiller: string;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private as: AuthService) {
+    private as: AuthService,
+    private cs: ConseillerService) {
   }
 
   ngOnInit() {
@@ -32,7 +35,8 @@ export class LoginComponent implements OnInit {
       // Les validateurs doivent être exploités
       login: ['', [Validators.required, Validators.maxLength(20)]],
       password: ['', [Validators.required, Validators.maxLength(50)]]
-    })
+    });
+    this.cs.loadConseillerParAuth("jdurand1", "4321").subscribe(conseiller => this.testConseiller = conseiller.login);
   }
 
   doLogin() {

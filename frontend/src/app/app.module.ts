@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { AccueilComponent } from './accueil/accueil.component';
 import { OperationsModule } from './operations/operations.module';
+import { ConseillerService } from './conseiller/conseiller.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   ],
   providers: [
     AuthService,
+    ConseillerService,
     { provide: 'BACKEND_URL', useValue: 'http://localhost:8080/proxibanquesi/' }
   ],
   bootstrap: [

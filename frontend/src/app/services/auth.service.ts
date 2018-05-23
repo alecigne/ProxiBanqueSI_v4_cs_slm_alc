@@ -10,13 +10,14 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/observable/of';
 import { Conseiller } from '../conseiller/conseiller';
+import { ConseillerService } from '../conseiller/conseiller.service';
 
 @Injectable()
 export class AuthService {
   private conseillerObs = new ReplaySubject<Conseiller>(1);
   private isLoggedInObs = new ReplaySubject<boolean>(1);
 
-  constructor(@Inject(DOCUMENT) private document) {
+  constructor(@Inject(DOCUMENT) private document, private cs: ConseillerService) {
     this.checkCurrentConseiller();
   }
 
@@ -43,6 +44,11 @@ export class AuthService {
   }
 
   signIn(): Observable<Conseiller> {
+    // let conseillerData = {};
+    // this.cs.loadConseillerParAuth("jdurand1", "1234").subscribe(data => {
+    //   conseillerData = data;
+    //   this.setCookie('conseiller', JSON.stringify(conseillerData));
+    // });
     const conseillerData = {
       idConseiller: 2,
       nom: 'Durand',
@@ -52,6 +58,7 @@ export class AuthService {
     };
     this.setCookie('conseiller', JSON.stringify(conseillerData));
     this.checkCurrentConseiller();
+    // this.checkCurrentConseiller();
     return Observable.of(new Conseiller(conseillerData));
   }
 
@@ -66,7 +73,7 @@ export class AuthService {
   // Private methods
   //
 
-  private setCookie(name: string, value: string) {
+  setCookie(name: string, value: string) {
     this.document.cookie = `${name}=${value}`;
   }
 

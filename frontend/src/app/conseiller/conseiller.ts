@@ -6,11 +6,11 @@ export class Conseiller {
   password: string;
 
   constructor(options: {
-    idConseiller: number;
-    nom: string;
-    prenom: string;
-    login: string;
-    password: string;
+    idConseiller?: number;
+    nom?: string;
+    prenom?: string;
+    login?: string;
+    password?: string;
   }) {
     this.idConseiller = options.idConseiller;
     this.nom = options.nom;

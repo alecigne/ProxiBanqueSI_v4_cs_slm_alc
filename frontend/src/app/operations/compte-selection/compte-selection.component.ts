@@ -30,11 +30,12 @@ export class CompteSelectionComponent implements OnInit {
           this.clients = listeClients;
           this.isLoading = false;
         });
-      }}
+      })
+    }
 
   selectClient(idClient: number) {
     if (idClient) {
-      this.currentClient = this.clients.filter(value => value.id === +idClient).shift();
+      this.currentClient = this.clients.filter(value => value.idClient === +idClient).shift();
       console.log(this.currentClient);
       this.listeCompte = [this.currentClient.compteCourant, this.currentClient.compteEpargne];
     }
