@@ -16,8 +16,8 @@ export class ConseillerService {
     * Affiche un client par son id.
     */
   loadConseillerParAuth(login: string, password: string): Observable<Conseiller> {
-    return this.http.get(`${this.baseURL}conseiller/${login}/${password}`)
-      .map(conseillerData => new Conseiller(conseillerData));
+    return this.http.get<Conseiller>(`${this.baseURL}conseiller/${login}/${password}`);
+      // .map(conseillerData => new Conseiller(conseillerData));
   }
 
 }

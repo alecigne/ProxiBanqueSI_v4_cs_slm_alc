@@ -55,7 +55,7 @@ export class ClientService {
   * Supprime le client sélectionné.
   */
   deleteClient(clientId: number): Observable<any> {
-    return this.http.delete(`${this.baseURL}/client/${clientId}`);
+    return this.http.delete(`${this.baseURL}client/${clientId}`);
   }
 
 }

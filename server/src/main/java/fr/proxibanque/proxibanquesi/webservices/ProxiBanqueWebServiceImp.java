@@ -73,7 +73,7 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@PutMapping(value = "/client/", produces = "application/json")
+	@PutMapping(value = "/conseiller/{idConseiller}/client/{idClient}", produces = "application/json")
 	public ResponseEntity<Client> modifierClient(@RequestBody Client client) {
 		try {
 			service.modifierClient(client);

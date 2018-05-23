@@ -11,12 +11,12 @@ export class Conseiller {
     prenom?: string;
     login?: string;
     password?: string;
-  }) {
-    this.idConseiller = options.idConseiller;
-    this.nom = options.nom;
-    this.prenom = options.prenom;
-    this.login = options.login;
-    this.password = options.password;
+  }={}) {
+    this.idConseiller = options.idConseiller ||null;
+    this.nom = options.nom || '';
+    this.prenom = options.prenom|| '';
+    this.login = options.login|| '';
+    this.password = options.password|| '';
   }
 
 }
