@@ -6,13 +6,13 @@ export class Conseiller {
   password: string;
 
   constructor(options: {
-    idConseiller?: number;
+    id?: number;
     nom?: string;
     prenom?: string;
     login?: string;
     password?: string;
   }={}) {
-    this.idConseiller = options.idConseiller ||null;
+    this.idConseiller = options.id || null;
     this.nom = options.nom || '';
     this.prenom = options.prenom|| '';
     this.login = options.login|| '';

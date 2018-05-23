@@ -10,10 +10,8 @@ import { ConseillerService } from '../conseiller/conseiller.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-  isLoading = true;
   currentConseiller: Conseiller;
   loginForm: FormGroup;
-  testConseiller: string;
 
   constructor(
     private fb: FormBuilder,
@@ -23,45 +21,31 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.as.getCurrentConseiller().subscribe(
-      conseiller => {
-        this.currentConseiller = conseiller;
-        this.isLoading = false;
-      },
-      error => {
-        this.isLoading = false;
-      });
     this.loginForm = this.fb.group({
-      // Les validateurs doivent être exploités
-      login: ['', [Validators.required, Validators.maxLength(20)]],
-      password: ['', [Validators.required, Validators.maxLength(50)]]
+      login: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
-    if (this.currentConseiller) {
-      this.cs.loadConseillerParAuth("jdurand1", "4321").subscribe(conseiller => this.testConseiller = conseiller.login);
-    }
   }
 
   doLogin() {
-    this.as.signIn()
+    const login = this.loginForm.get('login').value;
+    const password = this.loginForm.get('password').value;
+    this.as.login(login, password)
+      .map(fullConseiller => new Conseiller(fullConseiller))
       .subscribe(conseiller => {
-        if (conseiller) {
-          this.gotoClients();
-        }
+        this.currentConseiller = conseiller;
+        this.as.setCookie('conseiller', JSON.stringify(this.currentConseiller));
+        // Vérification du cookie
+        console.log(this.as.getCookie('conseiller'));
+        this.gotoClients();
       });
+    
+    // this.gotoClients();
   }
 
-  doLogout() {
-    this.as.signOut()
-      .subscribe(() => {
-        alert('Vous êtes déconnecté(e).');
-      });
-  }
-
-  // Redirect the user to the admin homepage.
   gotoClients(event?: Event) {
-    const id=this.currentConseiller.idConseiller;
-        // this.router.navigate([`conseiller/${id}/clients`]);
-        this.router.navigate([`accueil`]);
+    const id = this.currentConseiller.idConseiller;
+    this.router.navigate([`conseiller/${id}/clients`]);
   }
 
 }

@@ -18,60 +18,11 @@ export class AuthService {
   private isLoggedInObs = new ReplaySubject<boolean>(1);
 
   constructor(@Inject(DOCUMENT) private document, private cs: ConseillerService) {
-    this.checkCurrentConseiller();
   }
 
-  getCurrentConseiller(): Observable<Conseiller> {
-    return this.conseillerObs.asObservable();
-  }
-
-  isLoggedIn(): Observable<boolean> {
-    return this.isLoggedInObs.asObservable();
-  }
-
-   /**
-   * Vérifier si un conseiller est présent (cookie).
-   */
-  checkCurrentConseiller() {
-    let conseiller;
-    const conseillerCookie = this.getCookie('conseiller');
-    if (conseillerCookie) {
-      const conseillerData = JSON.parse(conseillerCookie);
-      conseiller = new Conseiller(conseillerData);
-    }
-    this.conseillerObs.next(conseiller);
-    this.isLoggedInObs.next(!!conseiller);
-  }
-
-  signIn(): Observable<Conseiller> {
-    // let conseillerData = {};
-    // this.cs.loadConseillerParAuth("jdurand1", "1234").subscribe(data => {
-    //   conseillerData = data;
-    //   this.setCookie('conseiller', JSON.stringify(conseillerData));
-    // });
-    const conseillerData = {
-      idConseiller: 2,
-      nom: 'Durand',
-      prenom: 'Jacques',
-      login: 'jdurand',
-      password: '1234'
-    };
-    this.setCookie('conseiller', JSON.stringify(conseillerData));
-    this.checkCurrentConseiller();
-    // this.checkCurrentConseiller();
-    return Observable.of(new Conseiller(conseillerData));
-  }
-
-  signOut(): Observable<any> {
-    // console.log('deleteCookie');
-    this.deleteCookie('conseiller');
-    this.checkCurrentConseiller();
-    return Observable.of(undefined);
-  }
-
-  //
-  // Private methods
-  //
+  login(login: string, password: string): Observable<Conseiller> {
+    return this.cs.loadConseillerParAuth(login, password);
+}
 
   setCookie(name: string, value: string) {
     this.document.cookie = `${name}=${value}`;
@@ -83,7 +34,7 @@ export class AuthService {
    *
    * Cookie string format: "name=Vince; foo=bar"
    */
-  private getCookie(name: string = ''): string {
+  getCookie(name: string = ''): string {
     const allCookiesString = this.document.cookie;
     const index1 = allCookiesString.indexOf(name);
     if (index1 !== -1) {
