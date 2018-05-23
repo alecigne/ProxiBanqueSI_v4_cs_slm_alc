@@ -14,6 +14,15 @@
       <p>
         Découvert Autorisé : {{currentCompteCourant.decouvertAutorise}}
       </p>
+      <div *ngIf="currentCompteCourant.carteBancaire">
+        <h4>Carte Banquaire</h4>
+        <p>
+          Numéro de carte : {{currentCompteCourant.carteBancaire.numeroCarte}}
+        </p>
+        <p>
+          Type de carte : {{currentCompteCourant.carteBancaire.typeCarte}}
+        </p>
+      </div>
       <div class="text-right">
         <!-- <a class="btn btn-info btn-lg">Bouton placeholder</a> -->
       </div>
