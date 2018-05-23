@@ -19,7 +19,7 @@ export class ClientService {
   */
   loadClients(): Observable<Client[]> {
     return this.http.get<Client[]>(this.baseURL + 'client/all')
-    .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));
+      .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));
   }
 
   loadClientsParConseiller(idConseiller: number): Observable<Client[]> {

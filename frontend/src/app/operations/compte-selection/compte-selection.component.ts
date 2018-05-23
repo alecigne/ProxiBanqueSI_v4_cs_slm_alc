@@ -30,8 +30,8 @@ export class CompteSelectionComponent implements OnInit {
           this.clients = listeClients;
           this.isLoading = false;
         });
-      })
-    }
+
+      })}
 
   selectClient(idClient: number) {
     if (idClient) {
@@ -45,13 +45,13 @@ export class CompteSelectionComponent implements OnInit {
   selectAccount(numCompte: number) {
     if (numCompte) {
       this.comptenum = numCompte;
-      console.log(`account ${(numCompte)} ${(this.comptenum)} selected!`)
+      console.log(`account ${(numCompte)} ${(this.comptenum)} selected!`);
+      this.declencher();
     }
   }
 
   declencher() {
     this.numeroCompte.emit(this.comptenum);
-    //console.log(this.comptenum, this.departOuArrivee);
   }
 
 

@@ -1,5 +1,9 @@
 <div class="col-sm-4">
-<p>
-  transfert works!
-</p>
+    <form [formGroup]="montantForm" (change)="getMontant" novalidate>
+
+        <app-field label="Montant" >
+          <input formControlName="montant" type="text" class="form-control" placeholder="montant">
+        </app-field>
+
+      </form>
 </div>

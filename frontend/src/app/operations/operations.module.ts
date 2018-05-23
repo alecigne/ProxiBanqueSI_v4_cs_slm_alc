@@ -5,6 +5,9 @@ import { CompteSelectionComponent } from './compte-selection/compte-selection.co
 import { TransfertComponent } from './transfert/transfert.component';
 import { VirementComponent } from './virement/virement.component';
 import { OperationsService } from './operations.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FieldComponent } from '../shared/field/field.component';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   { path: 'virement', component: VirementComponent },
@@ -14,12 +17,16 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     VirementComponent,
     CompteSelectionComponent,
     TransfertComponent, 
-    CompteSelectionComponent
+    CompteSelectionComponent,
+ 
+
   ],
   providers:[
     OperationsService

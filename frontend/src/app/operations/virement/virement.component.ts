@@ -11,8 +11,6 @@ compteDepart:number;
 compteArrivee:number;
 montant:number=100;
 
-
-
   constructor(private service:OperationsService) { }
 
   ngOnInit() {
