@@ -53,6 +53,7 @@ export class ClientFormComponent implements OnInit {
       codePostal: [this.currentClient.codePostal, [Validators.maxLength(5), Validators.minLength(5)]],
       ville: [this.currentClient.ville],
       telephone: [this.currentClient.telephone, [Validators.maxLength(10), Validators.minLength(10)]],
+      conseiller:[]
     });
 
     this.conseillerForm = this.formBuilder.group({
@@ -71,7 +72,7 @@ export class ClientFormComponent implements OnInit {
       alert('Le client a été enregistré avec succès');
       this.router.navigate(['clients/']);
       // this.router.navigate([`client/${client.id}/nouveaucompte`]);
-    });
+});
 
   }
 

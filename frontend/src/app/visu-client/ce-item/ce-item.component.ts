@@ -7,12 +7,11 @@ import { Compte } from '../../client/compte';
 @Component({
   selector: 'app-ce-item',
   templateUrl: './ce-item.component.html',
-  styleUrls: ['./ce-item.component.css']
 })
 export class CeItemComponent implements OnInit {
 
   currentClient: Client;
-  currentCompteEpargne:Compte;
+  currentCompteEpargne: Compte;
 
   constructor(private aRoute: ActivatedRoute, private router: Router, private clientService: ClientService) { }
 
@@ -22,8 +21,8 @@ export class CeItemComponent implements OnInit {
     this.clientService.loadClient(clientId)
       .subscribe(client => {
         this.currentClient = client;
-        this.currentCompteEpargne=this.currentClient.compteEpargne;
+        this.currentCompteEpargne = this.currentClient.compteEpargne;
       });
-    }
+  }
 
 }
