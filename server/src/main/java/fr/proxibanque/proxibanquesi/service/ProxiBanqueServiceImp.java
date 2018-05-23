@@ -30,6 +30,8 @@ public class ProxiBanqueServiceImp
 
 	// *** ATTRIBUTS ***
 
+	private static final double SEUIL_AUDIT = -5000.0;
+
 	@Autowired
 	@Qualifier("clientDAO")
 	ClientDAO clientDao;
@@ -239,8 +241,8 @@ public class ProxiBanqueServiceImp
 		// methodologie pour récuperer le decouvert autorisé dans tous les cas
 		// pas de découvert Autorisé présent dans le compte epargne
 		if (CompteCourant.class.isInstance(compteDepart)) {
-			//*-1.0 : découvert autorisé en positif dans la base 
-			limiteDecouvert = -1.0*((CompteCourant) compteDepart).getDecouvertAutorise();
+			// *-1.0 : découvert autorisé en positif dans la base
+			limiteDecouvert = -1.0 * ((CompteCourant) compteDepart).getDecouvertAutorise();
 		} else {
 			limiteDecouvert = limiteDecouvertAutoriseEpargne;
 		}
@@ -261,6 +263,28 @@ public class ProxiBanqueServiceImp
 		Compte compte = compteDAO.findOne(numeroCompte);
 		compte.setSolde(compte.getSolde()+montant);
 		compteDAO.save(compte);	
+	}
+
+	@Override
+	public List<Client> auditerAgence() {
+		List<Client> clientsAgence = this.obtenirTousClients();
+		List<Client> clientsWarning = new ArrayList<>();
+		for (Client client : clientsAgence) {
+			CompteCourant cc = client.getCompteCourant();
+			CompteEpargne ce = client.getCompteEpargne();
+			if (cc == null) {
+				cc = new CompteCourant();
+				cc.setSolde(0);
+			}
+			if (ce == null) {
+				ce = new CompteEpargne();
+				ce.setSolde(0);
+			}
+			if (cc.getSolde() < SEUIL_AUDIT || ce.getSolde() < SEUIL_AUDIT) {
+				clientsWarning.add(client);
+			}
+		}
+		return clientsWarning;
 	}
 
 	// *** METHODES ANNEXES ***

@@ -16,8 +16,8 @@ export class NavbarComponent implements OnInit {
     { label: 'Accueil', path: 'accueil' },
     { label: 'Gestion Client', path: 'conseiller/:idConseiller/clients' },
     { label: 'Opérations', path: 'operations' },
-    { label: 'Gestion Conseiller', path: 'conseillers' },
-    { label: 'Transactions', path: 'transactions' },
+    // { label: 'Gestion Conseiller', path: 'conseillers' },
+    // { label: 'Transactions', path: 'transactions' },
     // { label: 'Connexion', path: 'login' },
     // { label: 'Deconnexion', path: 'logout' }
   ];

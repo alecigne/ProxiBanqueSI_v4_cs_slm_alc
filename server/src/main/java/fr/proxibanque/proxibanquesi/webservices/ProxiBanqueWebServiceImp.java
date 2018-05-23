@@ -155,6 +155,12 @@ public class ProxiBanqueWebServiceImp
 	public Conseiller obtenirConseillerParAuth(@PathVariable String login, @PathVariable String password) {
 		return service.obtenirConseillerParAuth(login, password);
 	}
+	
+	@Override
+	@GetMapping(value = "/audit", produces = "application/json")
+	public List<Client> auditerAgence() {
+		return service.auditerAgence();
+	}
 
 	@Override
 	@PutMapping(value= "creditercompte/{numCompte}/{montant}")
