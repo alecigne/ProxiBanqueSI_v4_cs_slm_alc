@@ -29,7 +29,7 @@ export class CompteEpargneFormComponent implements OnInit {
         this.buildForm();
       });
     } else {   // CRÉATION
-      this.currentCompteEpargne = new CompteEpargne({ tauxRemuneration: 0.3 });
+      this.currentCompteEpargne = new CompteEpargne({ tauxRemun: 0.03 });
       this.currentCompteEpargne.solde = 0;
       this.buildForm();
 
@@ -39,17 +39,17 @@ export class CompteEpargneFormComponent implements OnInit {
   buildForm() {
     this.compteEpargneForm = this.formBuilder.group({
       solde: [this.currentCompteEpargne.solde],
-      tauxRemuneration: [this.currentCompteEpargne.tauxRemuneration]
+      tauxRemuneration: [this.currentCompteEpargne.tauxRemun]
     });
   }
 
   saveCompteEpargne() {
     const clientId = +this.route.snapshot.params['idClient'];
-    // console.log(clientId);
+    const idConseiller = +this.route.snapshot.params['idConseiller'];
     const compteEpargne: CompteEpargne = Object.assign(this.currentCompteEpargne, this.compteEpargneForm.value);
     this.compteService.saveCompteEpargne(clientId, compteEpargne).subscribe(() => {
       alert('Le compte a été enregistré avec succès');
-      this.router.navigate([`../../../clients/`]);
+      this.router.navigate([`../../conseiller/idConseiller/clients/`]);
     });
 
   }

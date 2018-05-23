@@ -29,12 +29,12 @@ export class CompteCourant extends Compte {
 }
 
 export class CompteEpargne extends Compte {
-    tauxRemuneration: number = 0.3;
+    tauxRemun: number = 0.03;
 
     constructor(options: {
-        tauxRemuneration?: number;
+        tauxRemun?: number;
     } = {}) {
         super();
-        this.tauxRemuneration = options.tauxRemuneration || null;
+        this.tauxRemun = options.tauxRemun || null;
     }
 }

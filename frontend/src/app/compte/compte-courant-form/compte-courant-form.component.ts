@@ -51,10 +51,11 @@ export class CompteCourantFormComponent implements OnInit {
 
   saveCompteCourant() {
     const clientId = +this.route.snapshot.params['idClient'];
+    const idConseiller = +this.route.snapshot.params['idConseiller'];
     const compteCourant: CompteCourant = Object.assign(this.currentCompteCourant, this.compteCourantForm.value);
     this.compteService.saveCompteCourant(clientId, compteCourant).subscribe(() => {
       alert('Le compte a été enregistré avec succès');
-      this.router.navigate([`../../../clients/`]);
+      this.router.navigate([`../../conseiller/idConseiller/clients/`]);
     });
   }
 }

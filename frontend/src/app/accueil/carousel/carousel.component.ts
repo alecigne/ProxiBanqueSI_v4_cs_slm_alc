@@ -20,7 +20,7 @@ export class CarouselItemElement {
       </ul>
     </section>
     <div *ngIf="showControls" style="margin-top: 1em">
-      <button (click)="prev()" class="btn btn-default">Prev</button>
+          <button (click)="prev()" class="btn btn-default">Prev</button>
       <button (click)="next()" class="btn btn-default">Next</button>
     </div>
   `,
