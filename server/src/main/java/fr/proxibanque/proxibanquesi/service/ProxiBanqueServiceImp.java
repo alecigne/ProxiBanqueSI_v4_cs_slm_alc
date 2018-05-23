@@ -255,6 +255,13 @@ public class ProxiBanqueServiceImp
 		}
 
 	}
+	
+	@Override
+	public void CrediterCompte(long numeroCompte, double montant) {
+		Compte compte = compteDAO.findOne(numeroCompte);
+		compte.setSolde(compte.getSolde()+montant);
+		compteDAO.save(compte);	
+	}
 
 	// *** METHODES ANNEXES ***
 
@@ -268,5 +275,7 @@ public class ProxiBanqueServiceImp
 		Date date = new Date();
 		return sdfDate.format(date);
 	}
+
+
 
 }

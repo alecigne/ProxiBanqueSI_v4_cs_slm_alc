@@ -143,7 +143,6 @@ public class ProxiBanqueWebServiceImp
 	public void VirementCompteACompte(@PathVariable long numCompteDepart, @PathVariable long numCompteArrivee,
 			@PathVariable double montantTransfere) {
 		try {
-			System.out.println("passage par le web service pour le virement");
 			service.VirementCompteACompte(numCompteDepart, numCompteArrivee, montantTransfere);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -155,6 +154,17 @@ public class ProxiBanqueWebServiceImp
 	@GetMapping(value = "/conseiller/{login}/{password}", produces = "application/json")
 	public Conseiller obtenirConseillerParAuth(@PathVariable String login, @PathVariable String password) {
 		return service.obtenirConseillerParAuth(login, password);
+	}
+
+	@Override
+	@PutMapping(value= "creditercompte/{numCompte}/{montant}")
+	public void CrediterCompte(@PathVariable long numCompte, @PathVariable double montant) {
+		try {
+			service.CrediterCompte(numCompte, montant);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

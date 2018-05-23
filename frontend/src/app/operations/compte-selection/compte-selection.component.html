@@ -6,7 +6,7 @@
       Client :
       <select (change)="selectClient($event.target.value)">
         <option> Clients</option>
-        <option *ngFor="let client of clients" [value]="client.id">{{client.id}} {{client.prenom}} {{client.nom}} {{client.email}}</option>
+        <option *ngFor="let client of clients" [value]="client.idClient">{{client.idClient}} {{client.prenom}} {{client.nom}} {{client.email}}</option>
       </select>
 
     </div>
