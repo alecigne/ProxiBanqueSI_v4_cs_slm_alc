@@ -1,6 +1,6 @@
-<div class="container">
+<img src="../../assets/banner.jpeg">
 
-  <img src="../../assets/banner.jpeg">
+<div class="container">
 
   <div class="jumbotron text-center col-md-4 col-md-offset-4">
 
@@ -10,12 +10,12 @@
       <div *ngIf="currentConseiller">
         <p>Vous êtes identifié en tant que {{ currentConseiller.prenom }} {{ currentConseiller.nom }}.</p>
         <p>
-          <button class="btn btn-primary" (click)="gotoClients($event)">Liste des clients</button>
+          <!-- <button class="btn btn-primary" (click)="gotoClients($event)">Liste des clients</button> -->
           <button class="btn btn-default" (click)="doLogout()">Se déconnecter</button>
         </p>
       </div>
       <div *ngIf="!currentConseiller">
-        <form [formGroup]="loginForm" (ngSubmit)="doLogin()" novalidate>
+        <form novalidate [formGroup]="loginForm" (ngSubmit)="doLogin()">
 
           <app-field label="Login*" [control]="loginForm.get('login')">
             <input formControlName="login" type="text" class="form-control" placeholder="Login">
@@ -25,7 +25,7 @@
             <input formControlName="password" type="password" class="form-control" placeholder="Mot de passe">
           </app-field>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Connexion</button>
 
         </form>
       </div>

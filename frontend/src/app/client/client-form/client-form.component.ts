@@ -70,7 +70,6 @@ export class ClientFormComponent implements OnInit {
 
   saveClientAvecConseiller() {
     const idConseiller = +this.route.snapshot.params['idConseiller'];
-
     const client: Client = Object.assign(this.currentClient, this.clientForm.value);
     this.clientService.saveClientAvecConseiller(client, idConseiller).subscribe(() => {
       alert('Le client a été enregistré avec succès');
