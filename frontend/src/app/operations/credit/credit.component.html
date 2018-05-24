@@ -1,0 +1,25 @@
+<h1 class="text-center">Simulation de crédit à la consommation</h1>
+
+<div class="col-md-4 col-md-offset-4">
+  <form novalidate [formGroup]="creditForm" (ngSubmit)="simulerCredit()">
+
+    <app-field label="Montant" [control]="creditForm.get('montant')">
+      <input formControlName="montant" type="text" class="form-control" placeholder="Montant (€)">
+    </app-field>
+
+    <app-field label="Duree" [control]="creditForm.get('duree')">
+      <input formControlName="duree" type="text" class="form-control" placeholder="Durée (mois)">
+    </app-field>
+
+    <app-field label="Taux" [control]="creditForm.get('taux')">
+      <input formControlName="taux" type="text" class="form-control" placeholder="Taux (%)">
+    </app-field>
+
+    <button type="submit" [disabled]="creditForm.invalid" class="btn btn-primary">Soumettre</button>
+
+  </form>
+</div>
+
+<div class="col-md-4 col-md-offset-4 text-center">
+  <p>Votre mensualité : {{ mensualite | number : '1.2-2'}} €</p>
+</div>

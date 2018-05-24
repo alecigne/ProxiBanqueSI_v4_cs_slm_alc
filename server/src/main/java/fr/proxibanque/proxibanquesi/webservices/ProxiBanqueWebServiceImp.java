@@ -43,11 +43,12 @@ public class ProxiBanqueWebServiceImp
 			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PostMapping(value = "/conseiller/{idConseiller}/client/", produces = "application/json")
-	public ResponseEntity<Client> creerClientAvecConseiller(@RequestBody Client client, @PathVariable long idConseiller) {
+	public ResponseEntity<Client> creerClientAvecConseiller(@RequestBody Client client,
+			@PathVariable long idConseiller) {
 		try {
-			
+
 			service.creerClientAvecConseiller(client, idConseiller);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (ServiceException e) {
@@ -157,7 +158,7 @@ public class ProxiBanqueWebServiceImp
 	public Conseiller obtenirConseillerParAuth(@PathVariable String login, @PathVariable String password) {
 		return service.obtenirConseillerParAuth(login, password);
 	}
-	
+
 	@Override
 	@GetMapping(value = "/audit", produces = "application/json")
 	public List<Client> auditerAgence() {
@@ -165,14 +166,19 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@PutMapping(value= "creditercompte/{numCompte}/{montant}")
+	@PutMapping(value = "creditercompte/{numCompte}/{montant}")
 	public void CrediterCompte(@PathVariable long numCompte, @PathVariable double montant) {
 		try {
 			service.CrediterCompte(numCompte, montant);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+
+	@Override
+	@GetMapping(value = "/credit/{montant}/{dureeMois}/{taux}/", produces = "application/json")
+	public double simulerCredit(@PathVariable double montant, @PathVariable int dureeMois, @PathVariable double taux) {
+		return service.simulerCredit(montant, dureeMois, taux);
 	}
 
 }

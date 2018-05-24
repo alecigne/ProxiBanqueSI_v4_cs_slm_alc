@@ -13,4 +13,6 @@ public interface SIWebService {
 
 	List<Client> auditerAgence();
 
+	double simulerCredit(double montant, int dureeMois, double taux);
+	
 }
