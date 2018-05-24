@@ -38,7 +38,7 @@ public class InitBean implements InitializingBean {
 		CompteEpargne ce2 = new CompteEpargne(2002, 1000.0, "2018-05-20", 0.03);
 		client2.setCompteCourant(cc2);
 		client2.setCompteEpargne(ce2);
-		
+
 		// Client 3
 		Client client3 = new Client("Dupont3", "Michel", "michel@dupont3.com", "3 rue de la Source", "75003", "Paris",
 				"0100000003");
@@ -64,12 +64,16 @@ public class InitBean implements InitializingBean {
 		conseiller1.getListeClients().add(client1);
 		conseiller1.getListeClients().add(client2);
 		pbs.creerConseiller(conseiller1);
-		
+
 		// Conseiller 2
 		Conseiller conseiller2 = new Conseiller("Durand2", "Jacques", "jdurand2", "1234");
 		conseiller2.getListeClients().add(client3);
 		conseiller2.getListeClients().add(client4);
 		pbs.creerConseiller(conseiller2);
+
+		// System.out.println(pbs.AfficherCompteNumero(2004));
+
+		// pbs.supprimerCompte(2004);
 
 		// try {
 		// creerClient(client1);
@@ -77,10 +81,32 @@ public class InitBean implements InitializingBean {
 		// } catch (ServiceException e) {
 		// e.printStackTrace();
 		// }
+
+		// Client 5 sans comptes
+		// Client client5 = new Client("Dupont50", "Michel", "michel@dupont3.com", "3
+		// rue de la Source", "75003", "Paris",
+		// "0100000003");
+		// pbs.creerClientAvecConseiller(client5, 2);
+
+		// Client 6
+		Client client6 = new Client("Dupont4", "Michel", "michel@dupont4.com", "4 rue de la Source", "75004", "Paris",
+				"0100000004");
+		CompteCourant cc6 = new CompteCourant(55, 0, "2018-05-20");
+		CarteBancaire cb6 = new CarteBancaire(54564, CarteBancaire.TypeCarte.PREMIER);
+		cc6.setCarteBancaire(cb6);
+		CompteEpargne ce6 = new CompteEpargne(56, 0, "2018-05-20", 0.03);
+		client6.setCompteCourant(cc6);
+		client6.setCompteEpargne(ce6);
+
+		pbs.creerClientAvecConseiller(client6, 2);
+
+		System.out.println(pbs.afficherCompteNumero(55));
+		System.out.println(client6.getCompteCourant());
 		
-		// Client 5 sans comptes 
-//		Client client5 = new Client("Dupont50", "Michel", "michel@dupont3.com", "3 rue de la Source", "75003", "Paris",
-//				"0100000003");
-//		pbs.creerClientAvecConseiller(client5, 2);
+		System.out.println(pbs.afficherCompteNumero(56));
+		
+//		pbs.supprimerCompteCourantClient(5);
+//		pbs.supprimerCompteEpargneClient(5);
 	}
+
 }

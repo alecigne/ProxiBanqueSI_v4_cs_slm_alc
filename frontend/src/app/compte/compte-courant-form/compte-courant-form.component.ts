@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -18,6 +18,8 @@ export class CompteCourantFormComponent implements OnInit {
   currentClient: Client;
   idClient: number;
   numeroCompte: number;
+  carte = null;
+  carteBancaire: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,9 +38,10 @@ export class CompteCourantFormComponent implements OnInit {
     } else {   // CRÉATION
       this.currentCompteCourant = new CompteCourant({ decouvertAutorise: 1000 });
       this.currentCompteCourant.solde = 0;
-      this.currentCompteCourant.carteBancaire.typeCarte = 'AUCUNE';
       this.buildForm();
-      console.log(this.currentCompteCourant.carteBancaire)
+      if (this.currentCompteCourant.carteBancaire != null) {
+        this.buildFormCarte;
+      }
     }
   }
 
@@ -46,23 +49,37 @@ export class CompteCourantFormComponent implements OnInit {
     this.compteCourantForm = this.formBuilder.group({
       solde: [this.currentCompteCourant.solde],
       decouvertAutorise: [this.currentCompteCourant.decouvertAutorise],
-      // carte: [this.currentCompteCourant.carteBancaire.typeCarte],
     });
-    this.carteBancaireForm = this.formBuilder.group({
-      typeCarte: [this.currentCompteCourant.carteBancaire.typeCarte]
-    });
+
   }
 
+  buildFormCarte() {
+    this.carteBancaireForm = this.formBuilder.group({
+      typeCarte: []
+    });
+  }
+  // this.currentCompteCourant.carteBancaire.typeCarte
   saveCompteCourant() {
     const clientId = +this.route.snapshot.params['idClient'];
     const idConseiller = +this.route.snapshot.params['idConseiller'];
     const compteCourant: CompteCourant = Object.assign(this.currentCompteCourant, this.compteCourantForm.value);
-    compteCourant.carteBancaire = this.carteBancaireForm.value;
-    console.log(compteCourant);
-    console.log(compteCourant.carteBancaire);
+    if (this.carteBancaire) {
+      compteCourant.carteBancaire = this.carteBancaireForm.value;
+    }
     this.compteService.saveCompteCourant(clientId, compteCourant).subscribe(() => {
       alert('Le compte a été enregistré avec succès');
       this.router.navigate([`../../conseiller/idConseiller/clients/`]);
     });
+  }
+
+  addCard() {
+    // this.currentCompteCourant.carteBancaire.typeCarte = 'ELECTRON';
+
+    this.carteBancaire = true;
+    this.buildFormCarte();
+  }
+
+  removeCard() {
+    this.carteBancaire = false;
   }
 }

@@ -12,7 +12,7 @@ public class AOP {
 
 	private static Logger bankingLogger = LoggerFactory.getLogger("banking");
 
-	@After("execution(* fr.proxibanque.proxibanquesi.service.ProxiBanqueServiceImp.VirementCompteACompte(..))")
+	@After("execution(* fr.proxibanque.proxibanquesi.service.ProxiBanqueServiceImp.virementCompteACompte(..))")
 	public void virementEffectue() {
 		bankingLogger.warn("Virement bancaire effectué.");
 	}

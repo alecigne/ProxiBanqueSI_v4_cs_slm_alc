@@ -7,10 +7,10 @@ import fr.proxibanque.proxibanquesi.model.Client;
 
 public interface SIService {
 
-	public void VirementCompteACompte(long numCompteDepart, long numCompteArrivee, double montantTransfere)
+	public void virementCompteACompte(long numCompteDepart, long numCompteArrivee, double montantTransfere)
 			throws ServiceException;
 
-	public void CrediterCompte(long numeroCompte, double montant);
+	public void crediterCompte(long numeroCompte, double montant);
 
 	List<Client> auditerAgence();
 
