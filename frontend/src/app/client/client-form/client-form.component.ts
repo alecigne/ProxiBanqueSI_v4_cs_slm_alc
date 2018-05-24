@@ -51,7 +51,7 @@ export class ClientFormComponent implements OnInit {
     this.clientForm = this.formBuilder.group({
       nom: [this.currentClient.nom, [Validators.required, Validators.minLength(this.minLengthNom)]],
       prenom: [this.currentClient.prenom, Validators.required],
-      email: [this.currentClient.email, Validators.required],
+      email: [this.currentClient.email, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}')]],
       adresse: [this.currentClient.adresse],
       codePostal: [this.currentClient.codePostal, [Validators.maxLength(this.lengthCodePostal), Validators.minLength(this.lengthCodePostal)]],
       ville: [this.currentClient.ville],
