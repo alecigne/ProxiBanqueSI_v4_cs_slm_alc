@@ -70,18 +70,6 @@ public class ProxiBanqueServiceImp
 		}
 	}
 
-	@Override
-	public void creerClientAvecConseiller(Client client, long idConseiller) throws ServiceException {
-		Conseiller conseiller = this.obtenirConseiller(idConseiller);
-		if (conseiller == null) {
-			throw new ServiceException("Conseiller inexistant !");
-		} else {
-			conseiller.getListeClients().add(client);
-			conseillerDao.save(conseiller);
-		}
-
-	}
-
 	private boolean clientEstValide(Client client) {
 		if (client == null) {
 			return false;
@@ -96,6 +84,17 @@ public class ProxiBanqueServiceImp
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public void creerClientAvecConseiller(Client client, long idConseiller) throws ServiceException {
+		Conseiller conseiller = this.obtenirConseiller(idConseiller);
+		if (conseiller == null) {
+			throw new ServiceException("Conseiller inexistant !");
+		} else {
+			conseiller.getListeClients().add(client);
+			conseillerDao.save(conseiller);
+		}
 	}
 
 	@Override
@@ -184,6 +183,17 @@ public class ProxiBanqueServiceImp
 		}
 
 	}
+	
+	private long genererNumero() {
+		long randomNumber = (long) (Math.random() * 1_000_000_000);
+		return randomNumber;
+	}
+
+	private String today() {
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		return sdfDate.format(date);
+	}
 
 	@Override
 	public void AttribuerCompteCourantClient(long idClient, CompteCourant compteCourant) throws ServiceException {
@@ -257,12 +267,12 @@ public class ProxiBanqueServiceImp
 		}
 
 	}
-	
+
 	@Override
 	public void CrediterCompte(long numeroCompte, double montant) {
 		Compte compte = compteDAO.findOne(numeroCompte);
-		compte.setSolde(compte.getSolde()+montant);
-		compteDAO.save(compte);	
+		compte.setSolde(compte.getSolde() + montant);
+		compteDAO.save(compte);
 	}
 
 	@Override
@@ -287,19 +297,12 @@ public class ProxiBanqueServiceImp
 		return clientsWarning;
 	}
 
-	// *** METHODES ANNEXES ***
-
-	private long genererNumero() {
-		long randomNumber = (long) (Math.random() * 1_000_000_000);
-		return randomNumber;
+	@Override
+	public double simulerCredit(double montant, int dureeMois, double taux) {
+		dureeMois *= -1;
+		taux /= 100;
+		double mensualite = ((montant * (taux / 12)) / (1 - Math.pow((1 + (taux / 12)), dureeMois)));
+		return mensualite;
 	}
-
-	private String today() {
-		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		return sdfDate.format(date);
-	}
-
-
 
 }

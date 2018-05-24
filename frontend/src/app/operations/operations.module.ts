@@ -11,12 +11,14 @@ import { SharedModule } from '../shared/shared.module';
 import { MenuComponent } from './menu/menu.component';
 import { AuditComponent } from './audit/audit.component';
 import { CrediterCompteComponent } from './crediter-compte/crediter-compte.component';
+import { CreditComponent } from './credit/credit.component';
 
 const routes: Routes = [
   { path: 'virement', component: VirementComponent },
   { path: 'operations/audit', component: AuditComponent},
   { path: 'operations/crediter', component: CrediterCompteComponent},
-  { path: 'operations', component: MenuComponent }
+  { path: 'operations', component: MenuComponent },
+  { path: 'credit', component: CreditComponent }
 ]
 
 @NgModule({
@@ -25,7 +27,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    
   ],
   declarations: [
     VirementComponent,
@@ -34,7 +37,8 @@ const routes: Routes = [
     CompteSelectionComponent, MenuComponent,
     MenuComponent,
     AuditComponent,
-    CrediterCompteComponent
+    CrediterCompteComponent,
+    CreditComponent
    ],
   providers:[
     OperationsService
