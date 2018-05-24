@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OperationsService } from '../operations.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crediter-compte',
@@ -14,7 +15,7 @@ export class CrediterCompteComponent implements OnInit {
   compteCredite:number;
   montant:number;
 
-  constructor(private service: OperationsService, private formBuilder:FormBuilder,) { }
+  constructor(private service: OperationsService, private formBuilder:FormBuilder,private router:Router ) { }
 
   ngOnInit() {
   }
@@ -35,7 +36,9 @@ public validation():boolean {
 }
 
 Crediter(){
-  this.service.CrediterCompte(this.compteCredite,this.montant)
+  this.service.CrediterCompte(this.compteCredite,this.montant);
+  alert('Le Compte a été credité avec succès');
+  this.router.navigate([`../operations`]);
   console.log(this.compteCredite+' , '+this.montant)
 }
 
