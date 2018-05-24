@@ -36,7 +36,7 @@ export class ClientFormComponent implements OnInit {
         this.buildForm();
       });
     } else {   // CRÉATION
-      this.currentClient = new Client();
+      this.currentClient = new Client({});
       this.buildForm();
     }
   }

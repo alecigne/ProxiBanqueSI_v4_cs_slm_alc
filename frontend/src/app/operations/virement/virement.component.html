@@ -1,14 +1,16 @@
-
-<div >
-<app-compte-selection departOuArrivee="depart" (numeroCompte)="ReceptionMessage('depart',$event)"></app-compte-selection >
-<app-compte-selection departOuArrivee= "arrivee" (numeroCompte)="ReceptionMessage('arrivee',$event)"></app-compte-selection>
-
-<div class="col-sm-4">
-    <form [formGroup]="montantForm" (ngSubmit)="faireVirement()" novalidate>
+<div>
+  <app-compte-selection class="col-sm-4" departOuArrivee="depart" (numeroCompte)="compteDepart=$event"></app-compte-selection>
+  <app-compte-selection class="col-sm-4" departOuArrivee="arrivee" (numeroCompte)="compteArrivee=$event"></app-compte-selection>
+  <div class="col-sm-4">
+    <!-- <form [formGroup]="montantForm" (ngSubmit)="faireVirement()" novalidate>
           <input formControlName="montant" type="text" class="form-control" placeholder="montant">
         <a class="btn btn-info btn-lg" type="submit" (click)="faireVirement()">valider</a>
-      </form>
-</div>
+      </form> -->
+    <div>
+      <input type="number" [(ngModel)]="montant">
 
-
+    </div>
+    <button (click)="faireVirement()" [disabled]="!validation()">valider</button>
+  </div>
+  
 </div>

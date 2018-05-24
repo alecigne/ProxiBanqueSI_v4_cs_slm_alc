@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.proxibanque.proxibanquesi.exceptions.ServiceException;
@@ -21,6 +22,7 @@ import fr.proxibanque.proxibanquesi.model.Compte;
 import fr.proxibanque.proxibanquesi.model.CompteCourant;
 import fr.proxibanque.proxibanquesi.model.CompteEpargne;
 import fr.proxibanque.proxibanquesi.model.Conseiller;
+import fr.proxibanque.proxibanquesi.model.Virement;
 import fr.proxibanque.proxibanquesi.service.ProxiBanqueServiceImp;
 
 @RestController
@@ -139,11 +141,11 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@PutMapping(value = "virement/{numCompteDepart}/{numCompteArrivee}/{montantTransfere}")
-	public void VirementCompteACompte(@PathVariable long numCompteDepart, @PathVariable long numCompteArrivee,
-			@PathVariable double montantTransfere) {
+	@PutMapping(value = "virement", produces = "application/json")
+	public void VirementCompteACompte(@RequestBody Virement virementdata) {
 		try {
-			service.VirementCompteACompte(numCompteDepart, numCompteArrivee, montantTransfere);
+			System.out.println(virementdata.toString());
+			service.VirementCompteACompte(virementdata.getNumCompteDepart(), virementdata.getNumCompteArrivee(), virementdata.getMontantTransfere());
 		} catch (Exception e) {
 			e.printStackTrace();
 

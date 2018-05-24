@@ -8,9 +8,14 @@ export class OperationsService {
   @Inject('BACKEND_URL') private baseURL: string
 ) { }
 
-  virement(numCompteDepart, numCompteArrivee, montant){
-    console.log('URL requete : '+this.baseURL + 'virement/'+numCompteDepart+'/'+numCompteArrivee+'/'+montant)
-    this.http.put(this.baseURL + 'virement/'+numCompteDepart+'/'+numCompteArrivee+'/'+montant,'', null);
+  virement(numCompteDepart, numCompteArrivee, montant):Promise<any>{
+    console.log({ numCompteDepart:+numCompteDepart,
+      numCompteArrivee:+numCompteArrivee,
+      montantTransfere:montant})
+    return this.http.put(this.baseURL + 'virement',
+    { numCompteDepart:+numCompteDepart,
+       numCompteArrivee:+numCompteArrivee,
+       montantTransfere:montant} ).toPromise();
   }
 
 }
