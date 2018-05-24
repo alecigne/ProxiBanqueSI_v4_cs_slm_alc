@@ -37,33 +37,34 @@ export class ClientListComponent implements OnInit {
   deleteClient(id: number) {
     this.showConfirmationModal()
       .subscribe({
-        complete: () => this.clientService.deleteClient(id).subscribe(),
+        complete: () => this.clientService.deleteClient(id).subscribe(() => this.clientService.loadClientsParConseiller(this.currentConseiller.idConseiller)
+          .subscribe(clients => { this.listeClients = clients; })),
         error: () => { }
       });
     return false;
   }
 
 
-  goBack() {
-    this.router.navigate(['accueil']);
-  }
-
   deleteCompteCourant(idClient: number) {
     this.showConfirmationModalCompte()
       .subscribe({
-        complete: () => this.compteService.deleteCompteCourant(idClient).subscribe(),
+        complete: () => this.compteService.deleteCompteCourant(idClient)
+          .subscribe(() => this.clientService.loadClientsParConseiller(this.currentConseiller.idConseiller)
+            .subscribe(clients => { this.listeClients = clients; })),
         error: () => { }
 
       })
-    this.goBack();
+
   }
 
   deleteCompteEpargne(idClient: number) {
     this.showConfirmationModalCompte()
       .subscribe({
-        complete: () => this.compteService.deleteCompteEpargne(idClient).subscribe(),
+        complete: () => this.compteService.deleteCompteEpargne(idClient).subscribe(() => this.clientService.loadClientsParConseiller(this.currentConseiller.idConseiller)
+          .subscribe(clients => { this.listeClients = clients; })),
         error: () => { }
       })
+
   }
 
   showConfirmationModal(): Observable<any> {
