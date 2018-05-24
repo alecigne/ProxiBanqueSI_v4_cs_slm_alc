@@ -15,6 +15,7 @@ import { CrediterCompteComponent } from './crediter-compte/crediter-compte.compo
 const routes: Routes = [
   { path: 'virement', component: VirementComponent },
   { path: 'operations/audit', component: AuditComponent},
+  { path: 'operations/crediter', component: CrediterCompteComponent},
   { path: 'operations', component: MenuComponent }
 ]
 

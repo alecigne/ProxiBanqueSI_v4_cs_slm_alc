@@ -1,7 +1,8 @@
 <div>
-  <app-compte-selection class="col-sm-4" departOuArrivee="depart" (numeroCompte)="compteDepart=$event"></app-compte-selection>
-  <app-compte-selection class="col-sm-4" departOuArrivee="arrivee" (numeroCompte)="compteArrivee=$event"></app-compte-selection>
+  <app-compte-selection class="col-sm-4" departOuArrivee="crediteur" (numeroCompte)="compteDepart=$event"></app-compte-selection>
+  <app-compte-selection class="col-sm-4" departOuArrivee="credité" (numeroCompte)="compteArrivee=$event"></app-compte-selection>
   <div class="col-sm-4">
+    <h2>Montant à transférer</h2>
     <!-- <form [formGroup]="montantForm" (ngSubmit)="faireVirement()" novalidate>
           <input formControlName="montant" type="text" class="form-control" placeholder="montant">
         <a class="btn btn-info btn-lg" type="submit" (click)="faireVirement()">valider</a>

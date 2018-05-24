@@ -1,3 +1,8 @@
-<p>
-  crediter-compte works!
-</p>
+<div>
+  <app-compte-selection class="col-sm-4" departOuArrivee="à Créditer" (numeroCompte)="compteCredite=$event"></app-compte-selection>
+  <div>
+    <h2>Montant</h2>
+    <input type="number" [(ngModel)]="montant">
+  </div>
+  <button (click)="Crediter()" [disabled]="!validation()">valider</button>
+</div>

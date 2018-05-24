@@ -9,13 +9,15 @@ export class OperationsService {
 ) { }
 
   virement(numCompteDepart, numCompteArrivee, montant):Promise<any>{
-    console.log({ numCompteDepart:+numCompteDepart,
-      numCompteArrivee:+numCompteArrivee,
-      montantTransfere:montant})
     return this.http.put(this.baseURL + 'virement',
     { numCompteDepart:+numCompteDepart,
        numCompteArrivee:+numCompteArrivee,
        montantTransfere:montant} ).toPromise();
+  }
+
+  CrediterCompte(numCompte,montant):Promise<any>{
+    return this.http.put(this.baseURL+'creditercompte/'+numCompte+'/'+montant, {}).toPromise();
+
   }
 
 }
