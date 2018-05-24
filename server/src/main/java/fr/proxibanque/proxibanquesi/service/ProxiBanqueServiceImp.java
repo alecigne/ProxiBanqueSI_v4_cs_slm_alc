@@ -22,7 +22,7 @@ import fr.proxibanque.proxibanquesi.model.Conseiller;
 import fr.proxibanque.proxibanquesi.model.CompteEpargne;
 
 /**
- * @author Clothilde, Sandrine et Anthony
+ * @author Interface décrivant les méthodes du SI (opérations bancaires
  *
  */
 @Service("service")
@@ -31,7 +31,22 @@ public class ProxiBanqueServiceImp
 
 	// *** ATTRIBUTS ***
 
+	/**
+	 * Seuil de vérification de l'audit
+	 */
 	private static final double SEUIL_AUDIT = -5000.0;
+
+	// pas de découvert autorisé pour un compte Epargne (découvert autorisé défini
+	// pour chaque compte courant)
+	/**
+	 * reglage de la limite du découvert d'un compte épargne
+	 */
+	static double limiteDecouvertAutoriseEpargne = 0.0;
+
+	/**
+	 * Limite du nombre de client par conseiller
+	 */
+	public final int nbClientMaxByConseiller = 10;
 
 	@Autowired
 	@Qualifier("clientDAO")
@@ -43,12 +58,6 @@ public class ProxiBanqueServiceImp
 	@Autowired
 	@Qualifier("compteDAO")
 	CompteDAO compteDAO;
-
-	public final int nbClientMaxByConseiller = 10;
-
-	// pas de découvert autorisé pour un compte Epargne (découvert autorisé défini
-	// pour chaque compte courant)
-	static double limiteDecouvertAutoriseEpargne = 0.0;
 
 	// *** GETTERS et SETTERS ***
 
