@@ -12,6 +12,10 @@ import fr.proxibanque.proxibanquesi.model.Client;
  * @author Clothilde Szymezak, Sandrine Le Mentec, Anthony Le Cigne
  *
  */
+/**
+ * @author adminl
+ *
+ */
 public interface GestionClientWebService {
 
 	// TODO Les annotations devraient être déplacées ici. Ceci semble causer des

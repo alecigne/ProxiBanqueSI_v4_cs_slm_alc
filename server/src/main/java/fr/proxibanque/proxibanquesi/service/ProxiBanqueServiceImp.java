@@ -22,7 +22,7 @@ import fr.proxibanque.proxibanquesi.model.Conseiller;
 import fr.proxibanque.proxibanquesi.model.CompteEpargne;
 
 /**
- * @author Clothilde, Sandrine et Anthony
+ * @author Interface décrivant les méthodes du SI (opérations bancaires
  *
  */
 @Service("service")
