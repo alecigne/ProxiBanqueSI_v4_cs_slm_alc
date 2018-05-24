@@ -11,7 +11,7 @@ export class ChartUtils {
       type: 'pie'
     },
     title: {
-      text: 'Browser market shares in January, 2018'
+      text: 'repartition des montants par comptes'
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -35,7 +35,7 @@ export class ChartUtils {
       ChartUtils.PIE_CHART_CONFIG_BASE,
       {
         series: [{
-          name: 'Brands',
+          name: 'Type de Compte',
           colorByPoint: true,
           data: parts
         }]
