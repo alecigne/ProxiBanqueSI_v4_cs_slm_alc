@@ -11,19 +11,26 @@
 	<appender name="FILE"	class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>logFile_cs_slm_alc.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			Daily rollover
 			<fileNamePattern>logFile_cs_slm_alc.%d.log</fileNamePattern>
-			Keep logs for 1 week
 			<maxHistory>7</maxHistory>
-			3GB max for logs
 			<totalSizeCap>3GB</totalSizeCap>
 		</rollingPolicy>
-
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{35}
-				- %msg%n</pattern>
+			<pattern>%d{HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
 		</encoder>
 	</appender>
+
+	<appender name="BANKING" class="ch.qos.logback.core.FileAppender">
+		<file>banking_cs_slm_alc.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="banking" level="WARN" additivity="false">
+		<appender-ref ref="BANKING" />
+	</logger>
 
 	<!-- On définit le package qui logge et le niveau de log (il écrase le niveau 
 		par défaut) -->
