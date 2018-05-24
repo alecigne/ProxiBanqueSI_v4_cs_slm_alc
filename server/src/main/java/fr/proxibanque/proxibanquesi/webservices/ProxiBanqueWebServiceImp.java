@@ -2,6 +2,8 @@ package fr.proxibanque.proxibanquesi.webservices;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,7 @@ public class ProxiBanqueWebServiceImp
 
 	@Autowired
 	ProxiBanqueServiceImp service;
+	private static Logger LOGGER = LoggerFactory.getLogger(ProxiBanqueWebServiceImp.class);
 
 	@Override
 	@PostMapping(value = "/client/", produces = "application/json")
@@ -39,7 +42,7 @@ public class ProxiBanqueWebServiceImp
 			service.creerClient(client);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (ServiceException e) {
-			e.printStackTrace(); // TODO Remplacer par un log/AOP
+			LOGGER.warn("exception thrown", e);
 			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -52,7 +55,7 @@ public class ProxiBanqueWebServiceImp
 			service.creerClientAvecConseiller(client, idConseiller);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (ServiceException e) {
-			e.printStackTrace(); // TODO Remplacer par un log/AOP
+			LOGGER.warn("exception thrown", e);
 			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -82,7 +85,7 @@ public class ProxiBanqueWebServiceImp
 			service.modifierClient(client);
 			return new ResponseEntity<Client>(HttpStatus.OK);
 		} catch (ServiceException e) {
-			e.printStackTrace(); // TODO AOP
+			LOGGER.warn("exception thrown", e);
 			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -94,7 +97,7 @@ public class ProxiBanqueWebServiceImp
 			service.supprimerClient(idClient);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (ServiceException e) {
-			e.printStackTrace(); // TODO Remplacer par l'AOP
+			LOGGER.warn("exception thrown", e);
 			return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -108,9 +111,8 @@ public class ProxiBanqueWebServiceImp
 			service.AttribuerCompteEpargneClient(idClient, compteEpargne);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.warn("exception thrown", e);
 			return new ResponseEntity<CompteEpargne>(HttpStatus.BAD_REQUEST);
-			// TODO: integration AOP
 		}
 	}
 
@@ -121,8 +123,8 @@ public class ProxiBanqueWebServiceImp
 		try {
 			service.AttribuerCompteCourantClient(idClient, compteCourant);
 			return new ResponseEntity<>(HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (ServiceException e) {
+			LOGGER.warn("exception thrown", e);
 			return new ResponseEntity<CompteCourant>(HttpStatus.BAD_REQUEST);
 			// TODO: integration AOP
 		}
@@ -147,9 +149,8 @@ public class ProxiBanqueWebServiceImp
 		try {
 			System.out.println(virementdata.toString());
 			service.VirementCompteACompte(virementdata.getNumCompteDepart(), virementdata.getNumCompteArrivee(), virementdata.getMontantTransfere());
-		} catch (Exception e) {
-			e.printStackTrace();
-
+		} catch (ServiceException e) {
+			LOGGER.warn("exception thrown", e);
 		}
 	}
 

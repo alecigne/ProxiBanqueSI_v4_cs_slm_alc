@@ -70,18 +70,6 @@ public class ProxiBanqueServiceImp
 		}
 	}
 
-	@Override
-	public void creerClientAvecConseiller(Client client, long idConseiller) throws ServiceException {
-		Conseiller conseiller = this.obtenirConseiller(idConseiller);
-		if (conseiller == null) {
-			throw new ServiceException("Conseiller inexistant !");
-		} else {
-			conseiller.getListeClients().add(client);
-			conseillerDao.save(conseiller);
-		}
-
-	}
-
 	private boolean clientEstValide(Client client) {
 		if (client == null) {
 			return false;
@@ -96,6 +84,17 @@ public class ProxiBanqueServiceImp
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public void creerClientAvecConseiller(Client client, long idConseiller) throws ServiceException {
+		Conseiller conseiller = this.obtenirConseiller(idConseiller);
+		if (conseiller == null) {
+			throw new ServiceException("Conseiller inexistant !");
+		} else {
+			conseiller.getListeClients().add(client);
+			conseillerDao.save(conseiller);
+		}
 	}
 
 	@Override
