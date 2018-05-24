@@ -10,6 +10,7 @@ import { FieldComponent } from '../shared/field/field.component';
 import { SharedModule } from '../shared/shared.module';
 import { MenuComponent } from './menu/menu.component';
 import { AuditComponent } from './audit/audit.component';
+import { CrediterCompteComponent } from './crediter-compte/crediter-compte.component';
 
 const routes: Routes = [
   { path: 'virement', component: VirementComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
     TransfertComponent, 
     CompteSelectionComponent, MenuComponent,
     MenuComponent,
-    AuditComponent
+    AuditComponent,
+    CrediterCompteComponent
    ],
   providers:[
     OperationsService
