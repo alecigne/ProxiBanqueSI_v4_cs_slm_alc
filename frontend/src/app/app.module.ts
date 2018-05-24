@@ -26,7 +26,7 @@ import { AccueilModule } from './accueil/accueil.module';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'accueil', component: AccueilComponent },
-  { path: 'agence/demohighchart', component: ChartDemoComponent },
+  { path: 'operations/repartition', component: ChartDemoComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ]
 
