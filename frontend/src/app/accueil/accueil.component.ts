@@ -35,9 +35,4 @@ export class AccueilComponent implements OnInit {
       });
   }
 
-  // addSlide() {
-  //   this.items.push({
-  //     title: `Slide 4`
-  //   });
-  // }
 }

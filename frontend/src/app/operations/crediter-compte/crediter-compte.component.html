@@ -1,8 +1,14 @@
 <div>
   <app-compte-selection class="col-sm-4" departOuArrivee="à Créditer" (numeroCompte)="compteCredite=$event"></app-compte-selection>
-  <div>
-    <h2>Montant</h2>
-    <input type="number" [(ngModel)]="montant">
-  </div>
-  <button (click)="Crediter()" [disabled]="!validation()">valider</button>
+  <fieldset>
+    <legend>Montant</legend>
+    <div>
+      <input type="number" [(ngModel)]="montant">
+    </div>
+    <br>
+    <div class="text-left">
+      <button class="btn btn-default" (click)="goBack()">Retour</button>
+      <button class="btn btn-primary" (click)="Crediter()" [disabled]="!validation()">Valider</button>
+    </div>
+  </fieldset>
 </div>

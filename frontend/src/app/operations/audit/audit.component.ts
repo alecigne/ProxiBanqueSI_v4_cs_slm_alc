@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../client/client.service';
 import { Client } from '../../client/client';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-audit',
@@ -14,6 +15,7 @@ export class AuditComponent implements OnInit {
 
   constructor(
     private cs: ClientService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -23,5 +25,7 @@ export class AuditComponent implements OnInit {
         this.isLoading = false;
       });
   }
-
+  goBack() {
+    this.router.navigate(['operations']);
+  }
 }

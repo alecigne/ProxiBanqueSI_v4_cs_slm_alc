@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { OperationsService } from "../operations.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-credit',
@@ -12,7 +13,8 @@ export class CreditComponent {
 
   constructor(
     private fb: FormBuilder,
-    private os: OperationsService) { }
+    private os: OperationsService,
+    private router: Router) { }
 
   ngOnInit() {
     this.creditForm = this.fb.group({
@@ -31,6 +33,9 @@ export class CreditComponent {
     const taux = this.creditForm.get('taux').value;
     this.os.credit(montant, duree, taux).subscribe(mensualite => this.mensualite = mensualite);
   }
-  
+
+  goBack() {
+    this.router.navigate(['operations']);
+  }
 
 }

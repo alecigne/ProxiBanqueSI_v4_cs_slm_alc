@@ -1,17 +1,21 @@
 <div>
-  <app-compte-selection class="col-sm-4" departOuArrivee="crediteur" (numeroCompte)="compteDepart=$event"></app-compte-selection>
-  <app-compte-selection class="col-sm-4" departOuArrivee="credité" (numeroCompte)="compteArrivee=$event"></app-compte-selection>
-  <div class="col-sm-4">
-    <h2>Montant à transférer</h2>
-    <!-- <form [formGroup]="montantForm" (ngSubmit)="faireVirement()" novalidate>
+  <app-compte-selection class="col-sm-4" departOuArrivee="à débiter" (numeroCompte)="compteDepart=$event"></app-compte-selection>
+  <app-compte-selection class="col-sm-4" departOuArrivee="à créditer" (numeroCompte)="compteArrivee=$event"></app-compte-selection>
+  <fieldset>
+    <legend>Montant à transférer</legend>
+    <div class="col-sm-4">
+      <!-- <form [formGroup]="montantForm" (ngSubmit)="faireVirement()" novalidate>
           <input formControlName="montant" type="text" class="form-control" placeholder="montant">
         <a class="btn btn-info btn-lg" type="submit" (click)="faireVirement()">valider</a>
       </form> -->
-    <div>
-      <input type="number" [(ngModel)]="montant">
-
+      <div>
+        <input type="number" [(ngModel)]="montant">
+      </div>
     </div>
-    <button (click)="faireVirement()" [disabled]="!validation()">valider</button>
+  </fieldset>
+  <br>
+  <div class="text-right">
+    <button class="btn btn-default" (click)="goBack()">Retour</button>
+    <button class="btn btn-primary" (click)="faireVirement()" [disabled]="!validation()">valider</button>
   </div>
-  
 </div>

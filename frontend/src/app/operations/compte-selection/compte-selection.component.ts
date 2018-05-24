@@ -24,7 +24,7 @@ export class CompteSelectionComponent implements OnInit {
   constructor(private service: ClientService, private as: AuthService) { }
 
   ngOnInit() {
-    if (this.departOuArrivee !== 'credité') {
+    if (this.departOuArrivee !== 'à créditer') {
       this.as.getCurrentConseiller().subscribe(
         conseiller => {
           this.currentConseiller = conseiller;
@@ -46,12 +46,7 @@ export class CompteSelectionComponent implements OnInit {
   }
 
   emit() {
-
     this.numeroCompte.emit(this.selectedAccount ? this.selectedAccount : undefined);
-
   }
-
-
-
 
 }

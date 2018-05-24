@@ -169,7 +169,7 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@DeleteMapping(value = "client/{idClient}/compteCourant")
+	@DeleteMapping(value = "client/{idClient}/CompteCourant")
 	public ResponseEntity<Compte> supprimerCompteCourant(@PathVariable long idClient) {
 		try {
 			service.supprimerCompteCourantClient(idClient);
@@ -182,7 +182,7 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@DeleteMapping(value = "/client/{idClient}/compteEpargne")
+	@DeleteMapping(value = "/client/{idClient}/CompteEpargne")
 	public ResponseEntity<Compte> supprimerCompteEpargne(@PathVariable long idClient) {
 		try {
 			service.supprimerCompteEpargneClient(idClient);

@@ -44,22 +44,26 @@ export class ClientListComponent implements OnInit {
   }
 
 
-  deleteCompteCourant(idClient:number) {
+  goBack() {
+    this.router.navigate(['accueil']);
+  }
+
+  deleteCompteCourant(idClient: number) {
     this.showConfirmationModalCompte()
       .subscribe({
         complete: () => this.compteService.deleteCompteCourant(idClient).subscribe(),
         error: () => { }
-        
-})
-console.log(idClient);
+
+      })
+    this.goBack();
   }
 
-  deleteCompteEpargne(idClient:number) {
+  deleteCompteEpargne(idClient: number) {
     this.showConfirmationModalCompte()
       .subscribe({
         complete: () => this.compteService.deleteCompteEpargne(idClient).subscribe(),
         error: () => { }
-})
+      })
   }
 
   showConfirmationModal(): Observable<any> {

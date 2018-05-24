@@ -39,10 +39,10 @@ export class CompteService {
   }
 
   deleteCompteCourant(idClient: number) {
-    return this.http.delete(`${this.baseUrl}client/${idClient}/compteCourant`);
+    return this.http.delete(`${this.baseUrl}client/${idClient}/CompteCourant`);
   }
 
   deleteCompteEpargne(idClient: number) {
-    return this.http.delete(`${this.baseUrl}client/${idClient}/compteEpargne`);
+    return this.http.delete(`${this.baseUrl}client/${idClient}/CompteEpargne`);
   }
 }

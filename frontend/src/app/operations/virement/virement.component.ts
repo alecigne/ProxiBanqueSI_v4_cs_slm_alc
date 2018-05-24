@@ -40,5 +40,8 @@ export class VirementComponent implements OnInit {
     this.router.navigate([`../operations`]);
   }
 
+  goBack() {
+    this.router.navigate(['operations']);
+  }
 
 }

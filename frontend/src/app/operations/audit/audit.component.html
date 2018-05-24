@@ -1,26 +1,31 @@
-<h1 class="text-center">Clients à surveiller : {{listeClients.length}}</h1>
+<button class="btn btn-default" (click)="goBack()">Retour</button>
+<ng-template #noclient><h1 class="text-center">Aucun client à surveiller</h1></ng-template>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Prenom</th>
-      <th>Email</th>
-      <th>Téléphone</th>
-      <th>Compte Courant</th>
-      <th>Compte Epargne</th>
-      <th>Bilan net</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let client of listeClients">
-      <td>{{ client.nom }}</td>
-      <td>{{ client.prenom }}</td>
-      <td>{{ client.email }}</td>
-      <td>{{ client.telephone }}</td>
-      <td>{{ client.compteCourant.solde }}</td>
-      <td>{{ client.compteEpargne.solde }}</td>
-      <td>{{ client.compteEpargne.solde + client.compteCourant.solde }} €</td>
-    </tr>
-  </tbody>
-</table>
+<ng-container *ngIf="listeClients.length!=0; else noclient">
+  <h1 class="text-center">Clients à surveiller : {{listeClients.length}}</h1>
+
+  <table class="table table-striped text-center">
+    <thead>
+      <tr>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Prenom</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Téléphone</th>
+        <th class="text-center">Compte Courant</th>
+        <th class="text-center">Compte Epargne</th>
+        <th class="text-center">Bilan net</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of listeClients">
+        <td>{{ client.nom }}</td>
+        <td>{{ client.prenom }}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.telephone }}</td>
+        <td>{{ client.compteCourant.solde }}</td>
+        <td>{{ client.compteEpargne.solde }}</td>
+        <td>{{ client.compteEpargne.solde + client.compteCourant.solde }} €</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
