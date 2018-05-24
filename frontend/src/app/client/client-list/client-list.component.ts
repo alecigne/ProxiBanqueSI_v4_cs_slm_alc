@@ -5,6 +5,7 @@ import { Conseiller } from '../../conseiller/conseiller';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { CompteService } from '../../compte/compte.service';
 
 @Component({
   selector: 'app-client-list',
@@ -18,14 +19,15 @@ export class ClientListComponent implements OnInit {
 
   constructor(private router: Router,
     private as: AuthService,
-    private cs: ClientService
+    private clientService: ClientService,
+    private compteService: CompteService
   ) { }
 
   ngOnInit() {
     this.as.getCurrentConseiller().subscribe(
       conseiller => {
         this.currentConseiller = conseiller;
-        this.cs.loadClientsParConseiller(conseiller.idConseiller).subscribe(clients => {
+        this.clientService.loadClientsParConseiller(conseiller.idConseiller).subscribe(clients => {
           this.listeClients = clients;
           this.isLoading = false;
         });
@@ -35,10 +37,29 @@ export class ClientListComponent implements OnInit {
   deleteClient(id: number) {
     this.showConfirmationModal()
       .subscribe({
-        complete: () => this.cs.deleteClient(id).subscribe(),
+        complete: () => this.clientService.deleteClient(id).subscribe(),
         error: () => { }
       });
     return false;
+  }
+
+
+  deleteCompteCourant(idClient:number) {
+    this.showConfirmationModalCompte()
+      .subscribe({
+        complete: () => this.compteService.deleteCompteCourant(idClient).subscribe(),
+        error: () => { }
+        
+})
+console.log(idClient);
+  }
+
+  deleteCompteEpargne(idClient:number) {
+    this.showConfirmationModalCompte()
+      .subscribe({
+        complete: () => this.compteService.deleteCompteEpargne(idClient).subscribe(),
+        error: () => { }
+})
   }
 
   showConfirmationModal(): Observable<any> {
@@ -50,4 +71,16 @@ export class ClientListComponent implements OnInit {
       }
     });
   }
+
+  showConfirmationModalCompte(): Observable<any> {
+    return Observable.create(observer => {
+      if (confirm('Êtes-vous certain de vouloir supprimer ce compte de votre client ?')) {
+        observer.complete();
+      } else {
+        observer.error();
+      }
+    });
+  }
+
+
 }

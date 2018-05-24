@@ -26,15 +26,16 @@
           <th class="text-center">Nom</th>
           <th class="text-center">Prenom</th>
           <th class="text-center">Email</th>
+          <th class="text-center">Actions</th>
+
           <th class="text-center">Compte Courant</th>
           <th class="text-center">Découvert</th>
-          <th class="text-center">Actions CC</th>
+          <th class="text-center"></th>
           <th class="text-center">Compte Epargne</th>
 
           <th class="text-center">Situation</th>
-          <th class="text-center">Actions CE</th>
-          <!-- <th class="text-center">Synthèse</th> -->
-          <th class="text-center">Actions</th>
+          <th class="text-center"></th>
+
         </tr>
       </thead>
       <tbody>
@@ -43,8 +44,25 @@
           <td>{{ client.prenom }}</td>
           <td>{{ client.email }}</td>
 
+          <td>
+            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient]">
+              <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
+            </a>
+            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'editionclient']">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editer
+            </a>
+            <button class="btn btn-danger btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'clients']" (click)="deleteClient(client.idClient)">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+          </td>
+
           <ng-container *ngIf="client.compteCourant;else ajoutcc">
-            <td>{{ client.compteCourant.solde }} € </td>
+            <td>{{ client.compteCourant.solde }} €
+              <ng-container *ngIf="client.compteCourant.carteBancaire">
+                <span class="glyphicon glyphicon-credit-card" aria-idden="true"></span>
+              </ng-container>
+
+            </td>
             <td>
               <ng-container *ngIf="client.compteCourant.solde>0">
                 <span class="glyphicon glyphicon-ok" style="color: rgb(34, 204, 0);" aria-idden="true"></span>
@@ -124,26 +142,8 @@
             <td> </td>
           </ng-template>
 
-          <!-- <ng-container *ngIf="client.compteCourant.solde==null && client.compteEpargne.solde ==null; else synthese">
-              <td> dfhd</td>
-            </ng-container>
-            <ng-template #synthese>
-              <td> {{ client.compteCourant.solde + client.compteEpargne.solde }} €</td>
-            </ng-template> -->
-
-          <td>
-            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient]">
-              <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Voir
-            </a>
-            <a class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client', client.idClient,'editionclient']">
-              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editer
-            </a>
-            <button class="btn btn-danger btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'clients']" (click)="deleteClient(client.idClient)">
-              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            </button>
-          </td>
         </tr>
-
       </tbody>
     </table>
+
   </div>

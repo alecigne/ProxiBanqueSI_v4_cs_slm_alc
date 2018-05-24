@@ -12,25 +12,33 @@ export class CompteService {
 
   constructor(private http: HttpClient, @Inject('BACKEND_URL') private baseUrl: string, private clientService: ClientService) { }
 
-  loadCompteCourant(numeroCompte: number): Observable<CompteCourant> {
-    return this.http.get(`${this.baseUrl}CompteCourant/${numeroCompte}`)
+  loadCompteCourant(numCompte: number): Observable<CompteCourant> {
+    return this.http.get(`${this.baseUrl}CompteCourant/${numCompte}`)
       .map(ccData => new CompteCourant(ccData));
   }
 
-  loadCompteEpargne(numeroCompte: number): Observable<CompteEpargne>{
-    return this.http.get(`${this.baseUrl}CompteEpargne/${numeroCompte}`)
+  loadCompteEpargne(numCompte: number): Observable<CompteEpargne> {
+    return this.http.get(`${this.baseUrl}CompteEpargne/${numCompte}`)
       .map(ceData => new CompteEpargne(ceData));
   }
 
   saveCompteCourant(idClient: number, compteCourant: CompteCourant): Observable<any> {
-    const url = `${this.baseUrl}client/${idClient}/CompteCourant/` + (compteCourant.numeroCompte ? `/${compteCourant.numeroCompte}` : '');
-    const method = compteCourant.numeroCompte ? 'put' : 'post';
+    const url = `${this.baseUrl}client/${idClient}/CompteCourant/` + (compteCourant.numCompte ? `/${compteCourant.numCompte}` : '');
+    const method = compteCourant.numCompte ? 'put' : 'post';
     return this.http.request(method, url, { body: compteCourant });
   }
 
   saveCompteEpargne(idClient: number, compteEpargne: CompteEpargne): Observable<any> {
-    const url = `${this.baseUrl}client/${idClient}/CompteEpargne/` + (compteEpargne.numeroCompte ? `/${compteEpargne.numeroCompte}` : '');
-    const method = compteEpargne.numeroCompte ? 'put' : 'post';
+    const url = `${this.baseUrl}client/${idClient}/CompteEpargne/` + (compteEpargne.numCompte ? `/${compteEpargne.numCompte}` : '');
+    const method = compteEpargne.numCompte ? 'put' : 'post';
     return this.http.request(method, url, { body: compteEpargne });
+  }
+
+  deleteCompteCourant(idClient: number) {
+    return this.http.delete(`${this.baseUrl}client/${idClient}/compteCourant`);
+  }
+
+  deleteCompteEpargne(idClient: number) {
+    return this.http.delete(`${this.baseUrl}client/${idClient}/compteEpargne`);
   }
 }

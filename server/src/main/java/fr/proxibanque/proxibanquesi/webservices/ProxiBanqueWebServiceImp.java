@@ -104,11 +104,11 @@ public class ProxiBanqueWebServiceImp
 
 	@Override
 	@PostMapping(value = "/client/{idClient}/CompteEpargne/", produces = "application/json")
-	public ResponseEntity<CompteEpargne> AttribuerCompteEpargneClient(@PathVariable long idClient,
+	public ResponseEntity<CompteEpargne> attribuerCompteEpargneClient(@PathVariable long idClient,
 			@RequestBody CompteEpargne compteEpargne) {
 		//
 		try {
-			service.AttribuerCompteEpargneClient(idClient, compteEpargne);
+			service.attribuerCompteEpargneClient(idClient, compteEpargne);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			LOGGER.warn("exception thrown", e);
@@ -118,10 +118,10 @@ public class ProxiBanqueWebServiceImp
 
 	@Override
 	@PostMapping(value = "/client/{idClient}/CompteCourant/", produces = "application/json")
-	public ResponseEntity<CompteCourant> AttribuerCompteCourantClient(@PathVariable long idClient,
+	public ResponseEntity<CompteCourant> attribuerCompteCourantClient(@PathVariable long idClient,
 			@RequestBody CompteCourant compteCourant) {
 		try {
-			service.AttribuerCompteCourantClient(idClient, compteCourant);
+			service.attribuerCompteCourantClient(idClient, compteCourant);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (ServiceException e) {
 			LOGGER.warn("exception thrown", e);
@@ -131,26 +131,79 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@GetMapping(value = "/client/{idClient}/comptes", produces = "application/json")
-	public List<Compte> AfficherListeCompteClient(@PathVariable long idClient) {
-		return service.AfficherListeCompteClient(idClient);
+	@GetMapping(value = "client/{idClient}/comptes", produces = "application/json")
+	public List<Compte> afficherListeCompteClient(@PathVariable long idClient) {
+		return service.afficherListeCompteClient(idClient);
 	}
 
 	@Override
 	@GetMapping(value = "compte/{numCompte}")
-	public Compte AfficherCompteNumero(@PathVariable long numCompte) {
-		// TODO Auto-generated method stub
-		return service.AfficherCompteNumero(numCompte);
+	public Compte afficherCompteNumero(@PathVariable long numCompte) {
+		return service.afficherCompteNumero(numCompte);
 	}
 
 	@Override
+	@PutMapping(value = "client/{idClient}/compteCourant/{numCompte}", produces = "application/json")
+	public ResponseEntity<Compte> modifierCompteCourant(@PathVariable long idClient,
+			@RequestBody CompteCourant compteCourantModif) {
+		try {
+			service.modifierCompteCourantClient(idClient, compteCourantModif);
+			return new ResponseEntity<Compte>(HttpStatus.OK);
+		} catch (ServiceException e) {
+			e.printStackTrace(); // TODO AOP
+			return new ResponseEntity<Compte>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@Override
+	@PutMapping(value = "client/{idClient}/compteEpargne/{numCompte}", produces = "application/json")
+	public ResponseEntity<Compte> modifierCompteEpargne(@PathVariable long idClient,
+			@RequestBody CompteEpargne compteEpargneModif) {
+		try {
+			service.modifierCompteEpargneClient(idClient, compteEpargneModif);
+			return new ResponseEntity<Compte>(HttpStatus.OK);
+		} catch (ServiceException e) {
+			e.printStackTrace(); // TODO AOP
+			return new ResponseEntity<Compte>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@Override
+	@DeleteMapping(value = "client/{idClient}/compteCourant")
+	public ResponseEntity<Compte> supprimerCompteCourant(@PathVariable long idClient) {
+		try {
+			service.supprimerCompteCourantClient(idClient);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (ServiceException e) {
+			e.printStackTrace(); // TODO Remplacer par l'AOP
+			return new ResponseEntity<Compte>(HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
+	@Override
+	@DeleteMapping(value = "/client/{idClient}/compteEpargne")
+	public ResponseEntity<Compte> supprimerCompteEpargne(@PathVariable long idClient) {
+		try {
+			service.supprimerCompteEpargneClient(idClient);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (ServiceException e) {
+			e.printStackTrace(); // TODO Remplacer par l'AOP
+			return new ResponseEntity<Compte>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@Override
+
 	@PutMapping(value = "virement", produces = "application/json")
-	public void VirementCompteACompte(@RequestBody Virement virementdata) {
+	public void virementCompteACompte(@RequestBody Virement virementdata) {
 		try {
 			System.out.println(virementdata.toString());
-			service.VirementCompteACompte(virementdata.getNumCompteDepart(), virementdata.getNumCompteArrivee(), virementdata.getMontantTransfere());
+			service.virementCompteACompte(virementdata.getNumCompteDepart(), virementdata.getNumCompteArrivee(),
+					virementdata.getMontantTransfere());
 		} catch (ServiceException e) {
 			LOGGER.warn("exception thrown", e);
+
 		}
 	}
 
@@ -168,9 +221,9 @@ public class ProxiBanqueWebServiceImp
 
 	@Override
 	@PutMapping(value = "creditercompte/{numCompte}/{montant}")
-	public void CrediterCompte(@PathVariable long numCompte, @PathVariable double montant) {
+	public void crediterCompte(@PathVariable long numCompte, @PathVariable double montant) {
 		try {
-			service.CrediterCompte(numCompte, montant);
+			service.crediterCompte(numCompte, montant);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -180,6 +233,7 @@ public class ProxiBanqueWebServiceImp
 	@GetMapping(value = "/credit/{montant}/{dureeMois}/{taux}/", produces = "application/json")
 	public double simulerCredit(@PathVariable double montant, @PathVariable int dureeMois, @PathVariable double taux) {
 		return service.simulerCredit(montant, dureeMois, taux);
+
 	}
 
 }

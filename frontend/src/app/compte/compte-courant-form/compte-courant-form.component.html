@@ -8,18 +8,31 @@
     <app-field label="Découvert Autorisé" [control]="compteCourantForm.get('decouvertAutorise')">
       <input formControlName="decouvertAutorise" type="text" class="form-control" placeholder="Découvert Autorisé">
     </app-field>
-    <form novalidate *ngIf="carteBancaireForm" [formGroup]="carteBancaireForm">
-      <app-field label="Carte" [control]="carteBancaireForm.get('typeCarte')">
-        <br>
-        <input formControlName="typeCarte" type="radio" value="AUCUNE" checked> Aucune
-        <br>
-        <input formControlName="typeCarte" type="radio" value="ELECTRON"> Electron
-        <br>
-        <input formControlName="typeCarte" type="radio" value="PREMIER"> Premier
-      </app-field>
-    </form>
-    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Créer</button>
+
+    Ajouter une carte :
+    <ng-container *ngIf="!carteBancaire; else nocard">
+      <button class="btn btn-default" (click)="addCard()">Oui</button>
+    </ng-container>
+    <ng-template #nocard>
+      <button class="btn btn-default" (click)="removeCard()">Non</button>
+    </ng-template>
+    <br>
+    <ng-container *ngIf="carteBancaire">
+      <form novalidate *ngIf="carteBancaireForm" [formGroup]="carteBancaireForm">
+        <p></p>
+        <app-field label="Carte" [control]="carteBancaireForm.get('typeCarte')">
+          <br>
+          <input formControlName="typeCarte" type="radio" value="ELECTRON"> Carte Visa Electron
+          <br>
+          <input formControlName="typeCarte" type="radio" value="PREMIER"> Carte Visa Premier
+        </app-field>
+      </form>
+    </ng-container>
+    <br>
+    <button type="submit" class="btn btn-primary">
+      <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Créer</button>
     <a routerLink="../../../clients">Annuler</a>
+
   </form>
 
 </fieldset>

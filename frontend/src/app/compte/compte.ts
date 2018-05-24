@@ -1,14 +1,14 @@
 export abstract class Compte {
-    numeroCompte: number;
+    numCompte: number;
     solde: number;
     dateOuverture: string;
 
     constructor(options: {
-        numeroCompte?: number;
+        numCompte?: number;
         solde?: number;
         dateOuverture?: string;
     } = {}) {
-        this.numeroCompte = options.numeroCompte || null;
+        this.numCompte = options.numCompte || null;
         this.solde = options.solde || null;
         this.dateOuverture = options.dateOuverture || '';
     }
@@ -25,7 +25,7 @@ export class CompteCourant extends Compte {
 
         super();
         this.decouvertAutorise = options.decouvertAutorise || null;
-        this.carteBancaire = options.carteBancaire || {typeCarte:'AUCUNE'};
+        this.carteBancaire = options.carteBancaire || null;
     }
 }
 
@@ -41,5 +41,5 @@ export class CompteEpargne extends Compte {
 }
 
 export class CarteBancaire {
-    typeCarte: string = 'AUCUNE';
+    typeCarte: string;
 }

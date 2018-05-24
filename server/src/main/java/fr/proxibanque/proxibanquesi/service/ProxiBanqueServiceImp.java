@@ -14,6 +14,7 @@ import fr.proxibanque.proxibanquesi.dao.ClientDAO;
 import fr.proxibanque.proxibanquesi.dao.ConseillerDAO;
 import fr.proxibanque.proxibanquesi.dao.CompteDAO;
 import fr.proxibanque.proxibanquesi.exceptions.ServiceException;
+import fr.proxibanque.proxibanquesi.model.CarteBancaire;
 import fr.proxibanque.proxibanquesi.model.Client;
 import fr.proxibanque.proxibanquesi.model.Compte;
 import fr.proxibanque.proxibanquesi.model.CompteCourant;
@@ -85,7 +86,7 @@ public class ProxiBanqueServiceImp
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void creerClientAvecConseiller(Client client, long idConseiller) throws ServiceException {
 		Conseiller conseiller = this.obtenirConseiller(idConseiller);
@@ -170,7 +171,7 @@ public class ProxiBanqueServiceImp
 	// *** GESTION COMPTES ***
 
 	@Override
-	public void AttribuerCompteEpargneClient(long idClient, CompteEpargne compteEpargne) throws ServiceException {
+	public void attribuerCompteEpargneClient(long idClient, CompteEpargne compteEpargne) throws ServiceException {
 		// TODO Auto-generated method stub
 		Client client = obtenirClient(idClient);
 		if (client.getCompteEpargne() == null) {
@@ -183,7 +184,7 @@ public class ProxiBanqueServiceImp
 		}
 
 	}
-	
+
 	private long genererNumero() {
 		long randomNumber = (long) (Math.random() * 1_000_000_000);
 		return randomNumber;
@@ -196,11 +197,14 @@ public class ProxiBanqueServiceImp
 	}
 
 	@Override
-	public void AttribuerCompteCourantClient(long idClient, CompteCourant compteCourant) throws ServiceException {
+	public void attribuerCompteCourantClient(long idClient, CompteCourant compteCourant) throws ServiceException {
 		Client client = obtenirClient(idClient);
 		if (client.getCompteCourant() == null) {
 			compteCourant.setNumeroCompte(genererNumero());
 			compteCourant.setDateOuverture(today());
+			if (compteCourant.getCarteBancaire() != null) {
+				compteCourant.getCarteBancaire().setNumeroCarte(genererNumero());
+			}
 			client.setCompteCourant(compteCourant);
 			clientDao.save(client);
 		} else {
@@ -209,7 +213,7 @@ public class ProxiBanqueServiceImp
 	}
 
 	@Override
-	public List<Compte> AfficherListeCompteClient(long idClient) {
+	public List<Compte> afficherListeCompteClient(long idClient) {
 		Client client = obtenirClient(idClient);
 		List<Compte> listeCompte = new ArrayList<>();
 		listeCompte.add(client.getCompteCourant());
@@ -218,34 +222,69 @@ public class ProxiBanqueServiceImp
 	}
 
 	@Override
-	public void ModifierCompteEpargneClient(long idClient, CompteEpargne compteEpargneModif) {
+	public void modifierCompteEpargneClient(long idClient, CompteEpargne compteEpargneModif) throws ServiceException {
 		Client client = obtenirClient(idClient);
-		client.setCompteEpargne(compteEpargneModif);
-		clientDao.save(client);
+		if (client.getCompteEpargne() == null) {
+			throw new ServiceException("Ce client n'a pas de compte épargne");
+		} else {
+			client.setCompteEpargne(compteEpargneModif);
+			clientDao.save(client);
+			compteDAO.save(compteEpargneModif);
+		}
+	}
+
+	@Override
+	public void modifierCompteCourantClient(long idClient, CompteCourant compteCourantModif) throws ServiceException {
+		Client client = obtenirClient(idClient);
+		if (client.getCompteCourant() == null) {
+			throw new ServiceException("Ce client n'a pas de compte courant");
+		} else {
+			client.setCompteCourant(compteCourantModif);
+			clientDao.save(client);
+			compteDAO.save(compteCourantModif);
+		}
+	}
+
+	@Override
+	public void supprimerCompteCourantClient(long idClient) throws ServiceException {
+		Client client = this.obtenirClient(idClient);
+		CompteCourant compteCourantcandidat = client.getCompteCourant();
+		if (compteCourantcandidat.getSolde() != 0) {
+			throw new ServiceException("Le solde du compte n'est pas nul");
+		} else {
+			client.setCompteCourant(null);
+			clientDao.save(client);
+			compteDAO.delete(compteCourantcandidat.getNumeroCompte());
+		}
+	}
+
+	@Override
+	public void supprimerCompteEpargneClient(long idClient) throws ServiceException {
+		Client client = this.obtenirClient(idClient);
+		CompteEpargne compteEpargneCandidat = client.getCompteEpargne();
+		if (compteEpargneCandidat.getSolde() != 0) {
+			throw new ServiceException("Le solde du compte n'est pas nul");
+		} else {
+			client.setCompteEpargne(null);
+			clientDao.save(client);
+			compteDAO.delete(compteEpargneCandidat.getNumeroCompte());
+		}
 
 	}
 
 	@Override
-	public void ModifierCompteCourantClient(long idClient, CompteCourant compteCourantModif) {
-		Client client = obtenirClient(idClient);
-		client.setCompteCourant(compteCourantModif);
-		clientDao.save(client);
-
-	}
-
-	@Override
-	public Compte AfficherCompteNumero(long numCompte) {
+	public Compte afficherCompteNumero(long numCompte) {
 		return compteDAO.findOne(numCompte);
 	}
 
 	// *** OPERATIONS ***
 
 	@Override
-	public void VirementCompteACompte(long numCompteDepart, long numCompteArrivee, double montantTransfere)
+	public void virementCompteACompte(long numCompteDepart, long numCompteArrivee, double montantTransfere)
 			throws ServiceException {
-		Compte compteDepart = AfficherCompteNumero(numCompteDepart);
+		Compte compteDepart = afficherCompteNumero(numCompteDepart);
 		double soldecompteDepart = compteDepart.getSolde();
-		Compte compteArrivee = AfficherCompteNumero(numCompteArrivee);
+		Compte compteArrivee = afficherCompteNumero(numCompteArrivee);
 		double soldecompteArrivee = compteArrivee.getSolde();
 		double limiteDecouvert;
 		// methodologie pour récuperer le decouvert autorisé dans tous les cas
@@ -269,7 +308,7 @@ public class ProxiBanqueServiceImp
 	}
 
 	@Override
-	public void CrediterCompte(long numeroCompte, double montant) {
+	public void crediterCompte(long numeroCompte, double montant) {
 		Compte compte = compteDAO.findOne(numeroCompte);
 		compte.setSolde(compte.getSolde() + montant);
 		compteDAO.save(compte);
@@ -304,5 +343,4 @@ public class ProxiBanqueServiceImp
 		double mensualite = ((montant * (taux / 12)) / (1 - Math.pow((1 + (taux / 12)), dureeMois)));
 		return mensualite;
 	}
-
 }
