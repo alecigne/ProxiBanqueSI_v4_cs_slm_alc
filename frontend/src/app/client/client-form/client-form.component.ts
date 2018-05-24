@@ -18,6 +18,10 @@ export class ClientFormComponent implements OnInit {
   currentConseiller: Conseiller
   clientForm: FormGroup;
   conseillerForm: FormGroup;
+  //longueur minimum
+  minLengthNom: number = 2;
+  lengthCodePostal: number = 5;
+  lengthTelephone: number = 10;
 
   idClient = +this.route.snapshot.params['clientId'];
 
@@ -43,13 +47,13 @@ export class ClientFormComponent implements OnInit {
 
   buildForm() {
     this.clientForm = this.formBuilder.group({
-      nom: [this.currentClient.nom, [Validators.required, Validators.minLength(2)]],
+      nom: [this.currentClient.nom, [Validators.required, Validators.minLength(this.minLengthNom)]],
       prenom: [this.currentClient.prenom, Validators.required],
       email: [this.currentClient.email, Validators.required],
       adresse: [this.currentClient.adresse],
-      codePostal: [this.currentClient.codePostal, [Validators.maxLength(5), Validators.minLength(5)]],
+      codePostal: [this.currentClient.codePostal, [Validators.maxLength(this.lengthCodePostal), Validators.minLength(this.lengthCodePostal)]],
       ville: [this.currentClient.ville],
-      telephone: [this.currentClient.telephone, [Validators.maxLength(10), Validators.minLength(10)]],
+      telephone: [this.currentClient.telephone, [Validators.maxLength(this.lengthTelephone), Validators.minLength(this.lengthTelephone)]],
       conseiller: []
     });
 
@@ -71,9 +75,19 @@ export class ClientFormComponent implements OnInit {
   saveClientAvecConseiller() {
     const idConseiller = +this.route.snapshot.params['idConseiller'];
     const client: Client = Object.assign(this.currentClient, this.clientForm.value);
+    const nom = this.clientForm.value.nom;
     this.clientService.saveClientAvecConseiller(client, idConseiller).subscribe(() => {
       alert('Le client a été enregistré avec succès');
       this.router.navigate([`../../conseiller/idConseiller/clients/`]);
     })
+  }
+
+  validation(): boolean {
+    const nom = this.clientForm.value.nom;
+    const prenom = this.clientForm.value.prenom;
+    const email = this.clientForm.value.email;
+    return (nom !== undefined && prenom !== undefined && email !== undefined)
+      && (nom !== '' && prenom !== '' && email !== '')
+      && (nom.length >= this.minLengthNom);
   }
 }
