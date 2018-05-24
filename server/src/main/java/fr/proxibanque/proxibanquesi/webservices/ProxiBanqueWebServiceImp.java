@@ -141,12 +141,11 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@PutMapping(value = "virement/{numCompteDepart}/{numCompteArrivee}/{montantTransfere}")
-	public void VirementCompteACompte(@PathVariable long numCompteDepart, @PathVariable long numCompteArrivee,
-			@PathVariable double montantTransfere, @RequestBody Virement virementdata) {
+	@PutMapping(value = "virement", produces = "application/json")
+	public void VirementCompteACompte(@RequestBody Virement virementdata) {
 		try {
 			System.out.println(virementdata.toString());
-			service.VirementCompteACompte(numCompteDepart, numCompteArrivee, montantTransfere);
+			service.VirementCompteACompte(virementdata.getNumCompteDepart(), virementdata.getNumCompteArrivee(), virementdata.getMontantTransfere());
 		} catch (Exception e) {
 			e.printStackTrace();
 

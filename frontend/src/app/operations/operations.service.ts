@@ -9,10 +9,12 @@ export class OperationsService {
 ) { }
 
   virement(numCompteDepart, numCompteArrivee, montant):Promise<any>{
-    console.log('URL requete : '+this.baseURL + 'virement/'+numCompteDepart+'/'+numCompteArrivee+'/'+montant)
-    return this.http.put(this.baseURL + 'virement/'+numCompteDepart+'/'+numCompteArrivee+'/'+montant,
-    { numCompteDepart:numCompteDepart,
-       numCompteArrivee:numCompteArrivee,
+    console.log({ numCompteDepart:+numCompteDepart,
+      numCompteArrivee:+numCompteArrivee,
+      montantTransfere:montant})
+    return this.http.put(this.baseURL + 'virement',
+    { numCompteDepart:+numCompteDepart,
+       numCompteArrivee:+numCompteArrivee,
        montantTransfere:montant} ).toPromise();
   }
 

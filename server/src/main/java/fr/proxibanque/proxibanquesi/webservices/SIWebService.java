@@ -7,7 +7,7 @@ import fr.proxibanque.proxibanquesi.model.Virement;
 
 public interface SIWebService {
 
-	public void VirementCompteACompte(long numCompteDepart, long numCompteArrivee, double montantTransfere, Virement virementdata);
+	public void VirementCompteACompte(Virement virementdata);
 	public void CrediterCompte(long numeroCompte, double montant);
 
 	List<Client> auditerAgence();
