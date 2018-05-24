@@ -21,6 +21,9 @@ import javax.persistence.InheritanceType;
 public abstract class Employe {
 
 	// *** ATTRIBUTES ***
+	/**
+	 * Utilisé en PK de la table employe de la BDD
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_employe")

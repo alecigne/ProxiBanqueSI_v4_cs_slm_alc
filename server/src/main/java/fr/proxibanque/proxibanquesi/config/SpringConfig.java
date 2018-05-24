@@ -38,9 +38,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = { "fr.proxibanque.proxibanquesi" })
 public class SpringConfig {
 
+	/**
+	 * Variable definissant l'environemment de travail (driver BDD)
+	 */
 	@Autowired
 	private Environment environment;
 
+	/**
+	 * @return la data source (BDD, driver, url et accès,)
+	 */
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -63,6 +69,11 @@ public class SpringConfig {
 		return databasePopulator;
 	}
 
+	/**
+	 * Mise en place du management des transactions avec la BDD
+	 * @param entityManagerFactory : 
+	 * @return Le manager des transactions avec le BDD
+	 */
 	@Bean
 	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 		JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
@@ -72,6 +83,10 @@ public class SpringConfig {
 		return jpaTransactionManager;
 	}
 
+	/**
+	 * Choix du type de data base pour JPA (ici MySQL)
+	 * @return
+	 */
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
@@ -80,6 +95,11 @@ public class SpringConfig {
 		return jpaVendorAdapter;
 	}
 
+	/**
+	 * Mise en place de la communication avec la base de données via un container
+	 * (Emplacement des JavaBean à sauvegarder et définition du lancement de la database)
+	 * @return
+	 */
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();

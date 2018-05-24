@@ -44,6 +44,8 @@ public class ProxiBanqueServiceImp
 	@Qualifier("compteDAO")
 	CompteDAO compteDAO;
 
+	public final int nbClientMaxByConseiller = 10;
+
 	// pas de découvert autorisé pour un compte Epargne (découvert autorisé défini
 	// pour chaque compte courant)
 	static double limiteDecouvertAutoriseEpargne = 0.0;
@@ -93,8 +95,12 @@ public class ProxiBanqueServiceImp
 		if (conseiller == null) {
 			throw new ServiceException("Conseiller inexistant !");
 		} else {
-			conseiller.getListeClients().add(client);
-			conseillerDao.save(conseiller);
+			if (conseiller.getListeClients().size() < 10) {
+				conseiller.getListeClients().add(client);
+				conseillerDao.save(conseiller);
+			} else {
+				throw new ServiceException("Conseiller ayant déjà 10 clients");
+			}
 		}
 	}
 

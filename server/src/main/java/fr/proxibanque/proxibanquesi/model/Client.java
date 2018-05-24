@@ -20,10 +20,14 @@ import javax.persistence.Transient;
 @Entity
 public class Client {
 
+	/**
+	 * Id du client (PK de la base de données client)
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_client")
 	private long idClient;
+	
 	private String nom;
 	private String prenom;
 	private String email;
@@ -33,10 +37,16 @@ public class Client {
 	private String ville;
 	private String telephone;
 
+	/**
+	 * POJO du compte courant du client (numéro du compte FK de la table client)
+	 */
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinColumn(name = "compte_courant_id", unique = true)
 	private CompteCourant compteCourant;
 
+	/**
+	 * POJO du compte epargne du client (numéro du compte FK de la table client)
+	 */
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinColumn(name = "compte_epargne_id", unique = true)
 	private CompteEpargne compteEpargne;

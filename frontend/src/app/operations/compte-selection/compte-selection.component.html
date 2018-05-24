@@ -12,11 +12,6 @@
     </div>
     <div *ngIf="selectedClient" class="small-2">
       Compte :
-      <!-- <select (change)="selectAccount($event.target.value)">
-        <option value="">comptes </option>
-        <option [value]="currentClient?.compteCourant?.numeroCompte">Compte Courant : {{currentClient?.compteCourant?.numeroCompte}}</option>
-        <option [value]="currentClient?.compteEpargne?.numeroCompte">Compte Epargne : {{currentClient?.compteEpargne?.numeroCompte}}</option>
-      </select> -->
       <select [(ngModel)]="selectedAccount" (change)="emit()">
         <option value="">comptes </option>
         <option [value]="currentClient()?.compteCourant?.numeroCompte">Compte Courant : {{currentClient()?.compteCourant?.numeroCompte}}</option>
@@ -24,7 +19,6 @@
       </select>
 
     </div>
-    <!-- <a class="btn btn-info btn-lg" (click)="declencher()">valider</a> -->
 
   </div>
 </div>

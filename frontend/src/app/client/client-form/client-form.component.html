@@ -32,7 +32,7 @@
     <a routerLink="../../../clients">Annuler</a>
   </ng-container>
   <ng-template #creation>
-    <button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Créer</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!validation()"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Créer</button>
     <a routerLink="../../clients">Annuler</a>
   </ng-template>
   </form>

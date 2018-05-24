@@ -2,11 +2,25 @@ package fr.proxibanque.proxibanquesi.model;
 
 import org.springframework.web.bind.annotation.PathVariable;
 
-// TODO Implémenter
+/**
+ * classe décrivant les éléments nécessaires à un virement (Objet envoyé par le front Angular)
+ * 
+ * @author Clothilde Szymezak, Sandrine Le Mentec, Anthony Le Cigne
+ *
+ */
 public class Virement {
 	
+	/**
+	 * numéro de compte crediteur
+	 */
 	private long numCompteDepart; 
+	/**
+	 * numéro de compte credité
+	 */
 	private long numCompteArrivee;
+	/**
+	 * montant à transferer
+	 */
 	private double montantTransfere;
 	
 	public Virement() {}

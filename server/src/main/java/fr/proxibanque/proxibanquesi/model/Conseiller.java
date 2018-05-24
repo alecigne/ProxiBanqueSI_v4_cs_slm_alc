@@ -9,9 +9,18 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+/**
+ * POJO décrivant le conseiller proxibanque (Table conseiller dans la BDD)
+ * 
+ * @author Clothilde Szymezak, Sandrine Le Mentec, Anthony Le Cigne
+ *
+ */
 @Entity
 public class Conseiller extends Employe {
 
+	/**
+	 * Liste des clients d'un conseiller (id Conseiller utiliser en FK de la table client de la BDD)
+	 */
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "conseiller_id")
 	private Set<Client> listeClients = new HashSet<>();

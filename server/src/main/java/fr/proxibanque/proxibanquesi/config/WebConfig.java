@@ -12,6 +12,13 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ * 
+ * Configuration pour les web services avec Spring MVC
+ * 
+ * @author Clothilde Szymezak, Sandrine Le Mentec, Anthony Le Cigne
+ *
+ */
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = { "fr.proxibanque.proxibanquesi" })
@@ -25,6 +32,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH");
 	}
 
+	/**
+	 * Definition des emplacements des jsp du projet (non utilisées ici=> front en Angular)
+	 * @return 
+	 */
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
