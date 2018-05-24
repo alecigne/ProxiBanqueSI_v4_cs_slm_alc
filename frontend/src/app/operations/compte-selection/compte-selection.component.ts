@@ -14,11 +14,8 @@ export class CompteSelectionComponent implements OnInit {
   @Input() departOuArrivee: string;
 
   @Output() numeroCompte: EventEmitter<number> = new EventEmitter<number>();
-  // comptenum: number;
   clients: Client[];
   currentConseiller: Conseiller;
-  // isLoading = true;
-  // currentClient: Client;
   listeCompte: Compte[];
 
   selectedAccount
@@ -27,30 +24,31 @@ export class CompteSelectionComponent implements OnInit {
   constructor(private service: ClientService, private as: AuthService) { }
 
   ngOnInit() {
-    this.as.getCurrentConseiller().subscribe(
-      conseiller => {
-        this.currentConseiller = conseiller;
-        this.service.loadClientsParConseiller(conseiller.idConseiller).subscribe(listeClients => {
-          this.clients = listeClients;
-          // this.isLoading = false;
+    if (this.departOuArrivee !== 'credité') {
+      this.as.getCurrentConseiller().subscribe(
+        conseiller => {
+          this.currentConseiller = conseiller;
+          this.service.loadClientsParConseiller(conseiller.idConseiller).subscribe(listeClients => {
+            this.clients = listeClients;
+          })
         });
 
-      })
+    } else {
+      this.service.loadClients().subscribe(
+        listeClients => {
+          this.clients = listeClients;}
+      );
+    }
   }
 
-  currentClient(){
-    return  this.selectedClient ? this.clients.filter(value => value.idClient === +this.selectedClient).shift() : undefined;
+  currentClient() {
+    return this.selectedClient ? this.clients.filter(value => value.idClient === +this.selectedClient).shift() : undefined;
   }
-  // selectClient(idClient: number) {
-  //   this.currentClient = idClient ? this.clients.filter(value => value.idClient === +idClient).shift() : undefined;
-  //   this.selectedAccount=undefined;
-  // }
 
   emit() {
-    // this.comptenum = numCompte ? numCompte : undefined;
-    // console.log(`account ${(numCompte)} ${(this.comptenum)} selected!`);
-    this.numeroCompte.emit(this.selectedAccount?this.selectedAccount:undefined);
-    // console.log('----',this.selectedAccount)
+
+    this.numeroCompte.emit(this.selectedAccount ? this.selectedAccount : undefined);
+
   }
 
 
