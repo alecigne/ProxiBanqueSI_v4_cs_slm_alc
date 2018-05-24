@@ -28,12 +28,15 @@ export class CompteCourantFormComponent implements OnInit {
     private compteService: CompteService) { }
 
   ngOnInit() {
-    const numCompte = +this.route.snapshot.params['numeroCompte'];
-
+    const numCompte = +this.route.snapshot.params['numCompte'];
+    console.log(numCompte)
     if (numCompte) {   // ÉDITION
-      this.compteService.loadCompteCourant(numCompte).subscribe(compteCourant => {
+      this.compteService.loadCompte(numCompte).subscribe(compteCourant => {
         this.currentCompteCourant = compteCourant;
         this.buildForm();
+        if (this.currentCompteCourant.carteBancaire != null) {
+          this.buildFormCarte;
+        }
       });
     } else {   // CRÉATION
       this.currentCompteCourant = new CompteCourant({ decouvertAutorise: 1000 });
@@ -58,11 +61,13 @@ export class CompteCourantFormComponent implements OnInit {
       typeCarte: []
     });
   }
-  // this.currentCompteCourant.carteBancaire.typeCarte
+
   saveCompteCourant() {
     const clientId = +this.route.snapshot.params['idClient'];
-    const idConseiller = +this.route.snapshot.params['idConseiller'];
+    const numCompte = +this.route.snapshot.params['numCompte'];
     const compteCourant: CompteCourant = Object.assign(this.currentCompteCourant, this.compteCourantForm.value);
+    compteCourant.numCompte=numCompte;
+    console.log(compteCourant.numCompte);
     if (this.carteBancaire) {
       compteCourant.carteBancaire = this.carteBancaireForm.value;
     }

@@ -103,7 +103,7 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@PostMapping(value = "/client/{idClient}/CompteEpargne/", produces = "application/json")
+	@PostMapping(value = "/client/{idClient}/CompteEpargne", produces = "application/json")
 	public ResponseEntity<CompteEpargne> attribuerCompteEpargneClient(@PathVariable long idClient,
 			@RequestBody CompteEpargne compteEpargne) {
 		//
@@ -117,7 +117,7 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@PostMapping(value = "/client/{idClient}/CompteCourant/", produces = "application/json")
+	@PostMapping(value = "/client/{idClient}/CompteCourant", produces = "application/json")
 	public ResponseEntity<CompteCourant> attribuerCompteCourantClient(@PathVariable long idClient,
 			@RequestBody CompteCourant compteCourant) {
 		try {
@@ -143,7 +143,7 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@PutMapping(value = "client/{idClient}/compteCourant/{numCompte}", produces = "application/json")
+	@PutMapping(value = "client/{idClient}/CompteCourant/{numCompte}", produces = "application/json")
 	public ResponseEntity<Compte> modifierCompteCourant(@PathVariable long idClient,
 			@RequestBody CompteCourant compteCourantModif) {
 		try {
@@ -156,7 +156,7 @@ public class ProxiBanqueWebServiceImp
 	}
 
 	@Override
-	@PutMapping(value = "client/{idClient}/compteEpargne/{numCompte}", produces = "application/json")
+	@PutMapping(value = "client/{idClient}/CompteEpargne/{numCompte}", produces = "application/json")
 	public ResponseEntity<Compte> modifierCompteEpargne(@PathVariable long idClient,
 			@RequestBody CompteEpargne compteEpargneModif) {
 		try {

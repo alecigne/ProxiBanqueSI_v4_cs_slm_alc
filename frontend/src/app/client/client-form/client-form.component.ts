@@ -22,7 +22,7 @@ export class ClientFormComponent implements OnInit {
   minLengthNom: number = 2;
   lengthCodePostal: number = 5;
   lengthTelephone: number = 10;
-  isInvalid:boolean;
+  isInvalid: boolean;
 
   idClient = +this.route.snapshot.params['clientId'];
 
@@ -39,7 +39,6 @@ export class ClientFormComponent implements OnInit {
       this.clientService.loadClient(clientId).subscribe(client => {
         this.currentClient = client;
         this.buildForm();
-        console.log(!this.validation())
       });
     } else {   // CRÉATION
       this.currentClient = new Client({});

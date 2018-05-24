@@ -21,10 +21,10 @@ export class CompteEpargneFormComponent implements OnInit {
     private compteService: CompteService) { }
 
   ngOnInit() {
-    const numCompte = +this.route.snapshot.params['numeroCompte'];
+    const numCompte = +this.route.snapshot.params['numCompte'];
 
     if (numCompte) {   // ÉDITION
-      this.compteService.loadCompteEpargne(numCompte).subscribe(compteEpargne => {
+      this.compteService.loadCompte(numCompte).subscribe(compteEpargne => {
         this.currentCompteEpargne = compteEpargne;
         this.buildForm();
       });
@@ -45,8 +45,9 @@ export class CompteEpargneFormComponent implements OnInit {
 
   saveCompteEpargne() {
     const clientId = +this.route.snapshot.params['idClient'];
-    const idConseiller = +this.route.snapshot.params['idConseiller'];
+    const numCompte = +this.route.snapshot.params['numCompte'];
     const compteEpargne: CompteEpargne = Object.assign(this.currentCompteEpargne, this.compteEpargneForm.value);
+    if (numCompte) { compteEpargne.numCompte = numCompte; }
     this.compteService.saveCompteEpargne(clientId, compteEpargne).subscribe(() => {
       alert('Le compte a été enregistré avec succès');
       this.router.navigate([`../../conseiller/idConseiller/clients/`]);

@@ -9,7 +9,16 @@
       <input formControlName="tauxRemun" type="text" class="form-control" placeholder="Taux de rémunération">
     </app-field>
 
-    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Créer</button>
-    <a routerLink="../../../clients">Annuler</a>
+    <ng-container *ngIf="currentCompteEpargne;else creation">
+      <button type="submit" class="btn btn-primary" [disabled]="!validation()">
+        <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Editer</button>
+      <a routerLink="../../../clients">Annuler</a>
+    </ng-container>
+    <ng-template #creation>
+      <button type="submit" class="btn btn-primary" [disabled]="!validation()">
+        <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Editer</button>
+      <a routerLink="../../../../../clients">Annuler</a>
+    </ng-template>
+
   </form>
 </fieldset>

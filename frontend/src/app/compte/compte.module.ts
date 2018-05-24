@@ -13,8 +13,8 @@ import { CompteEpargneFormComponent } from './compte-epargne-form/compte-epargne
 
 
 const routes: Routes = [
-  { path: 'conseiller/:idConseiller/client/:idClient/editioncomptecourant', component: CompteCourantFormComponent },
-  { path: 'conseiller/:idConseiller/client/:idClient/editioncompteepargne', component: CompteEpargneFormComponent },
+  { path: 'conseiller/:idConseiller/client/:idClient/editioncomptecourant/:numCompte', component: CompteCourantFormComponent },
+  { path: 'conseiller/:idConseiller/client/:idClient/editioncompteepargne/:numCompte', component: CompteEpargneFormComponent },
   { path: 'conseiller/:idConseiller/client/:idClient/nouveaucomptecourant', component: CompteCourantFormComponent },
   { path: 'conseiller/:idConseiller/client/:idClient/nouveaucompteepargne', component: CompteEpargneFormComponent }
 

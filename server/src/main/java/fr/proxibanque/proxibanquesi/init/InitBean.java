@@ -100,13 +100,11 @@ public class InitBean implements InitializingBean {
 
 		pbs.creerClientAvecConseiller(client6, 2);
 
-		System.out.println(pbs.afficherCompteNumero(55));
-		System.out.println(client6.getCompteCourant());
-		
-		System.out.println(pbs.afficherCompteNumero(56));
-		
-//		pbs.supprimerCompteCourantClient(5);
-//		pbs.supprimerCompteEpargneClient(5);
+		client6.getCompteCourant().setDecouvertAutorise(3000);
+		pbs.modifierCompteCourantClient(5, client6.getCompteCourant());
+
+		// pbs.supprimerCompteCourantClient(5);
+		// pbs.supprimerCompteEpargneClient(5);
 	}
 
 }

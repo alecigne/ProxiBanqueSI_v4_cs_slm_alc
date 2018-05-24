@@ -22,14 +22,18 @@ export class CompteService {
       .map(ceData => new CompteEpargne(ceData));
   }
 
+  loadCompte(numCompte:number):Observable<any>{
+    return this.http.get(`${this.baseUrl}compte/${numCompte}`)
+  }
+
   saveCompteCourant(idClient: number, compteCourant: CompteCourant): Observable<any> {
-    const url = `${this.baseUrl}client/${idClient}/CompteCourant/` + (compteCourant.numCompte ? `/${compteCourant.numCompte}` : '');
+    const url = `${this.baseUrl}client/${idClient}/CompteCourant` + (compteCourant.numCompte ? `/${compteCourant.numCompte}` : '');
     const method = compteCourant.numCompte ? 'put' : 'post';
     return this.http.request(method, url, { body: compteCourant });
   }
 
   saveCompteEpargne(idClient: number, compteEpargne: CompteEpargne): Observable<any> {
-    const url = `${this.baseUrl}client/${idClient}/CompteEpargne/` + (compteEpargne.numCompte ? `/${compteEpargne.numCompte}` : '');
+    const url = `${this.baseUrl}client/${idClient}/CompteEpargne` + (compteEpargne.numCompte ? `/${compteEpargne.numCompte}` : '');
     const method = compteEpargne.numCompte ? 'put' : 'post';
     return this.http.request(method, url, { body: compteEpargne });
   }
