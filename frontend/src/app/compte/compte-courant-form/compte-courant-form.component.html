@@ -9,15 +9,7 @@
       <input formControlName="decouvertAutorise" type="text" class="form-control" placeholder="Découvert Autorisé">
     </app-field>
 
-    Ajouter une carte :
-    <ng-container *ngIf="!carteBancaire; else nocard">
-      <button class="btn btn-default" (click)="addCard()">Oui</button>
-    </ng-container>
-    <ng-template #nocard>
-      <button class="btn btn-default" (click)="removeCard()">Non</button>
-    </ng-template>
-    <br>
-    <ng-container *ngIf="carteBancaire">
+    <ng-container *ngIf="numeroCompte && currentCompteCourant.carteBancaire;else comptenonexistant ">
       <form novalidate *ngIf="carteBancaireForm" [formGroup]="carteBancaireForm">
         <p></p>
         <app-field label="Carte" [control]="carteBancaireForm.get('typeCarte')">
@@ -26,18 +18,36 @@
           <br>
           <input formControlName="typeCarte" type="radio" value="PREMIER"> Carte Visa Premier
         </app-field>
+
+        <button class="btn btn-danger" (click)="removeCard2()">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Carte </button>
+        <br>
       </form>
     </ng-container>
-    <br>
-    <ng-container *ngIf="currentCompteCourant;else creation">
-      <button type="submit" class="btn btn-primary" [disabled]="!validation()">
-        <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Editer</button>
-      <a routerLink="../../../clients">Annuler</a>
-    </ng-container>
-    <ng-template #creation>
-      <button type="submit" class="btn btn-primary" [disabled]="!validation()">
-        <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Editer</button>
-      <a routerLink="../../../../clients">Annuler</a>
+    <ng-template #comptenonexistant>
+      Carte bancaire :
+      <ng-container *ngIf="!carteBancaire; else nocard">
+        <button class="btn btn-info" (click)="addCard()">Ajoutez </button>
+      </ng-container>
+      <ng-template #nocard>
+        <button class="btn btn-danger" (click)="removeCard()">Supprimer </button>
+      </ng-template>
+      <br>
+      <ng-container *ngIf="carteBancaire">
+        <form novalidate *ngIf="carteBancaireForm" [formGroup]="carteBancaireForm">
+          <p></p>
+          <app-field label="Carte" [control]="carteBancaireForm.get('typeCarte')">
+            <br>
+            <input formControlName="typeCarte" type="radio" value="ELECTRON" checked> Carte Visa Electron
+            <br>
+            <input formControlName="typeCarte" type="radio" value="PREMIER"> Carte Visa Premier
+          </app-field>
+        </form>
+      </ng-container>
     </ng-template>
+    <br>
+    <button type="submit" class="btn btn-primary">
+      <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Editer</button>
+    <button class="btn btn-default" (click)="goBack()">Annuler</button>
   </form>
 </fieldset>

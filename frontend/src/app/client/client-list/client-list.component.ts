@@ -78,11 +78,11 @@ export class ClientListComponent implements OnInit {
   }
 
   showConfirmationModalCompte(): Observable<any> {
-    return Observable.create(observer => {
+    return Observable.create(observerCompte => {
       if (confirm('Êtes-vous certain de vouloir supprimer ce compte de votre client ?')) {
-        observer.complete();
+        observerCompte.complete();
       } else {
-        observer.error();
+        observerCompte.error();
       }
     });
   }

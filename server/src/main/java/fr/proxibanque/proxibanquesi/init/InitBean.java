@@ -105,6 +105,20 @@ public class InitBean implements InitializingBean {
 
 		// pbs.supprimerCompteCourantClient(5);
 		// pbs.supprimerCompteEpargneClient(5);
+
+		// Client 7
+		Client client7 = new Client("Dupont46545646", "Michel", "michel@dupont4.com", "4 rue de la Source", "75004",
+				"Paris", "0100000004");
+		CompteCourant cc7 = new CompteCourant(5898, 0, "2018-05-20");
+		client7.setCompteCourant(cc7);
+
+		System.out.println(client7);
+		pbs.creerClientAvecConseiller(client7, 2);
+
+		client7.getCompteCourant().setCarteBancaire(new CarteBancaire(556464, CarteBancaire.TypeCarte.PREMIER));
+		System.out.println(client7);
+
+		pbs.modifierCompteCourantClient(6, client7.getCompteCourant());
 	}
 
 }

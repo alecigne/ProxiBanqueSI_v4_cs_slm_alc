@@ -29,10 +29,10 @@
   </app-field>
   <ng-container *ngIf="idClient;else creation">
     <button type="submit" class="btn btn-primary" [disabled]="!validation()"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Modifier</button>
-    <a routerLink="../../../clients">Annuler</a>
+    <button type="submit" class="btn btn-default"><a routerLink="../../../clients">Annuler</a></button>
   </ng-container>
   <ng-template #creation>
     <button type="submit" class="btn btn-primary" [disabled]="!validation()"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Créer</button>
-    <a routerLink="../../clients">Annuler</a>
+    <button type="submit" class="btn btn-default"><a routerLink="../../clients">Annuler</a></button>
   </ng-template>
   </form>

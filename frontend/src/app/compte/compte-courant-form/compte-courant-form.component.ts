@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { CompteService } from '../compte.service';
 import { Compte, CompteCourant } from '../compte';
 import { Client } from '../../client/client';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-compte-courant-form',
@@ -20,6 +21,7 @@ export class CompteCourantFormComponent implements OnInit {
   numeroCompte: number;
   carte = null;
   carteBancaire: boolean = false;
+  hasCard: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,23 +31,28 @@ export class CompteCourantFormComponent implements OnInit {
 
   ngOnInit() {
     const numCompte = +this.route.snapshot.params['numCompte'];
-    console.log(numCompte)
+    this.numeroCompte = numCompte;
+    console.log(this.numeroCompte);
     if (numCompte) {   // ÉDITION
       this.compteService.loadCompte(numCompte).subscribe(compteCourant => {
         this.currentCompteCourant = compteCourant;
         this.buildForm();
+        this.currentCompteCourant.carteBancaire = compteCourant.carteBancaire;
         if (this.currentCompteCourant.carteBancaire != null) {
-          this.buildFormCarte;
+          this.buildFormCarte();
+        } else {
+          this.buildFormCarte2();
         }
       });
     } else {   // CRÉATION
       this.currentCompteCourant = new CompteCourant({ decouvertAutorise: 1000 });
       this.currentCompteCourant.solde = 0;
       this.buildForm();
-      if (this.currentCompteCourant.carteBancaire != null) {
-        this.buildFormCarte;
-      }
+      // if (this.currentCompteCourant.carteBancaire != null) {
+      this.buildFormCarte2();
+      // }
     }
+
   }
 
   buildForm() {
@@ -53,12 +60,17 @@ export class CompteCourantFormComponent implements OnInit {
       solde: [this.currentCompteCourant.solde],
       decouvertAutorise: [this.currentCompteCourant.decouvertAutorise],
     });
-
   }
 
   buildFormCarte() {
     this.carteBancaireForm = this.formBuilder.group({
-      typeCarte: []
+      typeCarte: [this.currentCompteCourant.carteBancaire.typeCarte]
+    });
+  }
+
+  buildFormCarte2() {
+    this.carteBancaireForm = this.formBuilder.group({
+      typeCarte: ['ELECTRON']
     });
   }
 
@@ -66,8 +78,7 @@ export class CompteCourantFormComponent implements OnInit {
     const clientId = +this.route.snapshot.params['idClient'];
     const numCompte = +this.route.snapshot.params['numCompte'];
     const compteCourant: CompteCourant = Object.assign(this.currentCompteCourant, this.compteCourantForm.value);
-    compteCourant.numCompte=numCompte;
-    console.log(compteCourant.numCompte);
+    compteCourant.numCompte = numCompte;
     if (this.carteBancaire) {
       compteCourant.carteBancaire = this.carteBancaireForm.value;
     }
@@ -78,13 +89,37 @@ export class CompteCourantFormComponent implements OnInit {
   }
 
   addCard() {
-    // this.currentCompteCourant.carteBancaire.typeCarte = 'ELECTRON';
-
     this.carteBancaire = true;
     this.buildFormCarte();
   }
 
   removeCard() {
     this.carteBancaire = false;
+    this.currentCompteCourant.carteBancaire = null;
+  }
+
+  removeCard3() {
+    this.currentCompteCourant.carteBancaire = null;
+  }
+
+  removeCard2() {
+    this.showConfirmationModalCarte().subscribe({
+      complete: () => this.removeCard3(),
+      error: () => { }
+    })
+  }
+
+  showConfirmationModalCarte(): Observable<any> {
+    return Observable.create(observerCarte => {
+      if (confirm('Êtes-vous certain de vouloir supprimer la carte ?')) {
+        observerCarte.complete();
+      } else {
+        observerCarte.error();
+      }
+    });
+  }
+
+  goBack() {
+    this.router.navigate(['conseiller/:idConseiller/clients']);
   }
 }

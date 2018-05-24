@@ -255,6 +255,10 @@ public class ProxiBanqueServiceImp
 			throw new ServiceException("Ce client n'a pas de compte courant");
 		} else {
 			client.setCompteCourant(compteCourantModif);
+			CompteCourant nouveauCompteCourant = client.getCompteCourant();
+			if (nouveauCompteCourant.getCarteBancaire() != null) {
+				compteCourantModif.getCarteBancaire().setNumeroCarte(genererNumero());
+			}
 			clientDao.save(client);
 			compteDAO.save(compteCourantModif);
 		}
