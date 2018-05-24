@@ -19,7 +19,6 @@ export class ClientListComponent implements OnInit {
   listeClients: Client[] = [];
 
   constructor(
-    @Inject(DOCUMENT) private document,
     private router: Router,
     private as: AuthService,
     private clientService: ClientService,
@@ -27,24 +26,14 @@ export class ClientListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const conseiller = JSON.parse(this.getCookie());
+    const conseiller = JSON.parse(this.as.getCookie());
     this.currentConseiller = conseiller;
     this.clientService.loadClientsParConseiller(conseiller.idConseiller).subscribe(clients => {
           this.listeClients = clients;
           this.isLoading = false;
+          console.log(conseiller);
     });
   }
-
-  getCookie(name: string = ''): string {
-    const allCookiesString = this.document.cookie;
-    const index1 = allCookiesString.indexOf(name);
-    if (index1 !== -1) {
-      let index2 = allCookiesString.indexOf(';', index1);
-      index2 = index2 === -1 ? allCookiesString.length : index2;
-      const cookieString = allCookiesString.slice(index1, index2);
-      return cookieString.split('=')[1];
-    }
-}
 
   deleteClient(id: number) {
     this.showConfirmationModal()

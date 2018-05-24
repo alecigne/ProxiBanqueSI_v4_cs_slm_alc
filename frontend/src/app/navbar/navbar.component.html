@@ -41,19 +41,15 @@
           </li>
         </ul>
 
-        <button type="button" class="btn btn-outline-danger navbar-right" style="margin-top:10px" aria-label="Left Align">
+        <ng-container *ngIf="currentConseiller; else deco">
+          <button (click)="doLogout()" class="btn btn-outline-danger navbar-right" style="margin-top:10px" aria-label="Left Align">Déconnexion</button>
+        </ng-container>
 
-          <ng-container *ngIf="currentConseiller;else deco">
-            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-            <a href="/login">Déconnexion</a>
-          </ng-container>
+        <ng-template #deco>
+          <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+          <a href="/login">Connexion</a>
+        </ng-template>
 
-          <ng-template #deco>
-            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-            <a href="/login">Connexion</a>
-          </ng-template>
-
-        </button>
       </div>
     </ng-container>
     <!--/.nav-collapse  navbar-right-->

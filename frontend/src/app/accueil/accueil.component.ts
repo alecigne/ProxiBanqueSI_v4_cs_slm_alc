@@ -25,14 +25,11 @@ export class AccueilComponent implements OnInit {
   image2 = '/assets/manger.jpg';
   image3 = '/assets/cochon.jpg';
 
-  constructor(private authService: AuthService) { }
+  constructor(private as: AuthService) { }
 
   ngOnInit() {
-    this.authService.getCurrentConseiller().subscribe(
-      conseiller => {
-        this.currentConseiller = conseiller;
-
-      });
+    const conseiller = JSON.parse(this.as.getCookie());
+    this.currentConseiller = conseiller;
   }
 
   // addSlide() {

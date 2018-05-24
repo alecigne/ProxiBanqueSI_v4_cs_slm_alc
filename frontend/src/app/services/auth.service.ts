@@ -31,10 +31,8 @@ export class AuthService {
   /**
    * Quick & dirty way to extract a specific cookie
    * from the cookie string.
-   *
-   * Cookie string format: "name=Vince; foo=bar"
    */
-  getCookie(name: string = ''): string {
+  getCookie(name: string = '') {
     const allCookiesString = this.document.cookie;
     const index1 = allCookiesString.indexOf(name);
     if (index1 !== -1) {

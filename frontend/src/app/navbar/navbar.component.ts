@@ -23,30 +23,20 @@ export class NavbarComponent implements OnInit {
   constructor(private as: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.as.getCurrentConseiller().subscribe(
-      conseiller => {
-        this.currentConseiller = conseiller;
-      });
+    this.currentConseiller = this.as.getCookie('conseiller');
   }
 
-  doLogin() {
-    this.as.signIn()
-      .subscribe(conseiller => {
-        if (conseiller) {
-          this.gotoClients();
-        }
-      });
-  }
-
-  doLogout() {
-    this.as.signOut()
-      .subscribe(() => {
-        alert('Vous êtes déconnecté(e).');
-      });
+  ngOnChanges() {
   }
 
   gotoClients(event?: Event) {
     if (event) { event.preventDefault(); }
     this.router.navigate(['/clients']);
   }
+
+  doLogout() {
+    this.as.deleteCookie('conseiller');
+    this.router.navigate(['/login']);
+  }
+
 }

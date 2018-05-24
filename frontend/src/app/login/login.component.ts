@@ -35,17 +35,14 @@ export class LoginComponent implements OnInit {
       .subscribe(conseiller => {
         this.currentConseiller = conseiller;
         this.as.setCookie('conseiller', JSON.stringify(this.currentConseiller));
-        // Vérification du cookie
-        console.log(this.as.getCookie('conseiller'));
-        this.gotoClients();
+        this.home();
       });
-    
-    // this.gotoClients();
+    this.home();
   }
 
-  gotoClients(event?: Event) {
+  home(event?: Event) {
     const id = this.currentConseiller.idConseiller;
-    this.router.navigate([`conseiller/${id}/clients`]);
+    this.router.navigate(['accueil']);
   }
 
 }
