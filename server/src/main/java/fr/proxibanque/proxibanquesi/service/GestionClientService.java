@@ -6,7 +6,7 @@ import fr.proxibanque.proxibanquesi.exceptions.ServiceException;
 import fr.proxibanque.proxibanquesi.model.Client;
 
 /**
- * Interface définissant les méthodes du service pour manipuler des Clients (CRUD)
+ * Interface définissant les méthodes du service pour manipuler des Clients (CRUD et attribution à un conseiller)
  * 
  * @author Clothilde Szymezak, Sandrine Le Mentec, Anthony Le Cigne
  *
@@ -41,10 +41,25 @@ public interface GestionClientService {
 	 */
 	List<Client> obtenirTousClients();
 	
+	/**
+	 * Récuperer la liste des clients d'un conseiller
+	 * @param idConseiller : Id du conseiller 
+	 * @return une List<Client> contenant les clients du conseiller 
+	 */
 	List<Client> obtenirClientsParIdConseiller(long idConseiller);
 	
+	/**
+	 * Modifie un client
+	 * @param client : objet client contenant les modifications à apporter
+	 * @throws ServiceException
+	 */
 	void modifierClient(Client client) throws ServiceException;
 	
+	/**
+	 * Supprime un client de la base
+	 * @param idClient : Id du client à supprimer
+	 * @throws ServiceException : renvoie une exception si le client n'existe pas dans la base de données
+	 */
 	void supprimerClient(long idClient) throws ServiceException;
 	
 }
