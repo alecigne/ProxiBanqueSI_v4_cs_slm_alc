@@ -35,7 +35,7 @@ export class VirementComponent implements OnInit {
   }
 
   faireVirement() {
-    this.service.virement(this.compteArrivee, this.compteDepart, this.montant);
+    this.service.virement(this.compteDepart,this.compteArrivee, this.montant);
     alert('Le virement a été enregistré avec succès');
     this.router.navigate([`../operations`]);
   }
