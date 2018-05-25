@@ -4,7 +4,12 @@
 
 <ng-template #showUI>
   <ng-template #noClientFound>
-    <h2>Vous n'avez pas de client...</h2>
+    <h2 class="text-center">Vous n'avez pas de client...</h2>
+    <p>
+      <a [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'client','nouveauclient']" class="btn btn-default">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau Client
+      </a>
+    </p>
   </ng-template>
 
   <div class="row" *ngIf="listeClients.length !== 0; else noClientFound">

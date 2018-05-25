@@ -90,4 +90,8 @@ export class ClientFormComponent implements OnInit {
       && (nom !== '' && prenom !== '' && email !== '')
       && (nom.length >= this.minLengthNom);
   }
+
+  goBack() {
+    this.router.navigate(['conseiller/:idConseiller/clients']);
+  }
 }
