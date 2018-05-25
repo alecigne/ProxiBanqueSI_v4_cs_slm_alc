@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { CompteService } from '../compte.service';
 import { Compte, CompteCourant } from '../compte';
@@ -57,7 +57,7 @@ export class CompteCourantFormComponent implements OnInit {
 
   buildForm() {
     this.compteCourantForm = this.formBuilder.group({
-      solde: [this.currentCompteCourant.solde],
+      solde: [this.currentCompteCourant.solde, Validators.pattern('^[0-9]+\\.?[0-9]*$')],
       decouvertAutorise: [this.currentCompteCourant.decouvertAutorise],
     });
   }

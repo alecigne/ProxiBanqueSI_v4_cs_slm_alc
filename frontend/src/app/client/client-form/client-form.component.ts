@@ -53,9 +53,9 @@ export class ClientFormComponent implements OnInit {
       prenom: [this.currentClient.prenom, Validators.required],
       email: [this.currentClient.email, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}')]],
       adresse: [this.currentClient.adresse],
-      codePostal: [this.currentClient.codePostal, [Validators.maxLength(this.lengthCodePostal), Validators.minLength(this.lengthCodePostal)]],
+      codePostal: [this.currentClient.codePostal, [Validators.pattern('[0-9]*'), Validators.maxLength(this.lengthCodePostal), Validators.minLength(this.lengthCodePostal)]],
       ville: [this.currentClient.ville],
-      telephone: [this.currentClient.telephone, [Validators.maxLength(this.lengthTelephone), Validators.minLength(this.lengthTelephone)]],
+      telephone: [this.currentClient.telephone, [Validators.pattern('[0-9]*'), Validators.maxLength(this.lengthTelephone), Validators.minLength(this.lengthTelephone)]],
       conseiller: []
     });
 
