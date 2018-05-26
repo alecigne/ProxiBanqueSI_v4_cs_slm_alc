@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-audit',
-  templateUrl: './audit.component.html',
-  styleUrls: ['./audit.component.css']
+  templateUrl: './audit.component.html'
 })
 export class AuditComponent implements OnInit {
 
@@ -14,18 +13,20 @@ export class AuditComponent implements OnInit {
   listeClients: Client[];
 
   constructor(
-    private cs: ClientService,
+    private clientService: ClientService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.cs.auditAgence().subscribe(
+    this.clientService.auditAgence().subscribe(
       clients => {
         this.listeClients = clients;
         this.isLoading = false;
       });
   }
+
   goBack() {
     this.router.navigate(['operations']);
   }
+
 }

@@ -7,8 +7,7 @@ import { Compte } from '../../compte/compte';
 
 @Component({
   selector: 'app-compte-selection',
-  templateUrl: './compte-selection.component.html',
-  styleUrls: ['./compte-selection.component.css']
+  templateUrl: './compte-selection.component.html'
 })
 export class CompteSelectionComponent implements OnInit {
   @Input() departOuArrivee: string;
@@ -21,7 +20,9 @@ export class CompteSelectionComponent implements OnInit {
   selectedAccount
   selectedClient
 
-  constructor(private service: ClientService, private as: AuthService) { }
+  constructor(
+    private service: ClientService,
+    private as: AuthService) { }
 
   ngOnInit() {
     if (this.departOuArrivee !== 'à créditer') {
@@ -36,7 +37,8 @@ export class CompteSelectionComponent implements OnInit {
     } else {
       this.service.loadClients().subscribe(
         listeClients => {
-          this.clients = listeClients;}
+          this.clients = listeClients;
+        }
       );
     }
   }

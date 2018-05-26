@@ -15,22 +15,22 @@ export class NavbarComponent implements OnInit {
   navItems = [
     { label: 'Accueil', path: 'accueil' },
     { label: 'Gestion Client', path: 'conseiller/:idConseiller/clients' },
-    { label: 'Opérations', path: 'operations' },
-    // { label: 'Gestion Conseiller', path: 'conseillers' },
-    // { label: 'Transactions', path: 'transactions' },
+    { label: 'Opérations', path: 'operations' }
   ];
 
-  constructor(private as: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.as.getCurrentConseiller().subscribe(
+    this.authService.getCurrentConseiller().subscribe(
       conseiller => {
         this.currentConseiller = conseiller;
       });
   }
 
   doLogin() {
-    this.as.signIn()
+    this.authService.signIn()
       .subscribe(conseiller => {
         if (conseiller) {
           this.gotoClients();
@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   }
 
   doLogout() {
-    this.as.signOut()
+    this.authService.signOut()
       .subscribe(() => {
         alert('Vous êtes déconnecté(e).');
       });

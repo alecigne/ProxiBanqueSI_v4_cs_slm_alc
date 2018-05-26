@@ -11,7 +11,7 @@ export class ChartUtils {
       type: 'pie'
     },
     title: {
-      text: 'repartition des montants par comptes'
+      text: 'Répartition des capitaux par type de comptes'
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -28,8 +28,7 @@ export class ChartUtils {
     },
   }
 
-
-  public static configPieChart(parts: PiePart[]){
+  public static configPieChart(parts: PiePart[]) {
     return Object.assign(
       {},
       ChartUtils.PIE_CHART_CONFIG_BASE,
@@ -41,19 +40,4 @@ export class ChartUtils {
         }]
       });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

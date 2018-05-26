@@ -6,12 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientService } from './client.service';
 import { ClientFormComponent } from './client-form/client-form.component';
 import { ClientListComponent } from './client-list/client-list.component';
+import { VisuClientComponent } from '../visu-client/visu-client.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { FieldComponent } from '../shared/field/field.component';
 
 import { ChartDemoComponent } from '../demo/chart-demo/chart-demo.component';
-import { VisuClientComponent } from '../visu-client/visu-client.component';
+
 import { LoadingComponent } from '../shared/loading/loading.component';
 
 const routes: Routes = [
@@ -31,7 +32,7 @@ const routes: Routes = [
   ],
   declarations: [
     ClientListComponent,
-    ClientFormComponent,
+    ClientFormComponent
   ],
   providers: [
     ClientService

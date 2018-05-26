@@ -15,8 +15,8 @@ import { CreditComponent } from './credit/credit.component';
 
 const routes: Routes = [
   { path: 'virement', component: VirementComponent },
-  { path: 'operations/audit', component: AuditComponent},
-  { path: 'operations/crediter', component: CrediterCompteComponent},
+  { path: 'operations/audit', component: AuditComponent },
+  { path: 'operations/crediter', component: CrediterCompteComponent },
   { path: 'operations', component: MenuComponent },
   { path: 'credit', component: CreditComponent }
 ]
@@ -27,20 +27,19 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    SharedModule,
-    
+    SharedModule
   ],
   declarations: [
     VirementComponent,
     CompteSelectionComponent,
-    TransfertComponent, 
+    TransfertComponent,
     CompteSelectionComponent, MenuComponent,
     MenuComponent,
     AuditComponent,
     CrediterCompteComponent,
     CreditComponent
-   ],
-  providers:[
+  ],
+  providers: [
     OperationsService
   ]
 })

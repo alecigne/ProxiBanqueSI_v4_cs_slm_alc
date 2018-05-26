@@ -3,31 +3,29 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-transfert',
-  templateUrl: './transfert.component.html',
-  styleUrls: ['./transfert.component.css']
+  templateUrl: './transfert.component.html'
 })
 export class TransfertComponent implements OnInit {
 
-  @Output() montant:EventEmitter<number> = new EventEmitter<number>();
-  montantForm:FormGroup;
-  transfert:number;
-  formControle:FormControl;
+  @Output() montant: EventEmitter<number> = new EventEmitter<number>();
+  montantForm: FormGroup;
+  transfert: number;
+  formControle: FormControl;
 
-
-  constructor(private formBuilder: FormBuilder,) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
   }
-  
-  buidlForm(){
+
+  buidlForm() {
     this.montantForm = this.formBuilder.group({
-      montant: [] })
+      montant: []
+    })
   }
 
-  getMontant(){
+  getMontant() {
     this.transfert = this.montantForm.value.montant;
     this.montant.emit(this.transfert);
   }
-
 
 }

@@ -31,13 +31,9 @@ export class ChartDemoComponent implements OnInit {
   pie3: PiePart;
   pie4: PiePart;
 
-
-
-
-  constructor(private clientService: ClientService, ) { }
+  constructor(private clientService: ClientService) { }
 
   ngOnInit() {
-
     this.clientService.loadClients().subscribe(
       listeClients => {
         this.clients = listeClients;
@@ -47,13 +43,9 @@ export class ChartDemoComponent implements OnInit {
         ));
       }
     )
-    console.log(this.pies)
-
-
   }
 
   calculRepartition(): PiePart[] {
-
     for (let client of this.clients) {
       if (client.compteCourant) {
         if (client.compteCourant.solde >= 0) {
@@ -74,7 +66,6 @@ export class ChartDemoComponent implements OnInit {
         }
       }
     }
-
     this.pourCentCC = 100 * this.montantCC / this.total;
     this.pourCentCE = 100 * this.montantCE / this.total;
     this.pourCentCCNegatif = 100 * this.montantCCNegatif / this.total;
@@ -88,5 +79,4 @@ export class ChartDemoComponent implements OnInit {
 
     return this.pies;
   }
-
 }

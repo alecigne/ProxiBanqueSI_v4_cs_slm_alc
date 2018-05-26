@@ -15,9 +15,8 @@ import { AuthService } from '../../services/auth.service';
 export class ClientFormComponent implements OnInit {
 
   currentClient: Client;
-  currentConseiller: Conseiller
   clientForm: FormGroup;
-  conseillerForm: FormGroup;
+
   //longueur minimum
   minLengthNom: number = 2;
   lengthCodePostal: number = 5;
@@ -61,14 +60,11 @@ export class ClientFormComponent implements OnInit {
 
   }
 
-
   saveClient() {
     const client: Client = Object.assign(this.currentClient, this.clientForm.value);
-    const conseiller: Conseiller = this.conseillerForm.value;
     this.clientService.saveClient(client).subscribe(() => {
       alert('Le client a été enregistré avec succès');
       this.router.navigate([`../../clients/`]);
-      // this.router.navigate([`client/${client.id}/nouveaucompte`]);
     });
   }
 

@@ -16,12 +16,8 @@ export class CompteCourantFormComponent implements OnInit {
   compteCourantForm: FormGroup;
   carteBancaireForm: FormGroup;
   currentCompteCourant: CompteCourant;
-  currentClient: Client;
-  idClient: number;
   numeroCompte: number;
-  carte = null;
   carteBancaire: boolean = false;
-  hasCard: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,7 +28,6 @@ export class CompteCourantFormComponent implements OnInit {
   ngOnInit() {
     const numCompte = +this.route.snapshot.params['numCompte'];
     this.numeroCompte = numCompte;
-    console.log(this.numeroCompte);
     if (numCompte) {   // ÉDITION
       this.compteService.loadCompte(numCompte).subscribe(compteCourant => {
         this.currentCompteCourant = compteCourant;
@@ -48,11 +43,8 @@ export class CompteCourantFormComponent implements OnInit {
       this.currentCompteCourant = new CompteCourant({ decouvertAutorise: 1000 });
       this.currentCompteCourant.solde = 0;
       this.buildForm();
-      // if (this.currentCompteCourant.carteBancaire != null) {
       this.buildFormCarte2();
-      // }
     }
-
   }
 
   buildForm() {

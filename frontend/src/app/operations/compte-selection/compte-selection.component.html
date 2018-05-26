@@ -2,15 +2,15 @@
   <legend>Compte {{departOuArrivee}}</legend>
   <div>
     <div class="row bg-white z-depth-2">
-      <div class="small-2">
 
+      <div class="small-2">
         Client :
         <select [(ngModel)]="selectedClient" (change)="emit()">
           <option value="">Clients</option>
           <option *ngFor="let client of clients" [value]="client.idClient">{{client.prenom}}, {{client.nom}}, {{client.email}}</option>
         </select>
-
       </div>
+
       <br>
       <div *ngIf="selectedClient" class="small-2">
         Compte :
@@ -20,6 +20,7 @@
           <option [value]="currentClient()?.compteEpargne?.numeroCompte">Compte Epargne : {{currentClient()?.compteEpargne?.numeroCompte}}</option>
         </select>
       </div>
+
     </div>
   </div>
 </fieldset>

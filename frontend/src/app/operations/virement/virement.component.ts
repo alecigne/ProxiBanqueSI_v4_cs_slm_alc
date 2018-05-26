@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-virement',
-  templateUrl: './virement.component.html',
-  styleUrls: ['./virement.component.css']
+  templateUrl: './virement.component.html'
 })
 export class VirementComponent implements OnInit {
 
@@ -17,11 +16,13 @@ export class VirementComponent implements OnInit {
   compteArrivee: number;
   public montant: number = 0;
 
-  constructor(private service: OperationsService, private formBuilder: FormBuilder, private router: Router, ) { }
+  constructor(
+    private service: OperationsService,
+    private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
   }
-
 
   buidlForm() {
     this.montantForm = this.formBuilder.group({
@@ -29,13 +30,12 @@ export class VirementComponent implements OnInit {
     })
   }
 
-
   public validation(): boolean {
     return this.compteDepart !== undefined && this.compteArrivee !== undefined && this.montant > 0;
   }
 
   faireVirement() {
-    this.service.virement(this.compteDepart,this.compteArrivee, this.montant);
+    this.service.virement(this.compteDepart, this.compteArrivee, this.montant);
     alert('Le virement a été enregistré avec succès');
     this.router.navigate([`../operations`]);
   }

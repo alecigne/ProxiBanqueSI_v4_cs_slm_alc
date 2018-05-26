@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crediter-compte',
-  templateUrl: './crediter-compte.component.html',
-  styleUrls: ['./crediter-compte.component.css']
+  templateUrl: './crediter-compte.component.html'
 })
 export class CrediterCompteComponent implements OnInit {
 
@@ -15,7 +14,10 @@ export class CrediterCompteComponent implements OnInit {
   compteCredite: number;
   montant: number;
 
-  constructor(private service: OperationsService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(
+    private service: OperationsService,
+    private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -25,11 +27,6 @@ export class CrediterCompteComponent implements OnInit {
       montant: []
     })
   }
-
-  // getMontant() {
-  //   this.transfert = this.montantForm.value.montant;
-  //   //this.montant.emit(this.transfert);
-  // }
 
   public validation(): boolean {
     return this.compteCredite !== undefined && this.montant > 0;
@@ -44,7 +41,5 @@ export class CrediterCompteComponent implements OnInit {
   goBack() {
     this.router.navigate(['operations']);
   }
-
-
 
 }

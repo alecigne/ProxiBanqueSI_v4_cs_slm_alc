@@ -22,7 +22,6 @@ export class CompteCourant extends Compte {
         decouvertAutorise?: number;
         carteBancaire?: CarteBancaire;
     } = {}) {
-
         super();
         this.decouvertAutorise = options.decouvertAutorise || null;
         this.carteBancaire = options.carteBancaire || null;

@@ -17,7 +17,9 @@ export class AuthService {
   private conseillerObs = new ReplaySubject<Conseiller>(1);
   private isLoggedInObs = new ReplaySubject<boolean>(1);
 
-  constructor(@Inject(DOCUMENT) private document, private cs: ConseillerService) {
+  constructor(
+    @Inject(DOCUMENT) private document,
+    private conseillerService: ConseillerService) {
     this.checkCurrentConseiller();
   }
 
@@ -29,9 +31,9 @@ export class AuthService {
     return this.isLoggedInObs.asObservable();
   }
 
-   /**
-   * Vérifier si un conseiller est présent (cookie).
-   */
+  /**
+  * Vérifier si un conseiller est présent (cookie).
+  */
   checkCurrentConseiller() {
     let conseiller;
     const conseillerCookie = this.getCookie('conseiller');
@@ -44,11 +46,6 @@ export class AuthService {
   }
 
   signIn(): Observable<Conseiller> {
-    // let conseillerData = {};
-    // this.cs.loadConseillerParAuth("jdurand1", "1234").subscribe(data => {
-    //   conseillerData = data;
-    //   this.setCookie('conseiller', JSON.stringify(conseillerData));
-    // });
     const conseillerData = {
       idConseiller: 2,
       nom: 'Durand',
@@ -58,12 +55,10 @@ export class AuthService {
     };
     this.setCookie('conseiller', JSON.stringify(conseillerData));
     this.checkCurrentConseiller();
-    // this.checkCurrentConseiller();
     return Observable.of(new Conseiller(conseillerData));
   }
 
   signOut(): Observable<any> {
-    // console.log('deleteCookie');
     this.deleteCookie('conseiller');
     this.checkCurrentConseiller();
     return Observable.of(undefined);

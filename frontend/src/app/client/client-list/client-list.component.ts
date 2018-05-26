@@ -18,13 +18,13 @@ export class ClientListComponent implements OnInit {
   listeClients: Client[] = [];
 
   constructor(private router: Router,
-    private as: AuthService,
+    private authService: AuthService,
     private clientService: ClientService,
     private compteService: CompteService
   ) { }
 
   ngOnInit() {
-    this.as.getCurrentConseiller().subscribe(
+    this.authService.getCurrentConseiller().subscribe(
       conseiller => {
         this.currentConseiller = conseiller;
         this.clientService.loadClientsParConseiller(conseiller.idConseiller).subscribe(clients => {
@@ -44,7 +44,6 @@ export class ClientListComponent implements OnInit {
     return false;
   }
 
-
   deleteCompteCourant(idClient: number) {
     this.showConfirmationModalCompte()
       .subscribe({
@@ -52,9 +51,7 @@ export class ClientListComponent implements OnInit {
           .subscribe(() => this.clientService.loadClientsParConseiller(this.currentConseiller.idConseiller)
             .subscribe(clients => { this.listeClients = clients; })),
         error: () => { }
-
       })
-
   }
 
   deleteCompteEpargne(idClient: number) {
@@ -64,7 +61,6 @@ export class ClientListComponent implements OnInit {
           .subscribe(clients => { this.listeClients = clients; })),
         error: () => { }
       })
-
   }
 
   showConfirmationModal(): Observable<any> {

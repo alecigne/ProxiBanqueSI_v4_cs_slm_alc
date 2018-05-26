@@ -27,16 +27,17 @@
   <app-field label="Téléphone" [control]="clientForm.get('telephone')">
     <input formControlName="telephone" type="text" class="form-control" placeholder="Téléphone">
   </app-field>
+
   <ng-container *ngIf="idClient;else creation">
     <button type="submit" class="btn btn-primary" [disabled]="!validation()">
       <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Modifier</button>
     <button class="btn btn-default" (click)="goBack()">Annuler</button>
-
   </ng-container>
+
   <ng-template #creation>
     <button type="submit" class="btn btn-primary" [disabled]="!validation()">
       <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Créer</button>
     <button class="btn btn-default" (click)="goBack()">Annuler</button>
-
   </ng-template>
+  
 </form>

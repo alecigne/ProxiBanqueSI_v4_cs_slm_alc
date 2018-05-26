@@ -9,9 +9,9 @@ import { AuthService } from '../services/auth.service';
 export class AccueilComponent implements OnInit {
 
   items = [
-    { image: '/assets/ethique.jpg' },
-    { image: '/assets/ethique.jpg' },
-    { image: '/assets/ethique.jpg' },
+    { image: '/assets/banque-demain.jpg' },
+    { image: '/assets/banque-croissance.jpg' },
+    { image: '/assets/banque-travaux.jpg' },
   ]
 
   currentConseiller: Conseiller;
@@ -31,7 +31,6 @@ export class AccueilComponent implements OnInit {
     this.authService.getCurrentConseiller().subscribe(
       conseiller => {
         this.currentConseiller = conseiller;
-
       });
   }
 

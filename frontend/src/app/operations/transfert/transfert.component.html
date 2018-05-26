@@ -1,9 +1,11 @@
 <div class="col-sm-4">
-    <form [formGroup]="montantForm" (ngChange)="getMontant" novalidate>
 
-        <app-field label="Montant" >
-          <input formControlName="montant" type="text" class="form-control" placeholder="Montant">
-        </app-field>
+  <form [formGroup]="montantForm" (ngChange)="getMontant" novalidate>
 
-      </form>
+    <app-field label="Montant">
+      <input formControlName="montant" type="text" class="form-control" placeholder="Montant">
+    </app-field>
+
+  </form>
+
 </div>

@@ -10,7 +10,10 @@ import { ClientService } from '../../client/client.service';
 export class ClientItemComponent implements OnInit {
   currentClient: Client;
 
-  constructor(private aRoute: ActivatedRoute, private router: Router, private clientService: ClientService) { }
+  constructor(
+    private aRoute: ActivatedRoute,
+    private router: Router,
+    private clientService: ClientService) { }
 
   ngOnInit() {
     const clientId = +this.aRoute.snapshot.params['clientId'];

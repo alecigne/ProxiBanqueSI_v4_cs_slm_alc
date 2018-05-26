@@ -1,10 +1,13 @@
 <button class="btn btn-default" (click)="goBack()">Retour</button>
-<ng-template #noclient><h1 class="text-center">Aucun client à surveiller</h1></ng-template>
+<ng-template #noclient>
+  <h1 class="text-center">Aucun client à surveiller</h1>
+</ng-template>
 
 <ng-container *ngIf="listeClients.length!=0; else noclient">
   <h1 class="text-center">Clients à surveiller : {{listeClients.length}}</h1>
 
   <table class="table table-striped text-center">
+
     <thead>
       <tr>
         <th class="text-center">Nom</th>
@@ -16,6 +19,7 @@
         <th class="text-center">Bilan net</th>
       </tr>
     </thead>
+
     <tbody>
       <tr *ngFor="let client of listeClients">
         <td>{{ client.nom }}</td>
@@ -27,5 +31,6 @@
         <td>{{ client.compteEpargne.solde + client.compteCourant.solde }} €</td>
       </tr>
     </tbody>
+
   </table>
 </ng-container>

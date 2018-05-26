@@ -22,6 +22,9 @@ export class ClientService {
       .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));
   }
 
+  /**
+  * Affiche la liste des clients par conseiller.
+  */
   loadClientsParConseiller(idConseiller: number): Observable<Client[]> {
     return this.http.get<Client[]>(this.baseURL + 'client/' + idConseiller + "/all")
       .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));
@@ -44,12 +47,14 @@ export class ClientService {
     return this.http.request(method, url, { body: client });
   }
 
+  /**
+  * Sauvegarde le client du formulaire (nouveau ou édité selon l'url) et l'attribut au conseiller loggé.
+  */
   saveClientAvecConseiller(client: Client, idConseiller: number): Observable<any> {
     const url = `${this.baseURL}conseiller/${idConseiller}/client/` + (client.idClient ? `${client.idClient}` : '');
     const method = client.idClient ? 'put' : 'post';
     return this.http.request(method, url, { body: client });
   }
-
 
   /**
   * Supprime le client sélectionné.
@@ -58,6 +63,9 @@ export class ClientService {
     return this.http.delete(`${this.baseURL}client/${clientId}`);
   }
 
+  /**
+  * Audit de tous les clients de l'agence.
+  */
   auditAgence(): Observable<Client[]> {
     return this.http.get<Client[]>(this.baseURL + 'audit')
       .map((clients: any[]) => clients.map(clientdata => new Client(clientdata)));

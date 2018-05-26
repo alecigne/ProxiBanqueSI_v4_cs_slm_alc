@@ -12,7 +12,6 @@ export class VisuClientComponent implements OnInit {
   ngOnInit() {
   }
 
-
   goBack() {
     this.router.navigate(['conseiller/:idConseiller/clients']);
   }

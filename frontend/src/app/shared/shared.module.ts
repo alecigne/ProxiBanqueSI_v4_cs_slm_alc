@@ -13,7 +13,7 @@ import { LoadingComponent } from './loading/loading.component';
   ],
   declarations: [
     FieldComponent,
-    LoadingComponent,
+    LoadingComponent
   ]
 })
 export class SharedModule { }

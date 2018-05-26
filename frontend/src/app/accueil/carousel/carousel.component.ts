@@ -20,8 +20,8 @@ export class CarouselItemElement {
       </ul>
     </section>
     <div *ngIf="showControls" style="margin-top: 1em">
-          <button (click)="prev()" class="btn btn-default">Prev</button>
-      <button (click)="next()" class="btn btn-default">Next</button>
+          <button (click)="prev()" class="btn btn-default"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button> 
+      <button (click)="next()" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
     </div>
   `,
   styles: [`

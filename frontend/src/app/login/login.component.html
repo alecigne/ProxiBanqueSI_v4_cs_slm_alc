@@ -1,19 +1,21 @@
-<img src="../../assets/banner.jpeg">
+<div class="container text-center">
 
-<div class="container">
+  <img src="../../assets/banner.jpeg">
 
-  <div class="col-md-4 col-md-offset-4">
+  <div class="col-md-4 col-md-offset-4 well">
 
     <p *ngIf="isLoading; else showUI">Chargement en cours...</p>
 
     <ng-template #showUI>
+
       <div *ngIf="currentConseiller">
-        <p>Vous êtes identifié en tant que {{ currentConseiller.prenom }} {{ currentConseiller.nom }}.</p>
+        <p></p>
+        <p>Vous êtes identifié en tant que {{ currentConseiller.prenom }} {{ currentConseiller.nom }}</p>
         <p>
-          <!-- <button class="btn btn-primary" (click)="gotoClients($event)">Liste des clients</button> -->
           <button class="btn btn-default" (click)="doLogout()">Se déconnecter</button>
         </p>
       </div>
+
       <div *ngIf="!currentConseiller">
         <form novalidate [formGroup]="loginForm" (ngSubmit)="doLogin()">
 
@@ -29,6 +31,7 @@
 
         </form>
       </div>
+
     </ng-template>
 
   </div>

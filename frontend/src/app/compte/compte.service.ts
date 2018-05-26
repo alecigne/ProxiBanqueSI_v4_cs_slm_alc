@@ -10,38 +10,46 @@ import { Client } from '../client/client';
 @Injectable()
 export class CompteService {
 
-  constructor(private http: HttpClient, @Inject('BACKEND_URL') private baseUrl: string, private clientService: ClientService) { }
+  constructor(
+    private http: HttpClient,
+    @Inject('BACKEND_URL') private baseUrl: string,
+    private clientService: ClientService) { }
 
-  loadCompteCourant(numCompte: number): Observable<CompteCourant> {
-    return this.http.get(`${this.baseUrl}CompteCourant/${numCompte}`)
-      .map(ccData => new CompteCourant(ccData));
-  }
-
-  loadCompteEpargne(numCompte: number): Observable<CompteEpargne> {
-    return this.http.get(`${this.baseUrl}CompteEpargne/${numCompte}`)
-      .map(ceData => new CompteEpargne(ceData));
-  }
-
-  loadCompte(numCompte:number):Observable<any>{
+  /**
+  * Affiche un compte par son numéro.
+  */
+  loadCompte(numCompte: number): Observable<any> {
     return this.http.get(`${this.baseUrl}compte/${numCompte}`)
   }
 
+  /**
+  * Sauvegarde le compte courant du formulaire.
+  */
   saveCompteCourant(idClient: number, compteCourant: CompteCourant): Observable<any> {
     const url = `${this.baseUrl}client/${idClient}/CompteCourant` + (compteCourant.numCompte ? `/${compteCourant.numCompte}` : '');
     const method = compteCourant.numCompte ? 'put' : 'post';
     return this.http.request(method, url, { body: compteCourant });
   }
 
+  /**
+  * Sauvegarde le compte épargne du formulaire.
+  */
   saveCompteEpargne(idClient: number, compteEpargne: CompteEpargne): Observable<any> {
     const url = `${this.baseUrl}client/${idClient}/CompteEpargne` + (compteEpargne.numCompte ? `/${compteEpargne.numCompte}` : '');
     const method = compteEpargne.numCompte ? 'put' : 'post';
     return this.http.request(method, url, { body: compteEpargne });
   }
 
+  /**
+  * Supprime le compte courant sélectionné.
+  */
   deleteCompteCourant(idClient: number) {
     return this.http.delete(`${this.baseUrl}client/${idClient}/CompteCourant`);
   }
 
+  /**
+  * Supprime le compte épargne sélectionné.
+  */
   deleteCompteEpargne(idClient: number) {
     return this.http.delete(`${this.baseUrl}client/${idClient}/CompteEpargne`);
   }

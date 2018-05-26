@@ -13,7 +13,10 @@ export class CeItemComponent implements OnInit {
   currentClient: Client;
   currentCompteEpargne: CompteEpargne;
 
-  constructor(private aRoute: ActivatedRoute, private router: Router, private clientService: ClientService) { }
+  constructor(
+    private aRoute: ActivatedRoute,
+    private router: Router,
+    private clientService: ClientService) { }
 
   ngOnInit() {
     const clientId = +this.aRoute.snapshot.params['clientId'];

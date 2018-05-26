@@ -6,20 +6,22 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class OperationsService {
 
-  constructor(private http: HttpClient,
-  @Inject('BACKEND_URL') private baseURL: string
-) { }
+  constructor(
+    private http: HttpClient,
+    @Inject('BACKEND_URL') private baseURL: string
+  ) { }
 
-  virement(numCompteDepart, numCompteArrivee, montant):Promise<any>{
+  virement(numCompteDepart, numCompteArrivee, montant): Promise<any> {
     return this.http.put(this.baseURL + 'virement',
-    { numCompteDepart:+numCompteDepart,
-       numCompteArrivee:+numCompteArrivee,
-       montantTransfere:montant} ).toPromise();
+      {
+        numCompteDepart: +numCompteDepart,
+        numCompteArrivee: +numCompteArrivee,
+        montantTransfere: montant
+      }).toPromise();
   }
 
-  CrediterCompte(numCompte,montant):Promise<any>{
-    return this.http.put(this.baseURL+'creditercompte/'+numCompte+'/'+montant, {}).toPromise();
-
+  CrediterCompte(numCompte, montant): Promise<any> {
+    return this.http.put(this.baseURL + 'creditercompte/' + numCompte + '/' + montant, {}).toPromise();
   }
 
   credit(montant: number, duree: number, taux: number): Observable<number> {

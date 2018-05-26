@@ -1,5 +1,6 @@
 <fieldset>
   <legend>Compte Epargne</legend>
+
   <form novalidate *ngIf="compteEpargneForm" [formGroup]="compteEpargneForm" (ngSubmit)="saveCompteEpargne()">
     <app-field label="Solde" [control]="compteEpargneForm.get('solde')">
       <input formControlName="solde" type="text" class="form-control" placeholder="Solde">
@@ -10,8 +11,8 @@
     </app-field>
 
     <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Editer</button>
-      <button class="btn btn-default" (click)="goBack()">Annuler</button>
+      <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Editer</button>
+    <button class="btn btn-default" (click)="goBack()">Annuler</button>
 
   </form>
 </fieldset>

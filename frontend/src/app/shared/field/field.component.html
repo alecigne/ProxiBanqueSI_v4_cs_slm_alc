@@ -1,7 +1,11 @@
 <div class="form-group" [class.has-error]="control.dirty && control.invalid">
+
   <label class="control-label">{{ label }}</label>
+
   <ng-content></ng-content>
+
   <div class="help-block" *ngIf="control.dirty && control.invalid">
+    
     <div *ngIf="control.errors['required']">
       Ce champ est obligatoire.
     </div>
@@ -22,8 +26,8 @@
     </div>
 
     <div *ngIf="control.errors['pattern']">
-        Ce format de donnée n'est pas valide.
-      </div>
+      Ce format de donnée n'est pas valide.
+    </div>
 
   </div>
 </div>
