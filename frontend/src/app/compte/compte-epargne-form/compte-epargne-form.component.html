@@ -2,11 +2,11 @@
   <legend>Compte Epargne</legend>
 
   <form novalidate *ngIf="compteEpargneForm" [formGroup]="compteEpargneForm" (ngSubmit)="saveCompteEpargne()">
-    <app-field label="Solde" [control]="compteEpargneForm.get('solde')">
+    <app-field label="Solde (€)" [control]="compteEpargneForm.get('solde')">
       <input formControlName="solde" type="text" class="form-control" placeholder="Solde">
     </app-field>
 
-    <app-field label="Taux de rémunération" [control]="compteEpargneForm.get('tauxRemun')">
+    <app-field label="Taux de rémunération (%)" [control]="compteEpargneForm.get('tauxRemun')">
       <input formControlName="tauxRemun" type="text" class="form-control" placeholder="Taux de rémunération">
     </app-field>
 

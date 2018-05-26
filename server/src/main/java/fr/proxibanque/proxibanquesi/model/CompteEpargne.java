@@ -23,7 +23,7 @@ public class CompteEpargne extends Compte {
 	 * Taux de rémunération (négociable)
 	 */
 	@Column(name = "taux_remun")
-	private double tauxRemun=0.03;
+	private double tauxRemun=3;
 	
 	// *** CONSTRUCTEURS *** 
 	

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CompteService } from '../compte.service';
 import { CompteEpargne } from '../compte';
@@ -27,7 +27,7 @@ export class CompteEpargneFormComponent implements OnInit {
         this.buildForm();
       });
     } else {   // CRÉATION
-      this.currentCompteEpargne = new CompteEpargne({ tauxRemun: 0.03 });
+      this.currentCompteEpargne = new CompteEpargne({ tauxRemun: 3 });
       this.currentCompteEpargne.solde = 0;
       this.buildForm();
     }
@@ -36,7 +36,7 @@ export class CompteEpargneFormComponent implements OnInit {
   buildForm() {
     this.compteEpargneForm = this.formBuilder.group({
       solde: [this.currentCompteEpargne.solde],
-      tauxRemun: [this.currentCompteEpargne.tauxRemun]
+      tauxRemun: [this.currentCompteEpargne.tauxRemun, [Validators.max(100), Validators.pattern('^[0-9]+\\.?[0-9]*$')]]
     });
   }
 

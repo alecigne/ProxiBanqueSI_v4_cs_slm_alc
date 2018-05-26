@@ -2,11 +2,11 @@
   <legend>Compte Courant</legend>
 
   <form novalidate *ngIf="compteCourantForm" [formGroup]="compteCourantForm" (ngSubmit)="saveCompteCourant()">
-    <app-field label="Solde" [control]="compteCourantForm.get('solde')">
+    <app-field label="Solde (€)" [control]="compteCourantForm.get('solde')">
       <input formControlName="solde" type="text" class="form-control" placeholder="Solde">
     </app-field>
 
-    <app-field label="Découvert Autorisé" [control]="compteCourantForm.get('decouvertAutorise')">
+    <app-field label="Découvert Autorisé (€)" [control]="compteCourantForm.get('decouvertAutorise')">
       <input formControlName="decouvertAutorise" type="text" class="form-control" placeholder="Découvert Autorisé">
     </app-field>
 

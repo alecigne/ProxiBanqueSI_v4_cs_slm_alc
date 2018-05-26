@@ -29,7 +29,7 @@ export class CompteCourant extends Compte {
 }
 
 export class CompteEpargne extends Compte {
-    tauxRemun: number = 0.03;
+    tauxRemun: number = 3;
 
     constructor(options: {
         tauxRemun?: number;
