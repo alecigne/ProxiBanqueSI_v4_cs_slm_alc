@@ -87,5 +87,17 @@ export class ClientListComponent implements OnInit {
     });
   }
 
+  triAlphabetique(a, b) {
+    if (a.nom < b.nom) {
+      return -1;
+    } else if (a.nom == b.nom) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
 
+  trierClients() {
+    this.listeClients.sort(this.triAlphabetique)
+  }
 }

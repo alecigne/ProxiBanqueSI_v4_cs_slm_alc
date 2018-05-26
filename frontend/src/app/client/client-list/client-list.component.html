@@ -24,11 +24,17 @@
       </p>
     </ng-container>
 
+
+
     <br>
     <table class="table table-striped text-center">
       <thead>
         <tr>
-          <th class="text-center">Nom</th>
+          <th class="text-center">Nom
+            <button class="btn btn-default btn-sm" [routerLink]="['../../../conseiller',currentConseiller.idConseiller,'clients']" (click)="trierClients()">
+              <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+            </button>
+          </th>
           <th class="text-center">Prenom</th>
           <th class="text-center">Email</th>
           <th class="text-center">Actions</th>
@@ -45,7 +51,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let client of listeClients">
-          <td>{{ client.nom }}</td>
+          <td>{{ client.nom }} </td>
           <td>{{ client.prenom }}</td>
           <td>{{ client.email }}</td>
 
