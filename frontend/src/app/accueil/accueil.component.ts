@@ -28,8 +28,7 @@ export class AccueilComponent implements OnInit {
   constructor(private as: AuthService) { }
 
   ngOnInit() {
-    const conseiller = JSON.parse(this.as.getCookie());
-    this.currentConseiller = conseiller;
+    this.currentConseiller = JSON.parse(this.as.getCookie());
   }
 
   // addSlide() {

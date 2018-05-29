@@ -24,21 +24,21 @@ export class CompteSelectionComponent implements OnInit {
   constructor(private service: ClientService, private as: AuthService) { }
 
   ngOnInit() {
-    if (this.departOuArrivee !== 'credité') {
-      this.as.getCurrentConseiller().subscribe(
-        conseiller => {
-          this.currentConseiller = conseiller;
-          this.service.loadClientsParConseiller(conseiller.idConseiller).subscribe(listeClients => {
-            this.clients = listeClients;
-          })
-        });
+    // if (this.departOuArrivee !== 'credité') {
+    //   this.as.getCurrentConseiller().subscribe(
+    //     conseiller => {
+    //       this.currentConseiller = conseiller;
+    //       this.service.loadClientsParConseiller(conseiller.idConseiller).subscribe(listeClients => {
+    //         this.clients = listeClients;
+    //       })
+    //     });
 
-    } else {
-      this.service.loadClients().subscribe(
-        listeClients => {
-          this.clients = listeClients;}
-      );
-    }
+    // } else {
+    //   this.service.loadClients().subscribe(
+    //     listeClients => {
+    //       this.clients = listeClients;}
+    //   );
+    // }
   }
 
   currentClient() {

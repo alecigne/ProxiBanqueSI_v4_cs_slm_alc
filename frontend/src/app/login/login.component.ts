@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Conseiller } from '../conseiller/conseiller';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { ConseillerService } from '../conseiller/conseiller.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
+
   currentConseiller: Conseiller;
   loginForm: FormGroup;
 
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentConseiller = JSON.parse(this.as.getCookie());
     this.loginForm = this.fb.group({
       login: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -35,13 +37,11 @@ export class LoginComponent implements OnInit {
       .subscribe(conseiller => {
         this.currentConseiller = conseiller;
         this.as.setCookie('conseiller', JSON.stringify(this.currentConseiller));
-        this.home();
       });
     this.home();
   }
 
   home(event?: Event) {
-    const id = this.currentConseiller.idConseiller;
     this.router.navigate(['accueil']);
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Conseiller } from '../conseiller/conseiller';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   logoImage = '/assets/logo_proxibanque3.jpg';
 
-  currentConseiller: Conseiller;
+  @Input('header-data') currentConseiller: Conseiller;
 
   navItems = [
     { label: 'Accueil', path: 'accueil' },
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   constructor(private as: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.currentConseiller = this.as.getCookie('conseiller');
+    // this.currentConseiller = this.as.getCookie('conseiller');
   }
 
   ngOnChanges() {

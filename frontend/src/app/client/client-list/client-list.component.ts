@@ -26,12 +26,10 @@ export class ClientListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const conseiller = JSON.parse(this.as.getCookie());
-    this.currentConseiller = conseiller;
-    this.clientService.loadClientsParConseiller(conseiller.idConseiller).subscribe(clients => {
+    this.currentConseiller = JSON.parse(this.as.getCookie());
+    this.clientService.loadClientsParConseiller(this.currentConseiller.idConseiller).subscribe(clients => {
           this.listeClients = clients;
           this.isLoading = false;
-          console.log(conseiller);
     });
   }
 
